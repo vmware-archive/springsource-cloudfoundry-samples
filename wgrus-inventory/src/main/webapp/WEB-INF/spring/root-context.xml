@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:amqp="http://www.springframework.org/schema/integration/amqp"
+	xmlns:http="http://www.springframework.org/schema/integration/http"
+	xmlns:mail="http://www.springframework.org/schema/integration/mail"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
+		http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
+		http://www.springframework.org/schema/integration/mail http://www.springframework.org/schema/integration/mail/spring-integration-mail.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<context:property-placeholder location="/WEB-INF/mail.properties"/>
+
+	<int:channel id="orderChannel"/>
+	<amqp:inbound-channel-adapter channel="orderChannel" connection-factory="rabbitConnectionFactory"
+		queue-name="orders" error-channel="errors" message-converter="jsonMessageConverter"/> 
+
+	<bean id="jsonMessageConverter" class="org.springframework.amqp.support.converter.JsonMessageConverter"/>
+
+	<int:logging-channel-adapter id="errors" log-full-message="true" level="WARN"/>
+
+	<mail:header-enricher input-channel="orderChannel" output-channel="warehouseChannel">
+		<mail:to expression="payload.email"/>
+	</mail:header-enricher>
+
+	<http:outbound-gateway request-channel="warehouseChannel"
+			url="http://127.0.0.1:8124/{productId}" http-method="GET"
+			reply-channel="filterChannel" expected-response-type="java.lang.String">
+		<http:uri-variable name="productId" expression="payload.productId"/>
+	</http:outbound-gateway>
+
+	<int:publish-subscribe-channel id="filterChannel"/>
+	<int:logging-channel-adapter channel="filterChannel" log-full-message="true" level="WARN"/>
+
+	<int:filter input-channel="filterChannel" expression="!payload.equals('0')" output-channel="inStock" discard-channel="outOfStock"/>
+
+	<int:transformer input-channel="inStock" expression="'Thanks for your order. The items are in stock!'" output-channel="mailChannel"/>
+
+	<int:transformer input-channel="outOfStock" expression="'Unfortunately, we are out of stock at the moment.'" output-channel="mailChannel"/>
+
+	<int:publish-subscribe-channel id="mailChannel"/>
+
+	<mail:outbound-channel-adapter channel="mailChannel" username="${mail.username}" password="${mail.password}" host="${mail.host}"/>
+
+	<int:logging-channel-adapter channel="mailChannel" log-full-message="true" level="WARN"/>
+	
+	<bean id="orderQueue" class="org.springframework.amqp.core.Queue">
+		<constructor-arg value="orders"/>
+	</bean>
+
+	<bean id="rabbitAdmin" class="org.springframework.amqp.rabbit.core.RabbitAdmin">
+		<constructor-arg ref="rabbitConnectionFactory"/>
+	</bean>
+
+	<bean id="rabbitConnectionFactory" class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory"/>
+
+</beans>
