@@ -15,17 +15,21 @@
 
 	<context:property-placeholder location="/WEB-INF/mail.properties"/>
 
-	<int:channel id="orderChannel"/>
-	<amqp:inbound-channel-adapter channel="orderChannel" connection-factory="rabbitConnectionFactory"
-		queue-name="orders" message-converter="jsonMessageConverter"/> 
+	<amqp:inbound-channel-adapter channel="orderChannel" connection-factory="rabbitConnectionFactory" queue-name="orders"/>
 
-	<bean id="jsonMessageConverter" class="org.springframework.amqp.support.converter.JsonMessageConverter"/>
+	<int:chain input-channel="orderChannel" output-channel="warehouseChannel">
+		<int:claim-check-out/>
+		<mail:header-enricher>
+			<mail:to expression="payload.email"/>
+		</mail:header-enricher>
+	</int:chain>
 
-	<int:logging-channel-adapter id="errors" log-full-message="true" level="WARN"/>
-
-	<mail:header-enricher input-channel="orderChannel" output-channel="warehouseChannel">
-		<mail:to expression="payload.email"/>
-	</mail:header-enricher>
+	<bean id="messageStore" class="org.springframework.integration.mongodb.store.MongoMessageStore">
+		<constructor-arg>
+			<bean class="com.mongodb.Mongo"/>
+		</constructor-arg>
+		<constructor-arg value="wgrus"/>
+	</bean>
 
 	<http:outbound-gateway request-channel="warehouseChannel"
 			url="http://127.0.0.1:8124/{productId}" http-method="GET"

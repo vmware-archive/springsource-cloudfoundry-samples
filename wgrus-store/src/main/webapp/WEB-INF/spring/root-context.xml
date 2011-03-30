@@ -9,13 +9,20 @@
 
 	<int:channel id="orderChannel"/>
 
-	<amqp:outbound-channel-adapter channel="orderChannel" amqp-template="rabbitTemplate" routing-key="orders"/> 
+	<int:claim-check-in input-channel="orderChannel" output-channel="amqpOut"/>
+
+	<int:channel id="amqpOut"/>
+	<amqp:outbound-channel-adapter channel="amqpOut" amqp-template="rabbitTemplate" routing-key="orders"/> 
+
+	<bean id="messageStore" class="org.springframework.integration.mongodb.store.MongoMessageStore">
+		<constructor-arg>
+			<bean class="com.mongodb.Mongo"/>
+		</constructor-arg>
+		<constructor-arg value="wgrus"/>
+	</bean>
 
 	<bean id="rabbitTemplate" class="org.springframework.amqp.rabbit.core.RabbitTemplate">
 		<constructor-arg ref="rabbitConnectionFactory"/>
-		<property name="messageConverter">
-			<bean class="org.springframework.amqp.support.converter.JsonMessageConverter"/>
-		</property>
 	</bean>
 
 	<bean id="orderQueue" class="org.springframework.amqp.core.Queue">
@@ -25,7 +32,6 @@
 	<bean id="rabbitAdmin" class="org.springframework.amqp.rabbit.core.RabbitAdmin">
 		<constructor-arg ref="rabbitConnectionFactory"/>
 	</bean>
-
 
 	<bean id="rabbitConnectionFactory" class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory"/>
 
