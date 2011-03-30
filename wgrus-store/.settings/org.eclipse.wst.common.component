@@ -4,6 +4,9 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/spring-integration-mongodb/spring-integration-mongodb">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="wgrus-store"/>
         <property name="java-output-path" value="/wgrus-store/target/classes"/>
     </wb-module>
