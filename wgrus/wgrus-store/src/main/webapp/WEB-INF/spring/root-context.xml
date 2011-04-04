@@ -15,9 +15,7 @@
 	<amqp:outbound-channel-adapter channel="amqpOut" amqp-template="rabbitTemplate" routing-key="orders"/> 
 
 	<bean id="messageStore" class="org.springframework.integration.mongodb.store.MongoMessageStore">
-		<constructor-arg>
-			<bean class="com.mongodb.Mongo"/>
-		</constructor-arg>
+		<constructor-arg ref="mongo"/>
 		<constructor-arg value="wgrus"/>
 	</bean>
 
@@ -33,6 +31,14 @@
 		<constructor-arg ref="rabbitConnectionFactory"/>
 	</bean>
 
-	<bean id="rabbitConnectionFactory" class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory"/>
+	<beans profile="default">
+		<bean id="mongo" class="com.mongodb.Mongo"/>
+		<bean id="rabbitConnectionFactory" class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory"/>
+	</beans>
+
+	<beans profile="cloud">
+		<cloud:mongo id="mongo"/>
+		<cloud:rabbit-connection-factory id="rabbitConnectionFactory"/>
+	</beans>
 
 </beans>
