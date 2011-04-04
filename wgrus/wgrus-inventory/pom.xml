@@ -13,7 +13,7 @@
 		<org.slf4j-version>1.5.10</org.slf4j-version>
 		<rabbitmq.version>2.1.0</rabbitmq.version>
 		<org.springframework.integration-version>2.0.3.RELEASE</org.springframework.integration-version>
-		<spring.amqp.version>1.0.0.M3</spring.amqp.version>
+		<spring.amqp.version>1.0.0.RC1</spring.amqp.version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
