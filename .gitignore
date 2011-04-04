@@ -1,0 +1,12 @@
+target
+bin
+.classpath
+.project
+.settings
+.springBeans
+*.swp
+*/src/main/java/META-INF
+erl_crash.dump
+nohup.out
+.idea
+*.iml
