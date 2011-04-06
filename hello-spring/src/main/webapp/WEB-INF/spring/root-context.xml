@@ -7,6 +7,7 @@
 
 	<beans profile="default">
 		<bean id="mongo" class="com.mongodb.Mongo"/>
+		<bean id="redis" class="org.springframework.data.keyvalue.redis.connection.jedis.JedisConnectionFactory"/>
 	</beans>
 
 	<beans profile="cloud">
