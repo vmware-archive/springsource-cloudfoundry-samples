@@ -1,6 +1,6 @@
 package org.cloudfoundry.services;
 
-import org.cloudfoundry.runtime.env.CloudEnvironment;
+import org.cloudfabric.runtime.env.CloudEnvironment;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 

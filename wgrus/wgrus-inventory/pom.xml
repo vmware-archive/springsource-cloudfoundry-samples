@@ -8,7 +8,7 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.cloudfoundry-version>0.5.0-BUILD-SNAPSHOT</org.cloudfoundry-version>
+		<org.cloudfoundry-version>0.5.0-LD</org.cloudfoundry-version>
 		<org.springframework-version>3.1.0.M1</org.springframework-version>
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<org.slf4j-version>1.5.10</org.slf4j-version>
@@ -19,7 +19,7 @@
 	<dependencies>
 		<!-- CloudFoundry -->
 		<dependency>
-			<groupId>org.cloudfoundry</groupId>
+			<groupId>org.cloudfabric</groupId>
 			<artifactId>runtime</artifactId>
 			<version>${org.cloudfoundry-version}</version>
 		</dependency>
@@ -34,7 +34,7 @@
 				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
-				 </exclusion>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -46,7 +46,7 @@
 				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
-				 </exclusion>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -58,7 +58,7 @@
 				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
-				 </exclusion>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -70,7 +70,7 @@
 				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
-				 </exclusion>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -82,7 +82,7 @@
 				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
-				 </exclusion>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -94,7 +94,7 @@
 				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
-				 </exclusion>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -119,8 +119,8 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
-		</dependency>	
-		
+		</dependency>
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -170,7 +170,7 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-				
+
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -198,19 +198,19 @@
 
 		<!-- RabbitMQ/AMQP -->
 		<dependency>
-  			<groupId>org.springframework.amqp</groupId>
-  			<artifactId>spring-amqp</artifactId>
-  			<version>${spring.amqp.version}</version>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-amqp</artifactId>
+			<version>${spring.amqp.version}</version>
 		</dependency>
 		<dependency>
-  			<groupId>org.springframework.amqp</groupId>
-  			<artifactId>spring-rabbit</artifactId>
-  			<version>${spring.amqp.version}</version>
-		</dependency>	
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-rabbit</artifactId>
+			<version>${spring.amqp.version}</version>
+		</dependency>
 		<dependency>
-  			<groupId>com.rabbitmq</groupId>
-  			<artifactId>amqp-client</artifactId>
-  			<version>${rabbitmq.version}</version>
+			<groupId>com.rabbitmq</groupId>
+			<artifactId>amqp-client</artifactId>
+			<version>${rabbitmq.version}</version>
 		</dependency>
 
 		<!-- Data -->
@@ -220,9 +220,9 @@
 			<version>1.0.0.BUILD-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-		  <groupId>org.springframework.data</groupId>
-		  <artifactId>spring-data-mongodb</artifactId>
-		  <version>1.0.0.BUILD-SNAPSHOT</version>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>1.0.0.BUILD-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>hsqldb</groupId>
@@ -238,23 +238,36 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
-        
+
 	</dependencies>
 	<repositories>
+		<repository>
+			<id>springsource-milestone</id>
+			<url>http://s3.amazonaws.com/private.maven.springsource.com/milestone/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
 		<!-- For testing against latest Spring snapshots -->
 		<repository>
 			<id>org.springframework.maven.snapshot</id>
 			<name>Spring Maven Snapshot Repository</name>
 			<url>http://maven.springframework.org/snapshot</url>
-			<releases><enabled>false</enabled></releases>
-			<snapshots><enabled>true</enabled></snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 		<!-- For developing against latest Spring milestones -->
 		<repository>
 			<id>org.springframework.maven.milestone</id>
 			<name>Spring Maven Milestone Repository</name>
 			<url>http://maven.springframework.org/milestone</url>
-			<snapshots><enabled>false</enabled></snapshots>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 	<build>
@@ -333,7 +346,7 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<version>1.0-beta-1</version>
-			</plugin>						
+			</plugin>
 		</plugins>
 	</build>
 </project>
