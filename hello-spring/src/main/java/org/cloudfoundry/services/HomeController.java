@@ -10,10 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-//import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.keyvalue.redis.connection.RedisConnectionFactory;
 import org.springframework.data.keyvalue.redis.connection.jedis.JedisConnectionFactory;
@@ -30,11 +26,8 @@ import com.mongodb.Mongo;
  */
 @Controller
 public class HomeController {
-
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired(required=false) DataSource dataSource;
-	//@Autowired(required=false) ConnectionFactory rabbitConnectionFactory;
 	@Autowired(required=false) RedisConnectionFactory redisConnectionFactory;
 	@Autowired(required=false) Mongo mongo;
 
@@ -50,9 +43,6 @@ public class HomeController {
 		else if (dataSource instanceof SimpleDriverDataSource) {
 			services.add("Data Source: " + ((SimpleDriverDataSource) dataSource).getUrl());
 		}
-		//if (rabbitConnectionFactory != null) {
-			//services.add("Rabbit: " + rabbitConnectionFactory);
-		//}
 		if (redisConnectionFactory != null) {
 			services.add("Redis: " + ((JedisConnectionFactory) redisConnectionFactory).getHostName() + ":" + ((JedisConnectionFactory) redisConnectionFactory).getPort());
 		}
@@ -60,6 +50,8 @@ public class HomeController {
 			services.add("Mongo: " + mongo.getAddress());
 		}
 		model.addAttribute("services", services);
+		String environmentName = (System.getenv("VCAP_APPLICATION") != null) ? "Cloud" : "Local";
+		model.addAttribute("environmentName", environmentName);
 		return "home";
 	}
 
