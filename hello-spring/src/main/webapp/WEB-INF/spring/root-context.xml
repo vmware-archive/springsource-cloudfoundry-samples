@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cloud="http://www.springframework.org/schema/cloud"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			http://www.springframework.org/schema/cloud http://www.springframework.org/schema/cloud/spring-cloud.xsd">
+
+	<beans profile="default">
+		<bean id="mongo" class="com.mongodb.Mongo"/>
+	</beans>
+
+	<beans profile="cloud">
+		<cloud:data-source id="dataSource"/>
+		<cloud:mongo id="mongo"/>
+		<cloud:redis-connection-factory id="redisConnectionFactory"/>
+	</beans>
+
+</beans>
