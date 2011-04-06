@@ -7,6 +7,10 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
+	<mvc:resources location="file:./src/main/resources/static/,classpath:/static/" mapping="static/**" />
+
+	<mvc:default-servlet-handler />
+
 	<mvc:annotation-driven />
 
 	<context:component-scan base-package="org.wgrus.web" />
