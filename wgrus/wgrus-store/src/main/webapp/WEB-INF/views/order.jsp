@@ -13,7 +13,7 @@
 		<div id="header">
 			<div id="name-and-company">
 				<div id='site-name'>
-					<a href="" title="WGRUS Store" rel="home">Orders</a>
+					<a href="" title="WGRUS Store" rel="home">WGRUS Store</a>
 				</div>
 				<div id='company-name'>
 					<a href="http://www.springsource.org/spring-integration"
