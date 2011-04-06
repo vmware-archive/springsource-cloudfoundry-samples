@@ -7,6 +7,8 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+	<import resource="redis-${REDIS:false}-config.xml"/>
+
 	<context:property-placeholder system-properties-mode="OVERRIDE" />
 
 	<!-- pick up rabbit broker configuration -->
@@ -30,11 +32,13 @@
 						</bean>
 					</key>
 					<bean id="trigger" class="org.springframework.scheduling.support.CronTrigger" scope="refresh">
-						<constructor-arg value="#{systemProperties['quote.trigger']?:'0/5 * * * * *'}"/>
+						<constructor-arg value="#{environmentProperties['quote.trigger']?:'0/5 * * * * *'}"/>
 					</bean>
 				</entry>
 			</map>
 		</property>
 	</bean>
+	
+	<util:properties id="environmentProperties"/>
 
 </beans>

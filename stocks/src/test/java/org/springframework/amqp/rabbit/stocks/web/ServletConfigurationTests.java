@@ -12,6 +12,12 @@
  */
 package org.springframework.amqp.rabbit.stocks.web;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Map;
+import java.util.Properties;
+
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -31,7 +37,17 @@ public class ServletConfigurationTests {
 
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 					new String[] { "classpath:/servlet-config.xml" }, parent);
-			context.close();
+
+			try {
+
+				EnvironmentController controller = context.getBean(EnvironmentController.class);
+				assertNotNull(controller);
+				Map<String, Properties> env = controller.env();
+				assertTrue(env.containsKey("env"));
+
+			} finally {
+				context.close();
+			}
 
 		} finally {
 
@@ -40,4 +56,38 @@ public class ServletConfigurationTests {
 		}
 
 	}
+
+	@Test
+	public void testRedisContext() throws Exception {
+
+		System.setProperty("REDIS", "true");
+
+		ClassPathXmlApplicationContext parent = new ClassPathXmlApplicationContext(
+				"classpath:/server-bootstrap-config.xml");
+
+		try {
+
+			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+					new String[] { "classpath:/servlet-config.xml" }, parent);
+
+			try {
+
+				EnvironmentController controller = context.getBean(EnvironmentController.class);
+				assertNotNull(controller);
+				Map<String, Properties> env = controller.env();
+				assertTrue(env.containsKey("env"));
+
+			} finally {
+				context.close();
+			}
+
+		} finally {
+
+			System.clearProperty("REDIS");
+			parent.close();
+
+		}
+
+	}
+
 }

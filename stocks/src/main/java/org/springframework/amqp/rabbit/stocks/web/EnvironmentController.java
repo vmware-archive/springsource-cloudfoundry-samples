@@ -14,6 +14,7 @@
 package org.springframework.amqp.rabbit.stocks.web;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
@@ -21,11 +22,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.stocks.context.RefreshScope;
+import org.springframework.data.keyvalue.redis.core.RedisOperations;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 
 /**
  * @author Dave Syer
@@ -40,6 +43,10 @@ public class EnvironmentController {
 
 	private AmqpTemplate amqpTemplate;
 
+	private RedisOperations<String, String> redisTemplate;
+
+	private Properties environmentProperties = new Properties();
+
 	public void setAmqpTemplate(AmqpTemplate amqpTemplate) {
 		this.amqpTemplate = amqpTemplate;
 	}
@@ -48,8 +55,20 @@ public class EnvironmentController {
 		this.refreshScope = refreshScope;
 	}
 
+	public void setRedisTemplate(RedisOperations<String, String> redisTemplate) {
+		this.redisTemplate = redisTemplate;
+	}
+
 	/**
-	 * Get the system properties (key value "system") and the OS environment (key value "env") if available.
+	 * @param properties the envProperties to set
+	 */
+	public void setEnvironmentProperties(Properties properties) {
+		this.environmentProperties = properties;
+	}
+
+	/**
+	 * Get the system properties (key value "system") and the OS environment (key value "host") if available and the
+	 * persistent back-end (key value "env" if present).
 	 * 
 	 * @return the system properties and OS environment
 	 */
@@ -58,7 +77,8 @@ public class EnvironmentController {
 	public Map<String, Properties> env() {
 		Map<String, Properties> model = new HashMap<String, Properties>();
 		model.put("system", getSystemProperties());
-		model.put("env", getHostProperties());
+		model.put("host", getHostProperties());
+		model.put("env", environmentProperties);
 		return model;
 	}
 
@@ -71,16 +91,23 @@ public class EnvironmentController {
 	 * 
 	 * @see #handleRefresh(RefreshRequest) a handler for the request generated here
 	 */
-	@RequestMapping(value = "/refresh", method = RequestMethod.POST)
+	@RequestMapping(value = "/refresh/{bean}", method = RequestMethod.POST)
 	@ResponseBody
-	public RefreshRequest refresh(@RequestParam(defaultValue = "") String trigger) {
+	public RefreshRequest refresh(@PathVariable String bean, WebRequest webRequest) {
 		RefreshRequest request = new RefreshRequest();
-		Properties model = new Properties();
-		if (trigger.length() > 0) {
-			model.setProperty("quote.trigger", trigger);
+		Properties updates = new Properties();
+		Properties oldValues = new Properties();
+		for (Iterator<String> keys = webRequest.getParameterNames(); keys.hasNext();) {
+			String key = keys.next();
+			updates.setProperty(key, webRequest.getParameter(key));
+			String value = environmentProperties.getProperty(key);
+			if (value != null) {
+				oldValues.setProperty(key, value);
+			}
 		}
-		request.setProperties(model);
-		request.setBeanName("trigger");
+		request.setUpdates(updates);
+		request.setOldValues(oldValues);
+		request.setBeanName(bean);
 		if (amqpTemplate != null) {
 			amqpTemplate.convertAndSend(request);
 		}
@@ -97,12 +124,15 @@ public class EnvironmentController {
 		logger.info("Handling refresh: " + request);
 
 		String name = request.getBeanName();
-		Properties properties = request.getProperties();
-		for (String property : properties.stringPropertyNames()) {
-			String old = System.getProperty(property);
-			String update = properties.getProperty(property);
+		Properties updates = request.getUpdates();
+		for (String property : updates.stringPropertyNames()) {
+			String old = environmentProperties.getProperty(property);
+			String update = updates.getProperty(property);
 			if (update.length() > 0 && !update.equals(old)) {
-				System.setProperty(property, update);
+				environmentProperties.setProperty(property, update);
+				if (redisTemplate != null) {
+					redisTemplate.boundValueOps("env." + property).set(update);
+				}
 			}
 		}
 
@@ -137,7 +167,9 @@ public class EnvironmentController {
 
 	public static class RefreshRequest {
 		private String beanName;
-		private Properties properties = new Properties();
+		private Properties updates = new Properties();
+
+		private Properties oldValues = new Properties();
 
 		public String getBeanName() {
 			return beanName;
@@ -147,17 +179,25 @@ public class EnvironmentController {
 			this.beanName = beanName;
 		}
 
-		public Properties getProperties() {
-			return properties;
+		public Properties getUpdates() {
+			return updates;
 		}
 
-		public void setProperties(Properties properties) {
-			this.properties = properties;
+		public Properties getOldValues() {
+			return oldValues;
+		}
+
+		public void setOldValues(Properties oldValues) {
+			this.oldValues = oldValues;
+		}
+
+		public void setUpdates(Properties oldValues) {
+			this.updates = oldValues;
 		}
 
 		@Override
 		public String toString() {
-			return "RefreshRequest [beanName=" + beanName + ", properties=" + properties + "]";
+			return "RefreshRequest [beanName=" + beanName + ", updates=" + updates + ", oldValues=" + oldValues + "]";
 		}
 	}
 }

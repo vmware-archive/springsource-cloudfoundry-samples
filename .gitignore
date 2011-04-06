@@ -6,6 +6,7 @@ bin
 .springBeans
 *.swp
 */src/main/java/META-INF
+*/src/main/webapp/META-INF
 erl_crash.dump
 nohup.out
 .idea
