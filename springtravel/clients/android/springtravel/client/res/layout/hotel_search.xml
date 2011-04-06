@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal"
+        android:padding="10px"
+       android:scrollbars="vertical"
+
+        >
+
+
+    <LinearLayout android:orientation="vertical"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content" android:id="@+id/search_form">
+
+        <EditText
+                android:id="@+id/edit_search_query"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:autoText="false"
+                android:inputType="textShortMessage"
+                android:lines="1"
+        />
+
+        <EditText
+                android:id="@+id/edit_search_price"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:autoText="false" android:lines="1"
+                android:inputType="numberDecimal"
+                />
+
+
+    </LinearLayout>
+
+
+    <Button android:text="@string/search_label"
+            android:id="@+id/hotel_search"
+            android:layout_below="@id/search_form"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+</RelativeLayout>

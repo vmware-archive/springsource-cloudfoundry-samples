@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="booking" type="booking"/>
+
+  <xs:element name="hotel" type="hotel"/>
+
+  <xs:element name="user" type="user"/>
+
+  <xs:complexType name="booking">
+    <xs:sequence>
+      <xs:element name="amenities" type="amenity" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="beds" type="xs:int"/>
+      <xs:element name="checkinDate" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="checkoutDate" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="creditCard" type="xs:string" minOccurs="0"/>
+      <xs:element name="creditCardExpiryMonth" type="xs:int"/>
+      <xs:element name="creditCardExpiryYear" type="xs:int"/>
+      <xs:element name="creditCardName" type="xs:string" minOccurs="0"/>
+      <xs:element ref="hotel" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="smoking" type="xs:boolean"/>
+      <xs:element ref="user" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="hotel">
+    <xs:sequence>
+      <xs:element name="address" type="xs:string" minOccurs="0"/>
+      <xs:element name="city" type="xs:string" minOccurs="0"/>
+      <xs:element name="country" type="xs:string" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="price" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="state" type="xs:string" minOccurs="0"/>
+      <xs:element name="zip" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="user">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="password" type="xs:string" minOccurs="0"/>
+      <xs:element name="username" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="amenity">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OCEAN_VIEW"/>
+      <xs:enumeration value="LATE_CHECKOUT"/>
+      <xs:enumeration value="MINIBAR"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+

@@ -1,0 +1,5 @@
+- support REST endpoints for travel
+- use javaconfig/profiles
+- move to jspx
+- support querying for open dates for hotels
+- remove flow managed persistence

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal"
+        android:padding="10px"
+
+android:scrollbars="vertical"
+        >
+
+    <TextView
+            android:id="@+id/empty"
+
+            style="@style/label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+
+    <ListView android:id="@android:id/list"  android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+<!--
+    &lt;!&ndash;
+
+     this view defines:
+      - a searchHotels text field
+      - a pricing spinner
+      - a button? (or do we need that?)
+
+    &ndash;&gt;
+
+    <TextView
+            android:id="@+id/search_query_label"
+            android:text="@string/search_query_label"
+            style="@style/label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+
+    <EditText
+            android:id="@+id/edit_search_query"
+            android:layout_below="@id/search_query_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:autoText="false"
+            android:inputType="textShortMessage"
+            android:lines="1"
+            />
+
+
+    <TextView
+            android:id="@+id/search_price_label"
+            android:layout_below="@id/edit_search_query"
+            android:text="@string/search_price_label"
+            style="@style/label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+
+    <EditText
+            android:id="@+id/edit_search_price"
+            android:layout_width="fill_parent"
+            android:layout_below="@id/search_price_label"
+            android:layout_height="wrap_content"
+            android:autoText="false" android:lines="1"
+            android:inputType="numberDecimal"
+            />
+
+
+    <Button android:text="@string/search_label"
+            android:id="@+id/hotel_search"
+            android:layout_below="@id/edit_search_price"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>-->
+
+</RelativeLayout>

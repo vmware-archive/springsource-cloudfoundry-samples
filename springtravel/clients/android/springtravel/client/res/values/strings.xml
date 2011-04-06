@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- validation messages-->
+    <string name="checkin_date_should_be_before_checkout">The checkout date should be after the checkin date</string>
+    <string name="cc_number_required">You must supply a credit card</string>
+    <string name="cc_name_required">You must supply a credit card name</string>
+    <string name="price_invalid">The price entered is an invalid value</string>
+    <string name="review_cc_name">Name:</string>
+    <string name="review_cc_number">Number:</string>
+    <string name="review_beds">Beds:</string>
+    <string name="review_amenities">Amenities:</string>
+    <string name="review_from">Check In:</string>
+    <string name="review_to">Check Out:</string>
+    <string name="review_expiration">Expiration:</string>
+    <string name="bed">bed</string>
+    <string name="beds">beds</string>
+    <string name="user_home_menu_label">User Home</string>
+    <string name="search_menu_label">Search</string>
+    <string name="hello_user">Hello</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="signing_in">Signing In...</string>
+    <string name="backward">Backward</string>
+    <string name="forward">Forward</string>
+    <string name="cc_review">Credit Card Information</string>
+    <string name="room_details">Room Configuration</string>
+    <string name="usr_and_pw_invalid">The user or password you entered are invalid. Please try again</string>
+    <string name="base_uri">http://192.168.1.68:8080/</string>
+    <string name="search_query_label">Search Hotels</string>
+    <string name="search_price_label">Maximum Price</string>
+    <string name="search_label">Search</string>
+    <string name="ok">OK</string>
+    <string name="query_invalid_msg">The entered query is not valid</string>
+    <string name="alert_label">Oops!</string>
+    <string name="empty">No Results Found</string>
+    <string name="retrieving_results">Retrieving Results</string>
+    <string name="working">Working...</string>
+    <string name="bookit">Book It!</string>
+    <string name="username_label">Username</string>
+    <string name="dates">Dates of Your Stay</string>
+    <string name="password_label">Password</string>
+    <string name="signin_label">Sign In</string>
+    <string name="app_name">Spring Travel on Android</string>
+    <string name="checkin_label">Check In Date</string>
+    <string name="checkout_label">Check Out Date</string>
+    <string name="next">Next</string>
+    <string name="smoking_label">Smoking?</string>
+    <string name="beds_label">How Many Beds?</string>
+    <string name="amenities_label">Amenities</string>
+    <string name="cc_expiration_date_label">Credit Card Expiration Date</string>
+
+    <!--amenities-->
+    <string name="SMOKING">Smoking</string>
+    <string name="LATE_CHECKOUT">Late checkout</string>
+    <string name="MINIBAR">Minibar</string>
+    <string name="OCEAN_VIEW">Ocean View</string>
+    <string name="cc_name_label">Name on the Credit Card</string>
+    <string name="cc_number_label">Number on the Credit Card</string>
+    <string name="cc_card">Credit Card Type</string>
+
+</resources>

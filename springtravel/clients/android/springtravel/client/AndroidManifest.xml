@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="org.springframework.samples.travel.client.android"
+          android:versionCode="1"
+          android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="3"></uses-sdk>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <application
+
+            android:label="@string/app_name"
+            android:allowClearUserData="true"
+            android:theme="@android:style/Theme.Black"
+            android:debuggable="true">
+
+
+        <activity android:name=".view.HotelSearch" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+
+
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name=".view.SignIn" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="SIGN_IN"/>
+            </intent-filter>
+        </activity>
+
+        <!--
+        todo see http://stackoverflow.com/questions/1512045/how-to-disable-orientation-change-in-android for info on how to properly handle screen rotation and the corresponding state resets
+        todo see http://www.androidpeople.com/android-rotate-emulator for information on howt to test it
+        -->
+
+        <activity android:name=".view.booking.BookHotel" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+
+               <category android:name="android.intent.category.DEFAULT"/>
+               <action android:name="BOOK_HOTEL"/>
+
+
+<!--
+
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+-->
+
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.UserHome" android:configChanges="keyboardHidden|orientation">
+                 <intent-filter>
+                     <category android:name="android.intent.category.DEFAULT"/>
+                     <!--<action android:name="SHOW_USER_HOME"/>-->
+                 </intent-filter>
+
+             </activity>
+
+        <activity android:name=".view.HotelSearchResults" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="SHOW_HOTEL_LIST"/>
+            </intent-filter>
+
+        </activity>
+
+
+    </application>
+
+</manifest> 

@@ -1,0 +1,4 @@
+- provide support for searching for a hotel
+- provide support for logging in as one of the preconfigured users
+- provide support for booking a hotel
+- provide support for lookign at a user's information (once logged in, presumably this would also display the users booked hotels)

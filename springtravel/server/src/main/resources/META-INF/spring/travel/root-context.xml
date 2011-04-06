@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:cloud="http://www.springframework.org/schema/cloud"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xmlns:tx="http://www.springframework.org/schema/tx"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+             http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
+             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+             http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+             http://www.springframework.org/schema/cloud http://www.springframework.org/schema/cloud/spring-cloud.xsd
+             ">
+
+
+    <context:property-placeholder location="classpath:/ds.standalone.properties"/>
+
+    <context:component-scan base-package="org.springframework.samples.travel.services"/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+	<http>
+		<!-- Authentication policy -->	
+		<form-login login-page="/users/login" login-processing-url="/users/login/authenticate" default-target-url="/hotels" authentication-failure-url="/users/login?login_error=1"/>
+		<logout logout-url="/users/logout" logout-success-url="/users/logoutSuccess"/>
+	</http>
+
+	<!--
+		Define local authentication provider, a real app would use an external provider (JDBC, LDAP, CAS, etc)
+		
+		usernames/passwords are:
+			keith/melbourne
+			erwin/leuven
+			jeremy/atlanta
+			scott/rochester
+			josh/la
+	-->
+	<authentication-manager>
+		<authentication-provider>
+			<password-encoder hash="md5" />
+
+			<user-service>
+				<user name="keith" password="417c7382b16c395bc25b5da1398cf076" authorities="ROLE_USER, ROLE_SUPERVISOR" />
+				<user name="erwin" password="12430911a8af075c6f41c6976af22b09" authorities="ROLE_USER, ROLE_SUPERVISOR" />
+				<user name="jeremy" password="57c6cbff0d421449be820763f03139eb" authorities="ROLE_USER" />
+				<user name="scott" password="942f2339bf50796de535a384f0d1af3e" authorities="ROLE_USER" />
+                <user name="josh"  password="c9089f3c9adaf0186f6ffb1ee8d6501c" authorities="ROLE_USER"/>
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+
+
+    <beans:beans profile="cloud">
+
+        <cloud:data-source id="mysqlDataSource"/>
+
+    </beans:beans>
+
+</beans:beans>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+	
+<tiles-definitions>
+	
+	<definition name="users/login" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/views/users/login.jsp" />
+	</definition>
+	
+	<definition name="users/logoutSuccess" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/views/users/logoutSuccess.jsp" />
+	</definition>
+	
+</tiles-definitions>
