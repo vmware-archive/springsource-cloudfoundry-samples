@@ -15,7 +15,9 @@
 
 	<context:property-placeholder location="classpath:/mail.properties"/>
 
-	<amqp:inbound-channel-adapter channel="orderChannel" connection-factory="rabbitConnectionFactory" queue-names="orders"/>
+	<amqp:inbound-channel-adapter channel="orderChannel" connection-factory="rabbitConnectionFactory" queue-names="orders" advice-chain="retryInterceptor"/>
+	
+	<bean id="retryInterceptor" class="org.springframework.amqp.rabbit.config.StatelessRetryOperationsInterceptorFactoryBean"/>
 
 	<int:chain input-channel="orderChannel" output-channel="warehouseChannel">
 		<int:claim-check-out/>
@@ -49,7 +51,7 @@
 
 	<int:publish-subscribe-channel id="mailChannel"/>
 
-	<mail:outbound-channel-adapter channel="mailChannel" username="${mail.username}" password="${mail.password}" host="${mail.host}"/>
+	<!-- mail:outbound-channel-adapter channel="mailChannel" username="${mail.username}" password="${mail.password}" host="${mail.host}"/-->
 
 	<int:logging-channel-adapter channel="mailChannel" log-full-message="true" level="WARN"/>
 	
