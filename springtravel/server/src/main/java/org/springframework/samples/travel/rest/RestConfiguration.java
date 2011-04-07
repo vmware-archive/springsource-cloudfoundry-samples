@@ -38,8 +38,6 @@ public class RestConfiguration {
 	public Jaxb2Marshaller marshaller() {
 		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
 		marshaller.setClassesToBeBound(this.jaxbClasses);
-
-	//todo regenerate the schema		marshaller.setSchema(this.schema);
 		return marshaller;
 	}
 

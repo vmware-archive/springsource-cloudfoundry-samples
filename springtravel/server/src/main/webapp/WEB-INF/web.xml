@@ -4,11 +4,11 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
-    <context-param>
+ <!--   <context-param>
         <param-name>contextInitializerClasses</param-name>
         <param-value>org.cloudfoundry.services.CloudApplicationContextInitializer</param-value>
     </context-param>
-
+-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:/META-INF/spring/travel/root-context.xml</param-value>

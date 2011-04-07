@@ -5,7 +5,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -18,7 +17,7 @@ import javax.sql.DataSource;
  * @author Josh Long
  */
 @Configuration
-@Profile("default")
+//@Profile("default")
 public class DefaultDataSourceConfiguration {
 
 	private Log log = LogFactory.getLog(getClass()) ;

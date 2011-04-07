@@ -34,23 +34,16 @@ public class HotelsRestController {
 	@Autowired
 	private BookingService bookingService;
 
-/*
-	@RequestMapping(value = "/hotels/search/", method = RequestMethod.POST)
-	@ResponseBody
-	public Hotels search(@RequestBody SearchCriteria searchCriteria) {
-		return fromResults(bookingService.findHotels(searchCriteria));
-	}
-*/
 
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public User user(@PathVariable("id") String userId) {
+	public User user( @PathVariable("id") String userId) {
 		return this.bookingService.findUser(userId);
 	}
 
 	@RequestMapping(value = "/bookings/{user}", method = RequestMethod.GET)
 	@ResponseBody
-	public Bookings bookingsForUser(@PathVariable("user") String user) {
+	public Bookings bookingsForUser( @PathVariable("user") String user) {
 		return fromResults(this.bookingService.findBookings(user));
 	}
 
@@ -64,7 +57,7 @@ public class HotelsRestController {
 	// todo whats the right way to handle this? currently its being handled using SPring Webflow on the web tier, the passwords are in the config. we need to make the config share the database jst like th rest of the service code, then make it so that REST clients can login as well.
 	@RequestMapping(value = "/users/login", method = RequestMethod.POST)
 	@ResponseBody
-	public User login(@RequestBody User u) {
+	public User login(@RequestBody User u ) {
 
 		String usrname = u.getUsername();
 		String pw = u.getPassword();
