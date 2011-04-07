@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:int="http://www.springframework.org/schema/integration"
 	xmlns:amqp="http://www.springframework.org/schema/integration/amqp"
 	xmlns:http="http://www.springframework.org/schema/integration/http"
 	xmlns:mail="http://www.springframework.org/schema/integration/mail"
-	xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-2.0.xsd
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit" xmlns:cloud="http://www.springframework.org/schema/cloud"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http-2.0.xsd
 		http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp-2.0.xsd
-		http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http-2.0.xsd
 		http://www.springframework.org/schema/integration/mail http://www.springframework.org/schema/integration/mail/spring-integration-mail-2.0.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-2.0.xsd
+		http://www.springframework.org/schema/cloud http://www.springframework.org/schema/cloud/spring-cloud.xsd
+		http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
@@ -27,14 +29,12 @@
 	</int:chain>
 
 	<bean id="messageStore" class="org.springframework.integration.mongodb.store.MongoMessageStore">
-		<constructor-arg>
-			<bean class="com.mongodb.Mongo"/>
-		</constructor-arg>
-		<constructor-arg value="wgrus"/>
+		<constructor-arg ref="mongo" />
+		<constructor-arg value="wgrus" />
 	</bean>
 
 	<http:outbound-gateway request-channel="warehouseChannel"
-			url="http://127.0.0.1:8124/{productId}" http-method="GET"
+			url="${warehouse.url:http://127.0.0.1:8124}/{productId}" http-method="GET"
 			reply-channel="filterChannel" expected-response-type="java.lang.String">
 		<http:uri-variable name="productId" expression="payload.productId"/>
 	</http:outbound-gateway>
@@ -59,10 +59,16 @@
 		<constructor-arg value="orders"/>
 	</bean>
 
-	<bean id="rabbitAdmin" class="org.springframework.amqp.rabbit.core.RabbitAdmin">
-		<constructor-arg ref="rabbitConnectionFactory"/>
-	</bean>
+	<rabbit:admin connection-factory="rabbitConnectionFactory"/>
 
-	<bean id="rabbitConnectionFactory" class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory"/>
+	<beans profile="default">
+		<bean id="mongo" class="com.mongodb.Mongo"/>
+		<rabbit:connection-factory id="rabbitConnectionFactory" />
+	</beans>
+
+	<beans profile="cloud">
+		<cloud:mongo id="mongo"/>
+		<cloud:rabbit-connection-factory id="rabbitConnectionFactory"/>
+	</beans>
 
 </beans>
