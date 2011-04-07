@@ -12,9 +12,8 @@
 		<org.springframework-version>3.1.0.M1</org.springframework-version>
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<org.slf4j-version>1.5.10</org.slf4j-version>
-		<rabbitmq.version>2.3.1</rabbitmq.version>
 		<org.springframework.integration-version>2.0.3.RELEASE</org.springframework.integration-version>
-		<spring.amqp.version>1.0.0.RC1</spring.amqp.version>
+		<spring.amqp.version>1.0.0.BUILD-SNAPSHOT</spring.amqp.version>
 	</properties>
 	<dependencies>
 		<!-- CloudFoundry -->
@@ -29,37 +28,16 @@
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-core</artifactId>
 			<version>${org.springframework.integration-version}</version>
-			<exclusions>
-				<!-- Exclude Commons Logging in favor of SLF4j -->
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				 </exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-amqp</artifactId>
 			<version>2.0.4.BUILD-SNAPSHOT</version>
-			<exclusions>
-				<!-- Exclude Commons Logging in favor of SLF4j -->
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				 </exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-mongodb</artifactId>
 			<version>2.1.0.BUILD-SNAPSHOT</version>
-			<exclusions>
-				<!-- Exclude Commons Logging in favor of SLF4j -->
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				 </exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -82,6 +60,32 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework-version}</version>
+			<scope>test</scope>
 		</dependency>
 				
 		<!-- AspectJ -->
@@ -176,11 +180,6 @@
   			<artifactId>spring-rabbit</artifactId>
   			<version>${spring.amqp.version}</version>
 		</dependency>	
-		<dependency>
-  			<groupId>com.rabbitmq</groupId>
-  			<artifactId>amqp-client</artifactId>
-  			<version>${rabbitmq.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>

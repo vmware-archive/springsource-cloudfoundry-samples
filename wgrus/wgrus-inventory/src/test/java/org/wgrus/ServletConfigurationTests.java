@@ -12,6 +12,8 @@
  */
 package org.wgrus;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -20,6 +22,16 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * 
  */
 public class ServletConfigurationTests {
+
+	@BeforeClass
+	public static void init() {
+		System.setProperty("spring.profiles.default", "default");
+	}
+
+	@AfterClass
+	public static void close() {
+		System.clearProperty("spring.profiles.default");
+	}
 
 	@Test
 	public void testContext() throws Exception {
