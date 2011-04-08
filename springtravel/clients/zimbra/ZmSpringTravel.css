@@ -1,0 +1,11 @@
+.SpringTravelZimlet_row {
+	border-bottom-color:#DBDBDB;
+	border-width:0 0 1px;
+	cursor:pointer;
+	background-color:white
+	
+}
+
+tr.SpringTravelZimlet_row:hover {
+	background-color:#FFFACD;	
+}

@@ -1,0 +1,7 @@
+<zimlet name="com_zimbra_springtravel" version="0.1" label="${msg.label}"
+	description="${msg.description}">
+	<include>ZmSpringTravel.js</include>
+	<includeCSS>ZmSpringTravel.css</includeCSS>	
+	<include>templates/ZmSpringTravel.template.js</include>
+	<handlerObject>ZmSpringTravel</handlerObject>
+</zimlet>

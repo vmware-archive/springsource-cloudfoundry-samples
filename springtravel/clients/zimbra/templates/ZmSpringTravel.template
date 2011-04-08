@@ -1,0 +1,11 @@
+<template id='DialogView'>
+	<div class='AboutZimlet_background'>
+	<table><tr><td align=center><div class='ImgAppBanner' style='width:220px'></div></td></tr>
+	<tr><td><input readonly='readonly' type=text value='${version}' class='AboutZimlet_input'></input></td></tr>
+	<tr><td><textarea type=text spellcheck='false' readonly='readonly' class='AboutZimlet_textarea'>${userAgent}</textarea></td></tr>
+	<tr/>
+	<tr><td><textarea type=text spellcheck='false' readonly='readonly' class='AboutZimlet_textarea'>${copyright}</textarea></td></tr>
+	
+	</table></div>
+
+</template>

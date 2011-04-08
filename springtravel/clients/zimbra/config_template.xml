@@ -1,0 +1,5 @@
+<zimletConfig name="com_zimbra_springtravel" version="0.1">
+    <global>
+        <property name="allowedDomains">*.vmware.com,*.cloudfoundary.com,maps.google.com</property>
+ 
+</zimletConfig>
