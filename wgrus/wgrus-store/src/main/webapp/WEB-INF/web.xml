@@ -3,18 +3,17 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<!-- ApplicationContextInitializer that detects the Cloud environment -->
-	<context-param>
-		<param-name>contextInitializerClasses</param-name>
-		<param-value>org.cloudfoundry.services.CloudApplicationContextInitializer</param-value>
-	</context-param>
-
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:/root-context.xml</param-value>
 	</context-param>
 	
+	<!-- Creates the Spring Profile for cloud and local usage -->
+	<listener>
+		<listener-class>org.wgrus.web.EnvironmentContextListener</listener-class>
+	</listener>
+
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
