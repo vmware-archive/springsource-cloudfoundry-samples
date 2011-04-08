@@ -2,8 +2,10 @@
 **/*iws
 **/*iml
 target
-.springBeans
+bin
 .settings
+.classpath
+.project
 **/**.iml
 **.iml
 **/**.ipr
@@ -11,6 +13,8 @@ target
 **/**.iws
 **.iws
 .idea
+*/src/main/java/META-INF
+*/src/main/webapp/META-INF
 spring-integration-gemfire/BACKUP_*
 spring-integration-gemfire/KEYS_*
 spring-integration-gemfire/RECOVERY_*

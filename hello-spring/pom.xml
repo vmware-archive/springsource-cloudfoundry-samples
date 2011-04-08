@@ -10,16 +10,35 @@
 	<properties>
 		<java-version>1.6</java-version>
 		<org.cloudfoundry-version>0.5.0-BUILD-SNAPSHOT</org.cloudfoundry-version>
+		<org.cloudfoundry-group>org.cloudfoundry</org.cloudfoundry-group>
 		<org.springframework-version>3.1.0.M1</org.springframework-version>
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<org.slf4j-version>1.5.10</org.slf4j-version>
 		<!-- <rabbitmq.version>2.3.1</rabbitmq.version> -->
 		<!-- <spring.amqp.version>1.0.0.RC1</spring.amqp.version> -->
 	</properties>
+	<profiles>
+		<profile>
+			<id>vcloud</id>
+			<properties>
+				<org.cloudfoundry-version>0.5.0-LD</org.cloudfoundry-version>
+				<org.cloudfoundry-group>org.cloudfabric</org.cloudfoundry-group>
+			</properties>
+			<repositories>
+				<repository>
+					<id>spring-milestone</id>
+					<url>http://s3.amazonaws.com/private.maven.springsource.com/milestone/</url>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
 	<dependencies>
 		<!-- CloudFoundry -->
 		<dependency>
-			<groupId>org.cloudfoundry</groupId>
+			<groupId>${org.cloudfoundry-group}</groupId>
 			<artifactId>runtime</artifactId>
 			<version>${org.cloudfoundry-version}</version>
 		</dependency>
@@ -34,7 +53,7 @@
 				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
-				 </exclusion>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -47,14 +66,14 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-				
+
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
-		</dependency>	
-		
+		</dependency>
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -104,7 +123,7 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-				
+
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -125,23 +144,11 @@
 		</dependency>
 
 		<!-- RabbitMQ/AMQP -->
-		<!--
-		<dependency>
-  			<groupId>org.springframework.amqp</groupId>
-  			<artifactId>spring-amqp</artifactId>
-  			<version>${spring.amqp.version}</version>
-		</dependency>
-		<dependency>
-  			<groupId>org.springframework.amqp</groupId>
-  			<artifactId>spring-rabbit</artifactId>
-  			<version>${spring.amqp.version}</version>
-		</dependency>		
-		<dependency>
-  			<groupId>com.rabbitmq</groupId>
-  			<artifactId>amqp-client</artifactId>
-  			<version>${rabbitmq.version}</version>
-		</dependency>
-		-->
+		<!-- <dependency> <groupId>org.springframework.amqp</groupId> <artifactId>spring-amqp</artifactId> 
+			<version>${spring.amqp.version}</version> </dependency> <dependency> <groupId>org.springframework.amqp</groupId> 
+			<artifactId>spring-rabbit</artifactId> <version>${spring.amqp.version}</version> 
+			</dependency> <dependency> <groupId>com.rabbitmq</groupId> <artifactId>amqp-client</artifactId> 
+			<version>${rabbitmq.version}</version> </dependency> -->
 
 		<!-- Data -->
 		<dependency>
@@ -155,9 +162,9 @@
 			<version>1.0.0.BUILD-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-		  <groupId>org.springframework.data</groupId>
-		  <artifactId>spring-data-mongodb</artifactId>
-		  <version>1.0.0.BUILD-SNAPSHOT</version>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>1.0.0.BUILD-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
@@ -173,7 +180,7 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
-    
+
 	</dependencies>
 	<repositories>
 		<!-- For testing against latest Spring snapshots -->
@@ -181,15 +188,21 @@
 			<id>org.springframework.maven.snapshot</id>
 			<name>Spring Maven Snapshot Repository</name>
 			<url>http://maven.springframework.org/snapshot</url>
-			<releases><enabled>false</enabled></releases>
-			<snapshots><enabled>true</enabled></snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 		<!-- For developing against latest Spring milestones -->
 		<repository>
 			<id>org.springframework.maven.milestone</id>
 			<name>Spring Maven Milestone Repository</name>
 			<url>http://maven.springframework.org/milestone</url>
-			<snapshots><enabled>false</enabled></snapshots>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 		<repository>
 			<id>springsource-snapshot</id>
@@ -230,52 +243,28 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>aspectj-maven-plugin</artifactId>
-				<!-- Have to use version 1.2 since version 1.3 does not appear to work with ITDs -->
-				<version>1.2</version>
-				<dependencies>
-					<!-- You must use Maven 2.0.9 or above or these are ignored (see MNG-2972) -->
-					<dependency>
-						<groupId>org.aspectj</groupId>
-						<artifactId>aspectjrt</artifactId>
-						<version>${org.aspectj-version}</version>
-					</dependency>
-					<dependency>
-						<groupId>org.aspectj</groupId>
-						<artifactId>aspectjtools</artifactId>
-						<version>${org.aspectj-version}</version>
-					</dependency>
-				</dependencies>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-							<goal>test-compile</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<outxml>true</outxml>
-					<source>${java-version}</source>
-					<target>${java-version}</target>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.7</version>  <!-- Note 2.8 does not work with AspectJ aspect path -->
 				<configuration>
-					<junitArtifactName>junit:junit</junitArtifactName>
-					<excludes>
-						<exclude>**/*_Roo_*</exclude>
-					</excludes>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>false</downloadJavadocs>
+					<wtpversion>2.0</wtpversion>
+					<additionalBuildcommands>
+						<buildCommand>
+							<name>org.springframework.ide.eclipse.core.springbuilder</name>
+						</buildCommand>
+					</additionalBuildcommands>
+					<additionalProjectnatures>
+						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+					</additionalProjectnatures>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<version>1.0-beta-1</version>
-			</plugin>						
+			</plugin>
 		</plugins>
 	</build>
 </project>
