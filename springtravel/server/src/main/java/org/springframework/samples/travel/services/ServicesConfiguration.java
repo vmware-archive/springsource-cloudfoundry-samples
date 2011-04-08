@@ -1,5 +1,7 @@
 package org.springframework.samples.travel.services;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.cache.HashtableCacheProvider;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.MySQL5InnoDBDialect;
@@ -10,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -31,35 +34,40 @@ import java.util.Map;
 @Configuration
 public class ServicesConfiguration {
 
+	private Log log = LogFactory.getLog(getClass()) ;
+
 	private Class<? extends Dialect> dialect = MySQL5InnoDBDialect.class;
 
-	@Value("classpath:/init.sql")
-	private Resource importSqlResource;
+	@Value("${ds.url}")
+	protected String url;
 
-	// will be the appropriate reference depending on whether the default profile or the cloud profile is activated
-	@Autowired
-	private DataSource dataSource;
+	@Value("${ds.password}")
+	protected String password;
 
-	@Autowired
-	private Environment environment;
+	@Value("${ds.driverClassName}")
+	protected String driverClassName;
 
-	@PostConstruct
-	protected void executeDatabaseSetup() throws Exception {
+	@Value("${ds.user}")
+	protected String user;
 
-		if (this.environment != null &&  Arrays.asList(this.environment.getActiveProfiles()).contains("cloud")) {
+	@Value("${ds.name}")
+	protected String database;
 
-			ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
-			resourceDatabasePopulator.setScripts(new Resource[]{this.importSqlResource});
-			resourceDatabasePopulator.setCommentPrefix("--");
-			resourceDatabasePopulator.setIgnoreFailedDrops(false);
-			resourceDatabasePopulator.setContinueOnError(false);
+	@Autowired DataSource dataSource ;
 
-			DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
-			dataSourceInitializer.setDatabasePopulator(resourceDatabasePopulator);
-			dataSourceInitializer.setDataSource(this.dataSource);
-			dataSourceInitializer.afterPropertiesSet();
-		}
-	}
+
+/*
+	@Bean
+	public DataSource dataSource() {
+		log.info(String.format("the url=%s, the password=%s, the user=%s, and the driverClassName=%s",  this.url,  this.password, this.user ,this.driverClassName) ) ;
+
+		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+		driverManagerDataSource.setUrl(this.url);
+		driverManagerDataSource.setPassword(this.password);
+		driverManagerDataSource.setUsername(this.user);
+		driverManagerDataSource.setDriverClassName(this.driverClassName);
+		return driverManagerDataSource;
+	}*/
 
 	public String getPersistenceXmlLocation() {
 		return "classpath:/META-INF/persistence.xml";
@@ -69,7 +77,7 @@ public class ServicesConfiguration {
 	public Map<String, Object> jpaProperties() {
 		Map<String, Object> props = new HashMap<String, Object>();
 		props.put("hibernate.dialect", this.dialect.getName());
-		props.put("hibernate.hbm2ddl.auto", "none");
+//		props.put("hibernate.hbm2ddl.auto", "none");
 		props.put("hibernate.show_sql", "true");
 		props.put("hibernate.cache.provider_class", HashtableCacheProvider.class.getName());
 		return props;
@@ -80,6 +88,7 @@ public class ServicesConfiguration {
 		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
 		hibernateJpaVendorAdapter.setShowSql(true);
 		hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
+		hibernateJpaVendorAdapter.setGenerateDdl(true);
 		return hibernateJpaVendorAdapter;
 	}
 
@@ -91,7 +100,7 @@ public class ServicesConfiguration {
 	@Bean
 	public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean() {
 		LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
-		lef.setDataSource(this.dataSource);
+		lef.setDataSource(this.dataSource  );
 		lef.setJpaVendorAdapter(this.jpaVendorAdapter());
 		lef.setJpaPropertyMap(this.jpaProperties());
 		lef.setPersistenceUnitName("travelDatabase");

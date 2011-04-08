@@ -18,6 +18,19 @@
     <context:component-scan base-package="org.springframework.samples.travel.services"/>
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
+    <beans:bean class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <beans:property name="url" value="jdbc:mysql://localhost/springtravelsql"/>
+        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <beans:property name="username" value="springtravelsql"/>
+        <beans:property name="password" value="springtravelsql"/>
+    </beans:bean>
+    
+    <!--	DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+		driverManagerDataSource.setUrl(this.url);
+		driverManagerDataSource.setPassword(this.password);
+		driverManagerDataSource.setUsername(this.user);
+		driverManagerDataSource.setDriverClassName(this.driverClassName);-->
+    
 
 	<http>
 		<!-- Authentication policy -->	
@@ -50,10 +63,10 @@
 	</authentication-manager>
 
 
-    <beans:beans profile="cloud">
+    <!--<beans:beans profile="cloud">-->
 
-        <cloud:data-source id="mysqlDataSource"/>
+        <!--<cloud:data-source id="mysqlDataSource"/>-->
 
-    </beans:beans>
+    <!--</beans:beans>-->
 
 </beans:beans>
