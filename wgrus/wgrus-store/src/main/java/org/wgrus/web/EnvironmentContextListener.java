@@ -16,8 +16,8 @@ package org.wgrus.web;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Dave Syer
@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class EnvironmentContextListener implements ServletContextListener {
 
-	private static Log logger = LogFactory.getLog(EnvironmentContextListener.class);
+	private static Logger logger = LoggerFactory.getLogger(EnvironmentContextListener.class);
 
 	public void contextInitialized(ServletContextEvent sce) {
 		if (System.getenv("VMC_APP_VERSION") != null || System.getenv("VCAP_APP_VERSION") != null) {

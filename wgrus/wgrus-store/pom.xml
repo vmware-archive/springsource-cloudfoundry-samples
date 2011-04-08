@@ -8,17 +8,36 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.cloudfoundry-version>0.5.0-LD</org.cloudfoundry-version>
+		<org.cloudfoundry-version>0.5.0-BUILD-SNAPSHOT</org.cloudfoundry-version>
+		<org.cloudfoundry-group>org.cloudfoundry</org.cloudfoundry-group>
 		<org.springframework-version>3.1.0.M1</org.springframework-version>
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<org.slf4j-version>1.5.10</org.slf4j-version>
 		<org.springframework.integration-version>2.0.3.RELEASE</org.springframework.integration-version>
 		<spring.amqp.version>1.0.0.BUILD-SNAPSHOT</spring.amqp.version>
 	</properties>
+	<profiles>
+		<profile>
+			<id>vcloud</id>
+			<properties>
+				<org.cloudfoundry-version>0.5.0-LD</org.cloudfoundry-version>
+				<org.cloudfoundry-group>org.cloudfabric</org.cloudfoundry-group>
+			</properties>
+			<repositories>
+				<repository>
+					<id>spring-milestone</id>
+					<url>http://s3.amazonaws.com/private.maven.springsource.com/milestone/</url>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
 	<dependencies>
 		<!-- CloudFoundry -->
 		<dependency>
-			<groupId>org.cloudfabric</groupId>
+			<groupId>${org.cloudfoundry-group}</groupId>
 			<artifactId>runtime</artifactId>
 			<version>${org.cloudfoundry-version}</version>
 		</dependency>
@@ -230,6 +249,13 @@
 			<name>Spring Maven Milestone Repository</name>
 			<url>http://maven.springframework.org/milestone</url>
 			<snapshots><enabled>false</enabled></snapshots>
+		</repository>
+		<repository>
+			<id>springsource-snapshot</id>
+			<url>http://s3.amazonaws.com/private.maven.springsource.com/snapshot/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 	<build>
