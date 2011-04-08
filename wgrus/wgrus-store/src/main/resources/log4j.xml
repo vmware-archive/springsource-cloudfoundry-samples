@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="org.springsource.samples.wgrus">
+	<logger name="org.springframework.integration">
 		<level value="info" />
 	</logger>
 	

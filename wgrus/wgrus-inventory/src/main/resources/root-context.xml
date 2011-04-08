@@ -59,9 +59,7 @@
 
 	<int:logging-channel-adapter channel="mailChannel" log-full-message="true" level="WARN"/>
 	
-	<bean id="orderQueue" class="org.springframework.amqp.core.Queue">
-		<constructor-arg value="orders"/>
-	</bean>
+	<rabbit:queue name="orders"/>
 
 	<rabbit:admin connection-factory="rabbitConnectionFactory"/>
 		

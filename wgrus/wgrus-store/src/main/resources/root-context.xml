@@ -22,7 +22,7 @@
 		<constructor-arg value="wgrus"/>
 	</bean>
 
-	<rabbit:queue name="orderQueue"/>
+	<rabbit:queue name="orders"/>
 
 	<rabbit:admin connection-factory="rabbitConnectionFactory"/>
 
