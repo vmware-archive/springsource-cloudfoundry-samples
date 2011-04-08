@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   applicationComplete="init()">
+
+
+	<fx:Script>
+		<![CDATA[
+			import mx.messaging.events.ChannelEvent;
+			import mx.messaging.messages.AsyncMessage;
+			import mx.messaging.messages.IMessage;
+			
+			private function init():void
+			{
+				consumer.subscribe();
+			}
+			
+			private function message(msg:Object):void {
+				var displayMsg:String = ""; 
+				if (!msg.userId) {
+					msg.userId = "Status";
+				}
+				displayMsg += msg.userId + ": " + msg.chatMessage + "\n";
+				log.text += displayMsg;
+			}
+			
+			private function send():void
+			{
+				var message:IMessage = new AsyncMessage();
+				message.body.userId = userId.text;
+				message.body.chatMessage = msg.text;
+				producer.send(message);
+				msg.text = "";
+			}
+			
+			private function messageHandler(message:IMessage):void
+			{
+				this.message(message.body);	
+			}
+			
+			private function connectionEventHandler(event:ChannelEvent):void {
+				var msg:Object = new Object();
+				if (event.type == ChannelEvent.CONNECT) {
+					msg.chatMessage = "Connected";
+				} else if (event.type == ChannelEvent.DISCONNECT) {
+					msg.chatMessage = "Disconnected";
+				}
+				this.message(msg);
+			}
+			
+		]]>
+	</fx:Script>	
+	
+	<fx:Declarations>
+		<!-- The ChannelSet API allows you to dynamically define your endpoints *at runtime*. In the example below, 
+		we hardcode the endpoint URLs. In real life, the client application would typically load these parameters 
+		dynamically. For example, the client application could read these parameters from an XML file loaded using 
+		the HTTPService at startup. The first channel added to the channelSet, is the first channel that the system 
+		will use to try to communicate with the server. If the first channel fails, the system will try to communicate 
+		with the second channel defined in the channelSet. -->
+		<mx:ChannelSet id="cs">
+			<mx:AMFChannel url="/messagebroker/amflongpolling"/>
+		</mx:ChannelSet>
+		
+		<mx:Producer id="producer" destination="si-chat-receiver" channelSet="{cs}"/>
+		<mx:Consumer id="consumer" destination="si-chat-pusher" channelSet="{cs}" message="messageHandler(event.message)" 
+					 channelConnect="connectionEventHandler(event)" channelDisconnect="connectionEventHandler(event)"/>
+	</fx:Declarations>
+
+	<s:Panel title="Flex Redis Chat Test" top="12" bottom="12" left="12" right="12">
+		<s:TextArea id="log" width="100%" height="100%" borderVisible="false"/>
+		<s:controlBarContent>
+			<mx:Form width="100%" paddingTop="4" paddingBottom="4" paddingLeft="4" paddingRight="4">
+				<mx:FormItem label="User Id:">
+					<s:TextInput id="userId" width="100" enter="send()"/>
+				</mx:FormItem>				
+				<mx:FormItem label="Message:" width="100%" direction="horizontal">
+					<s:TextInput id="msg" width="100%" enter="send()"/>
+					<s:Button label="Send" click="send()"/> 
+				</mx:FormItem>				
+			</mx:Form>
+		</s:controlBarContent>
+	</s:Panel>
+
+</s:Application>

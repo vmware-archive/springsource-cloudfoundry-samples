@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:flex="http://www.springframework.org/schema/flex"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/flex http://www.springframework.org/schema/flex/spring-flex-1.5.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+  	
+  	<!--  <aop:aspectj-autoproxy proxy-target-class="true"/> 
+
+	<bean class="org.springsource.flexchat.event.SubscriptionInterceptor"/> -->
+		
+	<flex:message-broker mapping-order="1">
+		<flex:mapping pattern="/messagebroker/*"/>
+		<flex:message-service default-channels="longpolling-amf" />
+	</flex:message-broker>
+	
+	<flex:integration-message-destination id="si-chat-receiver" message-channel="flexChatReceiver"/>
+	
+	<flex:integration-message-destination id="si-chat-pusher" message-channel="flexChatPusher"/>
+	
+</beans>

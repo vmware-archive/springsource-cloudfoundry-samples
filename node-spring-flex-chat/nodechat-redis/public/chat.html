@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/chat.css"></link>
+        <title>CloudFoundry Node Redis Chat Sample </title>
+    </head>
+    <body>
+        <h2>Node Redis Chat</h2>
+        <div id="chat"><p>Connecting...</p></div>
+        <form id="form" onSubmit="send(); return false">
+            <input type="text" autocomplete="off" id="text">
+            <input type="submit" value="Send">
+        </form>
+    </body>
+    <script src="/jquery-1.5.2.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/chat.js"></script>
+</html>
