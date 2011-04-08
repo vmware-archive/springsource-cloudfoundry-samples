@@ -210,7 +210,7 @@
 	</dependencies>
 	<repositories>
 		<repository>
-			<id>springsource-milestone</id>
+			<id>spring-milestone</id>
 			<url>http://s3.amazonaws.com/private.maven.springsource.com/milestone/</url>
 			<snapshots>
 				<enabled>false</enabled>
