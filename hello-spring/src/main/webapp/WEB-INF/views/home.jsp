@@ -28,9 +28,11 @@
 <p>Demonstration of using the 'cloud' namespace to create Spring beans backed by services bound to an application.</p>
 
 <h2>The following services are bound to this application:</h2>
-<c:forEach items="${services}" var="service">
-	<li><p>${service}</p></li>	
-</c:forEach>
+<ul>
+	<c:forEach items="${services}" var="service">
+		<li><p>${service}</p></li>	
+	</c:forEach>
+</ul>
 
 <h2>Overview</h2>
 
