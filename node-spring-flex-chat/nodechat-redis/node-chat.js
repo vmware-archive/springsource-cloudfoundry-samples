@@ -81,25 +81,26 @@ var io = io.listen(app, {transports: ['xhr-polling'], transportOptions: {'xhr-po
 console.log(io.options);
   
 io.on('connection', function(client){
-    redisSender.publish("chat", JSON.stringify({chatMessage:"I am connected.",userId:client.sessionId}));
+    redisSender.publish("chat", JSON.stringify({headers: {}, payload: {chatMessage:"I am connected.",userId:client.sessionId } }));
   
     client.on('message', function(message){
-        var msg = { chatMessage: message, userId: client.sessionId };
+        var msg = {headers: {}, payload: {chatMessage: message, userId: client.sessionId } };
         redisSender.publish("chat", JSON.stringify(msg));
     });
 
     client.on('disconnect', function(){
-        redisSender.publish("chat", JSON.stringify({chatMessage:"I am disconnected.",userId:client.sessionId}));
+        redisSender.publish("chat", JSON.stringify({headers: {}, payload: {chatMessage:"I am disconnected.",userId:client.sessionId } }));
     });
 });
 
 redisListener.subscribe("chat");
 
 redisListener.on("message", function(channel, message){
-    var msg = JSON.parse(message);
+    console.log("Received Redis message: "+message);
+    var msg = JSON.parse(message).payload;
     if (!msg.userId) {
-        io.broadcast(message);
+        io.broadcast(msg);
     } else {
-        io.broadcast(message, msg.userId);
+        io.broadcast(msg, msg.userId);
     }
 });
