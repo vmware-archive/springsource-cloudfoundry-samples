@@ -38,7 +38,7 @@
 	</bean>
 
 	<http:outbound-gateway request-channel="warehouseChannel"
-			url="${warehouse.url:http://127.0.0.1:8124}/{productId}" http-method="GET"
+			url="#{environmentProperties['warehouse.url']?:'http://127.0.0.1:8124'}/{productId}" http-method="GET"
 			reply-channel="filterChannel" expected-response-type="java.lang.String">
 		<http:uri-variable name="productId" expression="payload.productId"/>
 	</http:outbound-gateway>
@@ -66,6 +66,7 @@
 	<beans profile="default">
 		<bean id="mongo" class="com.mongodb.Mongo"/>
 		<rabbit:connection-factory id="rabbitConnectionFactory" />
+		<util:properties id="environmentProperties"/>
 	</beans>
 
 	<beans profile="cloud">
@@ -73,7 +74,7 @@
 		<cloud:rabbit-connection-factory id="rabbitConnectionFactory"/>
 		<context:property-placeholder ignore-unresolvable="true" properties-ref="environmentProperties"/>
 		<util:properties id="environmentProperties">
-			<prop key="warehouse.url">http://wgrus-warehouse.vcloudlabs.com</prop>
+			<prop key="warehouse.url">http://wgrus-warehouse.#{systemProperties['BASE_DOMAIN']?:'cloudfoundry.com'}</prop>
 		</util:properties>
 	</beans>
 
