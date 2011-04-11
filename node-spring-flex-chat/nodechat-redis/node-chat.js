@@ -98,7 +98,6 @@ io.on('connection', function(client){
 redisListener.subscribe("chat");
 
 redisListener.on("message", function(channel, message){
-    console.log("Received Redis message: "+message);
     var msg = JSON.parse(message).payload;
     if (!msg.userId) {
         io.broadcast(msg);
