@@ -34,7 +34,9 @@
 
 	<bean id="messageStore" class="org.springframework.integration.mongodb.store.MongoMessageStore">
 		<constructor-arg ref="mongo" />
-		<constructor-arg value="wgrus" />
+		<constructor-arg value="#{serviceProperties['mongo.name']?:'wgrus'}" />
+		<!-- <property name="username" value="#{serviceProperties['mongo.username']}"/> 
+			<property name="password" value="#{serviceProperties['mongo.password']}"/> -->
 	</bean>
 
 	<http:outbound-gateway request-channel="warehouseChannel"
@@ -67,15 +69,16 @@
 		<bean id="mongo" class="com.mongodb.Mongo"/>
 		<rabbit:connection-factory id="rabbitConnectionFactory" />
 		<util:properties id="environmentProperties"/>
+		<util:properties id="serviceProperties"/>
 	</beans>
 
 	<beans profile="cloud">
 		<cloud:mongo id="mongo"/>
 		<cloud:rabbit-connection-factory id="rabbitConnectionFactory"/>
-		<context:property-placeholder ignore-unresolvable="true" properties-ref="environmentProperties"/>
 		<util:properties id="environmentProperties">
 			<prop key="warehouse.url">http://wgrus-warehouse.#{systemProperties['BASE_DOMAIN']?:'cloudfoundry.com'}</prop>
 		</util:properties>
+		<cloud:service-properties id="serviceProperties"/>
 	</beans>
 
 </beans>
