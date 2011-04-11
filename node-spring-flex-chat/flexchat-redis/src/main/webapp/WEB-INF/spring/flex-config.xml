@@ -16,8 +16,10 @@
 		<flex:message-service default-channels="longpolling-amf" />
 	</flex:message-broker>
 	
-	<flex:integration-message-destination id="si-chat-receiver" message-channel="flexChatReceiver"/>
+	<flex:integration-message-destination id="si-chat-receiver" message-channel="chatReceiver"/>
 	
-	<flex:integration-message-destination id="si-chat-pusher" message-channel="flexChatPusher"/>
+	<flex:integration-message-destination id="si-chat-pusher" message-channel="chatPusher"/>
+	
+	<bean id="subscriptionListener" class="org.springsource.flexchat.event.SubscriptionListener"/>
 	
 </beans>

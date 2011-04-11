@@ -7,29 +7,32 @@
 	    http://www.springframework.org/schema/integration/event http://www.springframework.org/schema/integration/event/spring-integration-event-2.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
-	<channel id="flexChatReceiver" />
+	<!-- <channel id="flexChatReceiver" /> 
 	
-	<object-to-json-transformer input-channel="flexChatReceiver" output-channel="chatReceiver"/>
-	
+	<object-to-json-transformer input-channel="flexChatReceiver" output-channel="chatReceiver" />
+	-->
 	<channel id="chatReceiver" />
 	
-	<publish-subscribe-channel id="chatPusher" ignore-failures="true" />
+	<publish-subscribe-channel id="chatPusher" />
 	
+	<!-- 
 	<json-to-object-transformer input-channel="chatPusher" output-channel="flexChatPusher" type="java.util.HashMap" />
 	
-	<channel id="flexChatPusher" />
+	<channel id="flexChatPusher" /> -->
 	
 	<beans:bean id="redisInbound" class="org.springframework.integration.redis.inbound.RedisInboundChannelAdapter" >
 		<beans:constructor-arg ref="redisConnectionFactory"/>
 		<beans:property name="topics" value="chat"/>
 		<beans:property name="outputChannel" ref="chatPusher"/>
 		<beans:property name="errorChannel" ref="nullChannel" />
+		<beans:property name="messageConverter" ref="jsonConverter" />
 	</beans:bean>
 	
 	<outbound-channel-adapter channel="chatReceiver" ref="redisOutbound"/>
 	
 	<beans:bean id="redisOutbound" class="org.springframework.integration.redis.outbound.RedisPublishingMessageHandler" >
 		<beans:constructor-arg ref="redisConnectionFactory"/>
+		<beans:constructor-arg ref="jsonConverter"/>
 		<beans:property name="defaultRedisChannel" value="chat"/>
 	</beans:bean>
 	
