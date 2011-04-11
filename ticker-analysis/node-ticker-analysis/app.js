@@ -36,7 +36,7 @@ var io       = require("socket.io").listen(app, {
 
 // Connect to MongoDB
 var mongoConfig = cf.getServiceConfig("ticker-analysis");
-util.debug("mongo config: "+JSON.stringify(mongoConfig));
+//util.debug("mongo config: "+JSON.stringify(mongoConfig));
 var mongo = provider.connect("mongo://"+mongoConfig.hostname+":"+mongoConfig.port+"/"+mongoConfig.name);
 var analysis;
 var tickerData;
@@ -51,7 +51,7 @@ mongo.open(function(err, db) {
 
 // Connect to Redis
 var redisConfig = cf.getServiceConfig("ticker-stream");
-util.debug("redis config: "+JSON.stringify(redisConfig));
+//util.debug("redis config: "+JSON.stringify(redisConfig));
 var redisClient = redis.createClient(redisConfig.port, redisConfig.hostname);
 var redisPublisher = redis.createClient(redisConfig.port, redisConfig.hostname);
 if(redisConfig.password) {
@@ -88,13 +88,22 @@ function getRandomPrice(lastPrice) {
 	}
 }
 
+function getRandomVolume() {
+	var vol = Math.round(Math.random() * 10);
+	if(vol == 0) {
+		return 1;
+	}
+	return vol;
+}
+
 var tickerSender;
 function sendTickerEvent() {
 	var symbolInfo = {
 		symbol: getRandomSymbol(), 
-		price: getRandomPrice()
+		price: getRandomPrice(),
+		volume: getRandomVolume()
 	};
-	util.debug("sending ticker event: " + JSON.stringify(symbolInfo));
+	//util.debug("sending ticker event: " + JSON.stringify(symbolInfo));
 	redisPublisher.publish("ticker-stream", JSON.stringify(symbolInfo));
 	
 	var timeout = Math.round(Math.random() * 7000);
@@ -112,8 +121,13 @@ app.get("/", function(req, resp) {
 });
 
 app.get("/summary/:symbol", function(req, resp) {
-	sendTickerEvent("VMW", 22.5);
-	resp.send("OK");
+	resp.send({
+		name: "Name, Inc.",
+		high: 100.0,
+		average: 75.0,
+		low: 50.0,
+		volume: 100000
+	});
 });
 
 // Ticker Stream
@@ -121,7 +135,7 @@ io.on("connection", function(client) {
 	if(!tickerSender) {
 		sendTickerEvent();
 	}
-	util.debug("connection made..." + client);
+	//util.debug("connection made..." + client);
 })
 
 // Listen for requests

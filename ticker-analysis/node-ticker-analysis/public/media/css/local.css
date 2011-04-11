@@ -203,6 +203,7 @@ fieldset.smalltab .buttonGroup {
 
 #ticker-stream {
 	background-color: #dfdfdf;
+  background: -moz-linear-gradient(100% 100% 90deg, #dfdfdf, #ffffff, #dfdfdf);
 	background: -webkit-linear-gradient(#dfdfdf, #ffffff, #dfdfdf);
 	border-left: 1px solid #cccccc;
 	border-top: 1px solid #cccccc;
@@ -254,11 +255,62 @@ fieldset.smalltab .buttonGroup {
 	width: 105px;
 }
 
+.ticker-trend-nc {
+}
+
 .ticker-trend-up {
 	color: green;
 }
 
+.ticker-trend-down {
+	color: red;
+}
+
 #ticker-detail {
-	position: absolute;
-	width: 400px;
+	border: 1px solid #cccccc;
+	float: right;
+	height: 200px;
+	margin: 50px 0;
+	opacity: 0;
+	width: 300px;
+}
+
+#ticker-detail .t-d-data {
+	font-size: 15px;
+	padding: 5px;
+}
+
+#ticker-detail #t-d-symbol {
+	border-bottom: 1px solid #cccccc;
+	font-size: 35px;
+	margin: 0 0 10px;
+}
+
+#ticker-detail #t-d-name {
+	float: right;
+	font-size: 20px;
+	line-height: 40px;
+}
+
+#ticker-detail .t-d-s-price {
+	text-align: justify;
+}
+
+#ticker-detail .t-d-s-p-label {
+	float: left;
+	text-align: right;
+	width: 50%;
+}
+
+#ticker-detail .t-d-s-p-value {
+	text-align: right;
+}
+
+#ticker-detail #t-d-s-price-avg {
+	font-size: 20px;
+}
+
+#ticker-detail #t-d-volume {
+	padding: 0 10px 5px 0;
+	text-align: right;
 }

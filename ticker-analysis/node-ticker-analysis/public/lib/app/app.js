@@ -1,5 +1,22 @@
-function computeNodeSize(node, index, nodes, total) {
-	total += width;
+function handleSymbolClick(evt) {
+	var symbol = evt.target.attributes["data"].value;
+	dojo.xhrGet({
+		url: "/summary/" + symbol,
+		handleAs: "json",
+		load: function(data) {
+			dojo.byId("t-d-symb-val").innerHTML = symbol;
+			dojo.byId("t-d-name").innerHTML = data.name;
+			dojo.byId("t-d-s-p-high-val").innerHTML = data.high.toFixed(2);
+			dojo.byId("t-d-s-p-avg-val").innerHTML = data.average.toFixed(2);
+			dojo.byId("t-d-s-p-low-val").innerHTML = data.low.toFixed(2);
+			dojo.byId("t-d-v-val").innerHTML = data.volume;
+			
+			var dpStyle = dojo.style("ticker-detail");
+			if(dpStyle["opacity"] == "0") {
+				dojo.fadeIn({ node: "ticker-detail" }).play();
+			}
+		}
+	});
 }
 
 dojo.addOnLoad(function() {
@@ -9,10 +26,12 @@ dojo.addOnLoad(function() {
 		var data = dojo.fromJson(msg);
 		var html = dojo.byId("ticker-symbols").innerHTML;
 		dojo.byId("ticker-symbols").innerHTML = "<div class='ticker-data'>" +
-				"<div class='ticker-symbol'><a href='#' title='Ticker Symbol Analysis'><a href='#'>" + data.symbol + "</a></div>" +
+				"<div class='ticker-symbol'><a class='ticker-symb-link' href='#' data='" + data.symbol + "' title='Ticker Symbol Analysis'>" + data.symbol + "</a></div>" +
 				"<div class='ticker-meta ticker-price'>Price: $" + data.price + "</div>" +
-				"<div class='ticker-meta ticker-trend ticker-trend-up'>Change: +0.75</div>" +
+				"<div class='ticker-meta ticker-volume'>Volume: " + data.volume + "</div>" +
 			"</div>" + html;
+
+		dojo.query(".ticker-symb-link").onclick(handleSymbolClick);
 
 		var nodes = dojo.query("#ticker-symbols .ticker-data")
 		var total = 0;
@@ -40,4 +59,5 @@ dojo.addOnLoad(function() {
 			}
 		});
 	});
-	});
+	
+});
