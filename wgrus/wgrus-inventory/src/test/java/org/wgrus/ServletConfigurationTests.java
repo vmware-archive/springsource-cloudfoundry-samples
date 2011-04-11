@@ -12,6 +12,8 @@
  */
 package org.wgrus;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -55,6 +57,13 @@ public class ServletConfigurationTests {
 			parent.close();
 
 		}
+
+	}
+
+	@Test
+	public void testUriDiscovery() throws Exception {
+		String services = "{\"droplet_id\":1119,\"instance_id\":\"1b944bd60f7b3acacda84847a302b5bf\",\"instance_index\":0,\"name\":\"batch\",\"dir\":\"/var/vcap/data/dea/apps/batch-0-1b944bd60f7b3acacda84847a302b5bf\",\"uris\":[\"wgrus-inventory.cloudfoundry.com\"],\"users\":[\"dsyer@vmware.com\"],\"version\":\"336b66d32276651ba48605f0b4018d14e648a082-3\",\"mem_quota\":536870912,\"disk_quota\":2147483648,\"fds_quota\":256,\"state\":\"STARTING\",\"runtime\":\"java\",\"start\":\"2011-04-09 07:41:41 +0000\",\"state_timestamp\":1302334901,\"secure_user\":\"vcap-user-5\",\"resources_tracked\":true,\"port\":13036}";
+		assertEquals("cloudfoundry.com", services.replaceAll(".*wgrus-inventory\\.([a-zA-Z0-9.]*)\\\".*", "$1"));
 
 	}
 

@@ -53,21 +53,11 @@ public class ServicesConfiguration {
 	@Value("${ds.name}")
 	protected String database;
 
-	@Autowired DataSource dataSource ;
+	@Autowired (required = false )
+	DataSource dataSource ;
 
 
-/*
-	@Bean
-	public DataSource dataSource() {
-		log.info(String.format("the url=%s, the password=%s, the user=%s, and the driverClassName=%s",  this.url,  this.password, this.user ,this.driverClassName) ) ;
 
-		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-		driverManagerDataSource.setUrl(this.url);
-		driverManagerDataSource.setPassword(this.password);
-		driverManagerDataSource.setUsername(this.user);
-		driverManagerDataSource.setDriverClassName(this.driverClassName);
-		return driverManagerDataSource;
-	}*/
 
 	public String getPersistenceXmlLocation() {
 		return "classpath:/META-INF/persistence.xml";

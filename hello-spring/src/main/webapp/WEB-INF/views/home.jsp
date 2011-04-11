@@ -28,13 +28,45 @@
 <p>Demonstration of using the 'cloud' namespace to create Spring beans backed by services bound to an application.</p>
 
 <h2>The following services are bound to this application:</h2>
-<c:forEach items="${services}" var="service">
-	<li><p>${service}</p></li>	
-</c:forEach>
+<ul>
+	<c:forEach items="${services}" var="service">
+		<li><p>${service}</p></li>	
+	</c:forEach>
+</ul>
 
-<h2>Usage</h2>
+<h2>Overview</h2>
 
-<p>The 'cloud' namespace provides support for defining beans backed by services:</p>
+<h3>Spring Profiles</h3>
+
+<p>This application makes use of Spring 3.1 Profiles. There is an ApplicationContextInitializer
+registered in <code>web.xml</code>:</p>
+
+<pre>
+	&lt;context-param&gt;
+		&lt;param-name&gt;contextInitializerClasses&lt;/param-name&gt;
+		&lt;param-value&gt;org.cloudfoundry.services.CloudApplicationContextInitializer&lt;/param-value&gt;
+	&lt;/context-param&gt;
+</pre>
+
+<p>That initializer activates the "cloud" profile if it recognizes that it's running in a cloud environment.
+Otherwise, it activates the "default" profile.</p>
+
+<p>The configuration contains two different groups of beans that are labeled with the corresponding profile:</p>
+
+<pre>
+	&lt;beans profile="default"&gt;
+		&lt;!-- default bean definitions go here --&gt;
+	&lt;/beans&gt;
+
+	&lt;beans profile="cloud"&gt;
+		&lt;!-- cloud bean definitions go here --&gt;
+	&lt;/beans&gt;
+</pre>
+
+<h3>The "cloud" Namespace</h3>
+
+<p>The beans within the 'cloud' profile section make use of the 'cloud' namespace. That namespace provides
+support for defining beans backed by services:</p>
 
 <pre>
 	&lt;cloud:data-source/&gt;

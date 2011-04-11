@@ -11,12 +11,16 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="org.springsource.samples.wgrus">
-		<level value="info" />
+	<logger name="org.wgrus">
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.springframework.amqp">
 		<level value="info" />
 	</logger>
 	
