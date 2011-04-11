@@ -1,0 +1,27 @@
+!!! 5
+html(lang="en", xmlns="http://www.w3.org/1999/xhtml")
+	head
+		title= pageTitle
+		link(rel="stylesheet", href="/media/css/main.css", type="text/css")
+		link(rel="stylesheet", href="/media/css/colors.css", type="text/css")
+		link(rel="stylesheet", href="/media/css/local.css", type="text/css")
+		link(rel="stylesheet", href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/nihilo/nihilo.css", type="text/css")
+		style(type="text/css")
+			@import "http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojox/grid/resources/Grid.css";
+			@import "http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojox/grid/resources/nihiloGrid.css";
+			.dojoxGrid table { margin: 0 }
+		script(src="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js", djConfig="parseOnLoad: true")
+		script(src="/lib/socket.io/socket.io.min.js")
+		script(src="/lib/app/app.js")
+
+body.nihilo
+#page
+	#header
+		#name-and-company
+			#site-name
+				a(title=pageTitle, rel="home")= pageTitle
+			#company-name
+				a(href="http://www.springsource.com", title="SpringSource") SpringSource Home
+	#container
+		#content.no-side-nav
+			!= body
