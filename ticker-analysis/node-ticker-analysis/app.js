@@ -46,7 +46,6 @@ mongo.open(function(err, db) {
 	} else {
 		analysis = db;
 		tickerData = new provider.MongoProvider(analysis, "tickerdata");
-		tickerData.ensureIndex({ "symbol": 1 });
 	}
 });
 
@@ -97,7 +96,6 @@ function sendTickerEvent() {
 	};
 	util.debug("sending ticker event: " + JSON.stringify(symbolInfo));
 	redisPublisher.publish("ticker-stream", JSON.stringify(symbolInfo));
-	analysis.put()
 	
 	var timeout = Math.round(Math.random() * 7000);
 	if(timeout < 3000) {
