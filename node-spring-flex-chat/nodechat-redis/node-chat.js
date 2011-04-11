@@ -7,6 +7,8 @@ var http = require('http'),
 
 app = express.createServer();
 
+//process.env.VCAP_SERVICES = '{"redis-2.2":[{"name":"redis-4b710","label":"redis-2.2","plan":"free","credentials":{"node_id":"redis_node_4","hostname":"172.30.48.43","port":5000,"password":"c1ce71ae-cebd-430d-898f-2c45923bf29a","name":"redis-b846125c-1c56-47e8-9ab0-89b248292942"}}]}';
+
 app.configure(function(){
     app.use(express.methodOverride());
     app.use(express.bodyParser());
@@ -28,13 +30,26 @@ app.get('/', function(req, res){
     res.sendfile(__dirname + '/public/chat.html');
 });
 
-app.listen(process.env.VMC_APP_PORT || 8088);
+app.listen(process.env.VCAP_APP_PORT || 8088);
 
 //Set up Redis, dynamically discovering and connecting to the bound CloudFoundry service
-if (process.env.VMC_SERVICES) {
+if (process.env.VCAP_SERVICES) {
     console.log("Bound services detected.");
-    var services = JSON.parse(process.env.VMC_SERVICES);
-    services.forEach(function(service) {
+    var services = JSON.parse(process.env.VCAP_SERVICES);
+    for (serviceType in services) {
+        console.log("Service: "+serviceType);
+        console.log("Service Info: "+JSON.stringify(services[serviceType]));
+        if (serviceType.match(/redis*/)) {
+            var service = services[serviceType][0];
+            console.log("Connecting to Redis service "+service.name+":"+service.credentials.hostname+":"+service.credentials.port);
+            redisListener = redis.createClient(service.credentials.port, service.credentials.hostname);
+            redisListener.auth(service.credentials.password);
+            redisSender = redis.createClient(service.credentials.port, service.credentials.hostname);
+            redisSender.auth(service.credentials.password);
+            break;
+        }
+    }
+    /*services.forEach(function(service) {
         console.log("Service Info: "+JSON.stringify(service));
         if (service.vendor == "redis") {
             console.log("Connecting to Redis service "+service.name+":"+service.options.hostname+":"+service.options.port);
@@ -44,11 +59,11 @@ if (process.env.VMC_SERVICES) {
             redisSender.auth(service.options.password);
             return;
         }
-    });
+    });*/
 }
 
 //Fall-back Redis connections for local development outside of CloudFoundry
-if (!redisListener && !process.env.VMC_APP_PORT) {
+if (!redisListener && !process.env.VCAP_APP_PORT) {
     console.log("Connecting to local Redis service");
     redisListener = redis.createClient();
     redisSender = redis.createClient();
