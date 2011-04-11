@@ -7,8 +7,6 @@ var http = require('http'),
 
 app = express.createServer();
 
-//process.env.VCAP_SERVICES = '{"redis-2.2":[{"name":"redis-4b710","label":"redis-2.2","plan":"free","credentials":{"node_id":"redis_node_4","hostname":"172.30.48.43","port":5000,"password":"c1ce71ae-cebd-430d-898f-2c45923bf29a","name":"redis-b846125c-1c56-47e8-9ab0-89b248292942"}}]}';
-
 app.configure(function(){
     app.use(express.methodOverride());
     app.use(express.bodyParser());
@@ -49,17 +47,6 @@ if (process.env.VCAP_SERVICES) {
             break;
         }
     }
-    /*services.forEach(function(service) {
-        console.log("Service Info: "+JSON.stringify(service));
-        if (service.vendor == "redis") {
-            console.log("Connecting to Redis service "+service.name+":"+service.options.hostname+":"+service.options.port);
-            redisListener = redis.createClient(service.options.port, service.options.hostname);
-            redisListener.auth(service.options.password);
-            redisSender = redis.createClient(service.options.port, service.options.hostname);
-            redisSender.auth(service.options.password);
-            return;
-        }
-    });*/
 }
 
 //Fall-back Redis connections for local development outside of CloudFoundry
@@ -111,7 +98,6 @@ io.on('connection', function(client){
 redisListener.subscribe("chat");
 
 redisListener.on("message", function(channel, message){
-    console.log("Received Redis message: "+message);
     var msg = JSON.parse(message).payload;
     if (!msg.userId) {
         io.broadcast(msg);
