@@ -1,0 +1,53 @@
+#ticker-stream
+	#ticker-symbols
+#ticker-detail 
+	#t-d-symbol.t-d-data 
+		span#t-d-symb-val SYMB
+		#t-d-name.t-d-data Symbol, Inc.
+	#t-d-summary.t-d-data
+		#t-d-s-price-high(class="t-d-data t-d-s-price") 
+			.t-d-s-p-value 
+				span#t-d-s-p-high-val 0.00
+				.t-d-s-p-label High: 
+		#t-d-s-price-avg(class="t-d-data t-d-s-price")
+			.t-d-s-p-value 
+				span#t-d-s-p-avg-val 0.00
+				.t-d-s-p-label Avg: 
+		#t-d-s-price-low(class="t-d-data t-d-s-price")
+			.t-d-s-p-value 
+				span#t-d-s-p-low-val 0.00
+				.t-d-s-p-label Low: 
+	#t-d-volume.t-d-data Volume: 
+		span#t-d-v-val 100000
+#ticker-analysis
+
+h1 Ticker Analysis Sample
+
+.ticker-hello 
+p This sample illustrates a number of useful Cloud Foundry features:
+	ul
+		li Redis Publish/Subscribe functionality to issue streaming updates to the browser using Socket.IO.
+		li MongoDB to capture data streaming through Redis and to power a web UI summarization tool.
+
+h3 Ployglot Programming:
+
+p The app itself is composed of multiple architectures:
+	ul 
+		li The web UI is powered by 
+			a(href="http://nodejs.org") Node.JS
+			| ,
+			a(href="http://socket.io/") Socket.IO
+			| , and
+			a(href="http://expressjs.com") Express
+			|  on the server side...
+		li ...and uses the 
+			a(href="http://dojotoolkit.org") dojo toolkit
+			|  and
+			a(href="http://socket.io/") Socket.IO
+			|  on the client side.
+
+h3 How this example works:
+
+p To use this example, click on a ticker symbol from the stream at the top of the page. 
+	| A detail box should appear at the right of the page with summarization information for 
+	| that symbol pulled from a document in MongoDB.

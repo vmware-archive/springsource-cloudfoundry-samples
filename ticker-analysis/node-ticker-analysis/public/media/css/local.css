@@ -1,0 +1,316 @@
+
+.note {
+	border: 1px solid #FFDDBB;
+	color: inherit;
+	background-color: #FFF5EE;
+}
+
+div.note {
+	padding: 0.5em;
+	margin-top: 1.5em;
+}
+
+fieldset {
+	border-width: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.inline-labeles label {
+	margin-left: 0.5em;
+}
+
+#secondary-navigation ul {
+	padding-top: 6px;
+}
+
+#exports #export-fragment {
+	width: 50%;
+	float: right;
+	padding-bottom: 22px;
+}
+
+.loading_indicator_parent {
+	position: relative;
+}
+
+#loading_indicator {
+	position: absolute;
+	bottom: 5px;
+	right: 0;
+	opacity: 0;
+}
+
+textarea {
+	display: inline;
+	width: 40%;
+	height: 2em;
+}
+
+fieldset > div {
+	margin-top: 0.5em;
+}
+
+.error {
+	color: red;
+	backround-color: inherit;
+	font-weight: bold;
+}
+
+hr {
+	height: 1px;
+	border: 0;
+	background-color: #007C00;
+	color: #007C00;
+}
+
+#secondary-navigation {
+	margin-top: 15px;
+}
+
+#secondary-navigation ul li {
+	margin-bottom: 5px;
+}
+
+#secondary-navigation ul li li {
+	margin-bottom: 0;
+}
+
+.scroll {
+	overflow: auto;
+	border: 1px solid green;
+	padding: 3px;
+	height: 200px;
+	white-space: pre;
+}
+
+.clear {
+	clear: both;
+}
+
+input#cancel {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+
+
+
+
+
+
+form > fieldset { 
+	border: 0 
+	padding: 4px; 
+	padding-bottom: 8px;
+	margin: 0 0 10px; 
+}
+
+legend {
+	margin-bottom: 0.25em;
+	margin-left: 0.25em;
+}
+
+form, legend { 
+	border: 0; 
+	padding: 0; 
+	margin: 0; 
+}
+
+form ol, form ul { 
+	list-style: none; 
+	margin: 0;
+	padding: 0;
+}
+
+form li { 
+	clear: both;
+	margin: 0 0 .75em;
+	padding: 0; 
+} 
+
+.confirm { 
+	margin-bottom: 0.75em; 
+}
+
+label { 
+	display: block;
+	float: left;
+	margin-right: 10px;
+	text-align: right;
+	width: 120px;
+}
+
+label:after {
+	content: ':';
+}
+
+.radio label:after, 
+.confirm label:after {
+	content: ''; 
+}
+
+.confirm label { 
+	display: block; 
+	float: none;
+	margin-left: 130px; 
+	text-align: left;
+	width: inherit; 
+}
+
+fieldset.smalltab .confirm label { 
+	margin-left: 35px;
+}
+
+form .control {
+	float: left;
+	margin-bottom: 8px;
+}
+
+input[type="text"], 
+input[type="password"]
+{ 
+	width: 250px;
+}
+
+fieldset .buttonGroup { 
+	clear: both;
+	margin-left: 130px; 
+	margin-right: 5px;
+	cursor: pointer;
+	position: relative;
+}
+
+fieldset.notab .buttonGroup {
+	margin-left: 0;
+}
+
+fieldset.smalltab .buttonGroup {
+	margin-left: 35px;
+}
+
+.buttonGroup button,
+.buttonGroup input[type="button"],
+.buttonGroup input[type="submit"],
+.buttonGroup input[type="reset"] {
+	margin-right: 5px;
+}
+
+#page {
+	margin-top: 55px;
+}
+
+#ticker-stream {
+	background-color: #dfdfdf;
+  background: -moz-linear-gradient(100% 100% 90deg, #dfdfdf, #ffffff, #dfdfdf);
+	background: -webkit-linear-gradient(#dfdfdf, #ffffff, #dfdfdf);
+	border-left: 1px solid #cccccc;
+	border-top: 1px solid #cccccc;
+	height: 35px;
+	left: 0px;
+	overflow: hidden;
+	padding: 8px;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+}
+
+#ticker-symbols {
+	height: 30px;
+	overflow: hidden;
+	position: absolute;
+	right: 16px;
+	width: 0px;
+}
+
+.ticker-data {
+	border-left: 1px solid #cccccc;
+	clear; both;
+	float: right;
+	height: 35px;
+	margin: 0 10px 0 10px;
+	padding: 0 10px 0 10px;
+}
+
+.ticker-symbol {
+	clear: none;
+	float: left;
+	margin: 0 10px 0 0;
+}
+
+.ticker-meta {
+	text-align: right;
+}
+
+.ticker-data .ticker-symbol {
+	font-size: 25px;
+	float: left;
+}
+
+.ticker-data .ticker-price {
+	float: right;
+	font-size: 14px;
+	font-weight: bold;
+	width: 105px;
+}
+
+.ticker-trend-nc {
+}
+
+.ticker-trend-up {
+	color: green;
+}
+
+.ticker-trend-down {
+	color: red;
+}
+
+#ticker-detail {
+	border: 1px solid #cccccc;
+	float: right;
+	height: 200px;
+	margin: 50px 0;
+	opacity: 0;
+	width: 300px;
+}
+
+#ticker-detail .t-d-data {
+	font-size: 15px;
+	padding: 5px;
+}
+
+#ticker-detail #t-d-symbol {
+	border-bottom: 1px solid #cccccc;
+	font-size: 35px;
+	margin: 0 0 10px;
+}
+
+#ticker-detail #t-d-name {
+	float: right;
+	font-size: 20px;
+	line-height: 40px;
+}
+
+#ticker-detail .t-d-s-price {
+	text-align: justify;
+}
+
+#ticker-detail .t-d-s-p-label {
+	float: left;
+	text-align: right;
+	width: 50%;
+}
+
+#ticker-detail .t-d-s-p-value {
+	text-align: right;
+}
+
+#ticker-detail #t-d-s-price-avg {
+	font-size: 20px;
+}
+
+#ticker-detail #t-d-volume {
+	padding: 0 10px 5px 0;
+	text-align: right;
+}
