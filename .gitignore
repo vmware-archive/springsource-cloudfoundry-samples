@@ -19,4 +19,5 @@ spring-integration-gemfire/BACKUP_*
 spring-integration-gemfire/KEYS_*
 spring-integration-gemfire/RECOVERY_*
 .DS_Store
+**/.DS_Store
 
