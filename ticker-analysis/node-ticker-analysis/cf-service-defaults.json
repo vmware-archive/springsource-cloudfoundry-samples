@@ -4,7 +4,7 @@
     "port": 27017,
     "username": "admin",
     "password": "passwd",
-    "name": "tickeranalysis"
+    "db": "tickeranalysis"
   },
   "ticker-stream": {
     "hostname": "localhost",
