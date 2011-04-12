@@ -1,0 +1,10 @@
+Multi-client Chat for CloudFoundry
+
+This example shows how simple it is to deploy a NodeJS app and a Java app to CloudFoundry and allow them to interoperate through the use of shared platform services.
+
+The NodeJS app provides a simple HTML chat client that sends and receives messages using the Comet/Websocket Socket.IO Node module.  This client can be seen running at http://nodechat-redis.cloudfoundry.com
+
+The Java app provides a simple Flex chat client that sends and receives messages using a combination of Spring BlazeDS and Spring Integration.  This client can be seen running at http://flexchat-redis.cloudfoundry.com
+
+Both apps publish messages to a shared Redis service, such that messages published by the HTML client will be received by the Flex client and vice versa.
+
