@@ -1,0 +1,782 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+	<channel>
+		<title>GroovyBlogs.org</title>
+		<link>http://www.groovyblogs.org</link>
+		<description>groovyblogs.org Recent Entries</description>
+		<atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="http://feeds.feedburner.com/groovyblogs"/>
+		<feedburner:info xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" uri="groovyblogs"/>
+		<atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/"/>
+		<image>
+			<url>http://www.groovyblogs.org/favicon.ico</url>
+		</image>
+		<item>
+			<title>GORM gotcha: Many to Many mapping causing new Domain to be saved</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15540</link>
+			<description>Hi AllI came across a new Grails GORM subtle gotcha this week.I was creating a new Domain object and it was still getting persisted to the database even though i was not calling save().This is not nor...</description>
+			<pubDate>Mon, 18 Oct 2010 04:36:06 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15540</guid>
+			<dc:creator>delahuntyware</dc:creator>
+			<dc:date>2010-10-18T04:36:06Z</dc:date>
+		</item>
+		<item>
+			<title>Daily Dose - University Building a New Parallel Java</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15539</link>
+			<description>PyPy: The Fastest Python Implemenation?Firefox 4 Hitting Snags Opera Getting Extensions - Calls For a StandardOracle's strategy is now clear</description>
+			<pubDate>Sun, 17 Oct 2010 22:16:10 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15539</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-17T22:16:10Z</dc:date>
+		</item>
+		<item>
+			<title>Daily Dose - GAE Gets New Admin Utilities</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15538</link>
+			<description>Hibernate Static Metamodel Generator Annotation Processor 1.1STS 2.5 Out of MilestonesPerformance Tuning Added to CassandraGoogle's
+ guava java: the easy parts</description>
+			<pubDate>Sat, 16 Oct 2010 04:10:05 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15538</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-16T04:10:05Z</dc:date>
+		</item>
+		<item>
+			<title>On Gaelyks and Golden Hammers</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15537</link>
+			<description>I had a break in my personal speaking schedule today at NFJS in Minneapolis, MN, and I decided to attend Tim Berglund's talk on Gaelyk. Gaelyk is an extremely lightweight Groovy framework for Google A...</description>
+			<pubDate>Fri, 15 Oct 2010 21:51:04 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15537</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-15T21:51:04Z</dc:date>
+		</item>
+		<item>
+			<title>Groovy News:  Gaelyk 0.5.6 Released</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15536</link>
+			<description>It seems like every other article on this blog lately is about a new release of Gaelyk, but there is another one out. Version 0.5.6 was released today, which is mostly bug fix releases. From the relea...</description>
+			<pubDate>Fri, 15 Oct 2010 19:02:14 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15536</guid>
+			<dc:creator>Blogging Techstacks</dc:creator>
+			<dc:date>2010-10-15T19:02:14Z</dc:date>
+		</item>
+		<item>
+			<title>Gradle Goodness: Automatic Clean Tasks</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15535</link>
+			<description>Gradle adds the task rule clean&amp;lt;Taskname&amp;gt; to our projects when we apply the base plugin. This task is able to remove any output files or directories we have defined for our task. For example we ...</description>
+			<pubDate>Fri, 15 Oct 2010 16:41:11 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15535</guid>
+			<dc:creator>Messages from mrhaki</dc:creator>
+			<dc:date>2010-10-15T16:41:11Z</dc:date>
+		</item>
+		<item>
+			<title>Hibernate 3.6.0 and moving to Git and Gradle</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15534</link>
+			<description>The Hibernate team has released Hibernate Core 3.6.0 Final. Important changes are dropping JDK 1.4 support and merging Hibernate annotations into Hibernate Core. Along the way they changed some import...</description>
+			<pubDate>Fri, 15 Oct 2010 14:59:04 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15534</guid>
+			<dc:creator>techscouting through the news » Groovy and Grails</dc:creator>
+			<dc:date>2010-10-15T14:59:04Z</dc:date>
+		</item>
+		<item>
+			<title>Gradle Goodness: Custom Version Object</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15533</link>
+			<description>The project version in a Gradle project is not limited to a String value, but can be any Object. We must implement the toString() method of the object so Gradle can use it for example in naming JAR fi...</description>
+			<pubDate>Fri, 15 Oct 2010 06:19:08 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15533</guid>
+			<dc:creator>Messages from mrhaki</dc:creator>
+			<dc:date>2010-10-15T06:19:08Z</dc:date>
+		</item>
+		<item>
+			<title>Daily Dose - Spring Roo's RooBot</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15532</link>
+			<description>A Date With Chrome 8New Version of the Go LanguageIs Android 3.0 Coming Next Week?Is
+ JaveEE really portable? And is it really useful?</description>
+			<pubDate>Thu, 14 Oct 2010 23:14:18 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15532</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-14T23:14:18Z</dc:date>
+		</item>
+		<item>
+			<title>Externalize and reload grails configuration dynamically</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15531</link>
+			<description>Reloading configuration from external Configuration files without restarting the web container and putting the configuration file external to war file. I Used config.merge and new ConfigSlurper().pars...</description>
+			<pubDate>Thu, 14 Oct 2010 20:06:14 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15531</guid>
+			<dc:creator>IntelliGrape Blog</dc:creator>
+			<dc:date>2010-10-14T20:06:14Z</dc:date>
+		</item>
+		<item>
+			<title>GORM feature: Bypass Grails Domain Constraints</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15530</link>
+			<description>I didn&amp;#8217;t know this earlier, but found a very good feature of GORM &amp;#8211; &amp;#8216;bypass&amp;#8217; constraints or &amp;#8216;customize&amp;#8217; validation while saving a domain-object. I am not sure if th...</description>
+			<pubDate>Thu, 14 Oct 2010 20:06:13 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15530</guid>
+			<dc:creator>IntelliGrape Blog</dc:creator>
+			<dc:date>2010-10-14T20:06:13Z</dc:date>
+		</item>
+		<item>
+			<title>Regex to match exact word in a string</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15529</link>
+			<description>Hi,
+In my recent grails project, i needed to check the occurrence of a word in a string. I could have used contains() method of groovy , but the problem with contains() is that it also matches the wor...</description>
+			<pubDate>Thu, 14 Oct 2010 20:06:09 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15529</guid>
+			<dc:creator>IntelliGrape Blog</dc:creator>
+			<dc:date>2010-10-14T20:06:09Z</dc:date>
+		</item>
+		<item>
+			<title>Get absolute URL of site Grails application is available at?</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15528</link>
+			<description>Many times, we need to get the absolute URL of the site/application. One such case is when we are sending out links to the application in emails.
+
+The default Config.groovy file provided by Grails has...</description>
+			<pubDate>Thu, 14 Oct 2010 16:53:16 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15528</guid>
+			<dc:creator>IntelliGrape Blog</dc:creator>
+			<dc:date>2010-10-14T16:53:16Z</dc:date>
+		</item>
+		<item>
+			<title>Regex in grails CreateCriteria</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15527</link>
+			<description>Sometimes we need to retrieve the result on the basis of some regular expression pattern which could be applied to a column. In such situations its better to use a rlike method provided by Grails Crea...</description>
+			<pubDate>Thu, 14 Oct 2010 16:53:12 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15527</guid>
+			<dc:creator>IntelliGrape Blog</dc:creator>
+			<dc:date>2010-10-14T16:53:12Z</dc:date>
+		</item>
+		<item>
+			<title>Java-Objekte validieren: OVal-Framework 1.60 erschienen</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15526</link>
+			<description>OVal ist der Name eines Validierungs-Frameworks fï¿½r Java-Objekte. Validierungskriterien kï¿½nnen mittels Annotationen, POJOs oder XML konfiguriert werden, unterstï¿½tzt werden Java und Skriptsprache...</description>
+			<pubDate>Thu, 14 Oct 2010 16:50:13 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15526</guid>
+			<dc:creator>Java Magazin</dc:creator>
+			<dc:date>2010-10-14T16:50:13Z</dc:date>
+		</item>
+		<item>
+			<title>Uploading Files in Grails</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15525</link>
+			<description>Here's the slides from a presentation I did at the UGGUG in May 2010.  I found that I needed to use it again today so I posted it.Upload files with grailsView more presentations from Eric Berry.Here i...</description>
+			<pubDate>Thu, 14 Oct 2010 14:28:59 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15525</guid>
+			<dc:creator>Deviations in development</dc:creator>
+			<dc:date>2010-10-14T14:28:59Z</dc:date>
+		</item>
+		<item>
+			<title>Passing Data From View to Layout via pageProperty</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15524</link>
+			<description>I am writing a new Grails application which uses the website template Admintasia. Part of the layout gsp file has a section for the header and sub-header. For this to be used, I needed to be able to p...</description>
+			<pubDate>Thu, 14 Oct 2010 14:28:36 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15524</guid>
+			<dc:creator>Deviations in development</dc:creator>
+			<dc:date>2010-10-14T14:28:36Z</dc:date>
+		</item>
+		<item>
+			<title>Using Tag Lib within Controllers and Services</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15523</link>
+			<description>So let's say you want to utilize the standard grails tag lib of formatNumber within your domain class, controller or service. How would you go about doing it?  With the help of a blog post by Lucas Te...</description>
+			<pubDate>Thu, 14 Oct 2010 14:28:35 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15523</guid>
+			<dc:creator>Deviations in development</dc:creator>
+			<dc:date>2010-10-14T14:28:35Z</dc:date>
+		</item>
+		<item>
+			<title>Using Criteria Builder with Projections</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15522</link>
+			<description>Something I had to dig around for today was how to perform a sum on a table using Criteria Builder. It seems that it is treated a bit different than a normal query would be. Here is an example of what...</description>
+			<pubDate>Thu, 14 Oct 2010 14:28:33 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15522</guid>
+			<dc:creator>Deviations in development</dc:creator>
+			<dc:date>2010-10-14T14:28:33Z</dc:date>
+		</item>
+		<item>
+			<title>Simple Ehcache in Grails</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15521</link>
+			<description>The other day I needed to cache some results from a several remote services within my Grails application. It wasn't critical to that the response from the remote services be "real-time" and it was O.K...</description>
+			<pubDate>Thu, 14 Oct 2010 14:28:31 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15521</guid>
+			<dc:creator>Deviations in development</dc:creator>
+			<dc:date>2010-10-14T14:28:31Z</dc:date>
+		</item>
+		<item>
+			<title>Grails and simple realm-based authentication</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15520</link>
+			<description>Today's post is brought to you by skamster from the #grails IRC channel on freenode and describes how to setup memory-realm-based authentication with Tomcat.First, you will need to "install templates"...</description>
+			<pubDate>Thu, 14 Oct 2010 14:28:30 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15520</guid>
+			<dc:creator>Deviations in development</dc:creator>
+			<dc:date>2010-10-14T14:28:30Z</dc:date>
+		</item>
+		<item>
+			<title>Grails JMX - Redux</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15519</link>
+			<description>Here is an updated resources.groovy with some additional JMX controls exposed. Thanks to schmolly159 on the #grails freenode IRC channel for the examples and suggestion!beans = {  // JMX mBean server ...</description>
+			<pubDate>Thu, 14 Oct 2010 14:28:27 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15519</guid>
+			<dc:creator>Deviations in development</dc:creator>
+			<dc:date>2010-10-14T14:28:27Z</dc:date>
+		</item>
+		<item>
+			<title>Getting Domain Name From Request in Grails</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15518</link>
+			<description>Here&amp;#8217;s a little tidbit. If you need to determine what domain a request may have been referred from, such as when doing JSONP work, here&amp;#8217;s a code snippet that might help. def uri = new java...</description>
+			<pubDate>Thu, 14 Oct 2010 14:28:10 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15518</guid>
+			<dc:creator>#Adam.Blog#</dc:creator>
+			<dc:date>2010-10-14T14:28:10Z</dc:date>
+		</item>
+		<item>
+			<title>My Grails and MongoDB Experience (so far)</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15517</link>
+			<description>Slowly but surely I have been spending time learning how to develop web applications in Grails, a web application framework built on top of Groovy, Spring, and Hibernate. Last night I spent a good dea...</description>
+			<pubDate>Thu, 14 Oct 2010 14:28:09 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15517</guid>
+			<dc:creator>#Adam.Blog#</dc:creator>
+			<dc:date>2010-10-14T14:28:09Z</dc:date>
+		</item>
+		<item>
+			<title>Language Comparison: Compute Factorial</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15516</link>
+			<description>A friend of mine is in school and taking some classes in Java, and also happens to be learning ColdFusion on the side. He was talking about the class and how they were learning about recursion and how...</description>
+			<pubDate>Thu, 14 Oct 2010 14:28:07 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15516</guid>
+			<dc:creator>#Adam.Blog#</dc:creator>
+			<dc:date>2010-10-14T14:28:07Z</dc:date>
+		</item>
+		<item>
+			<title>Using Closures to Time Sections of Code in Groovy</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15515</link>
+			<description>Last night I was working on an import script in Groovy to bring data back from a web service and into a MongoDB database. There&amp;#8217;s a lot of data, and I wanted to know how much time the whole proc...</description>
+			<pubDate>Thu, 14 Oct 2010 14:28:06 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15515</guid>
+			<dc:creator>#Adam.Blog#</dc:creator>
+			<dc:date>2010-10-14T14:28:06Z</dc:date>
+		</item>
+		<item>
+			<title>Grails, MongoDB, and the Domain Class</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15514</link>
+			<description>While doing some experimentation with Groovy and Grails tied to a MongoDB database I was running into difficulties. I first tried the two plugins that are available for Grails and Mongo, but I just di...</description>
+			<pubDate>Thu, 14 Oct 2010 14:28:01 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15514</guid>
+			<dc:creator>#Adam.Blog#</dc:creator>
+			<dc:date>2010-10-14T14:28:01Z</dc:date>
+		</item>
+		<item>
+			<title>Gr��ve g��n��ralis��e chez OCTO</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15513</link>
+			<description>Du jamais vu en 12 ans d&amp;#8217;existence ! Mais voil��, OCTO n&amp;#8217;y ��chappe pas et malgr�� tous nos efforts la mobilisation bat des records historiques ! Oui, nous souffrons de revendications sala...</description>
+			<pubDate>Thu, 14 Oct 2010 14:19:03 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15513</guid>
+			<dc:creator>OCTO talks !</dc:creator>
+			<dc:date>2010-10-14T14:19:03Z</dc:date>
+		</item>
+		<item>
+			<title>Groovy:  EVNark v0.3 Released - "snarky"</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15512</link>
+			<description>It's only been about a week since the last release but I thought folks might appreciate this new version of evnark codenamed "snarky". No new functionality has been added but if you run this in a VT10...</description>
+			<pubDate>Thu, 14 Oct 2010 14:03:04 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15512</guid>
+			<dc:creator>Blogging Techstacks</dc:creator>
+			<dc:date>2010-10-14T14:03:04Z</dc:date>
+		</item>
+		<item>
+			<title>Groovy: EVNark v0.2 - Validate SSL EV Certs</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15511</link>
+			<description>Well, it's been a couple of months since the initial release and I've updated evnark to version 0.2. There are a few things new in this version: Added AC Camerfirma SA to list of known EV OIDS Added D...</description>
+			<pubDate>Thu, 14 Oct 2010 14:03:01 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15511</guid>
+			<dc:creator>Blogging Techstacks</dc:creator>
+			<dc:date>2010-10-14T14:03:01Z</dc:date>
+		</item>
+		<item>
+			<title>Groovy News:  Gaelyk 0.5.5 Released</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15510</link>
+			<description>It has been mere days since the last release but there's another new version of Gaelyk out. Gaelyk Version 0.5.5 was released, which features changes to Gaelyk's built-in url routing system. Improveme...</description>
+			<pubDate>Thu, 14 Oct 2010 14:02:59 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15510</guid>
+			<dc:creator>Blogging Techstacks</dc:creator>
+			<dc:date>2010-10-14T14:02:59Z</dc:date>
+		</item>
+		<item>
+			<title>GlassFish Tips and Links #11: CDI, EJB 3.1, Spring, HTML5, Maven, JCP, Forks...</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15509</link>
+			<description>Recent Tips and News on Java EE 6 &amp;amp; GlassFish:
+
+
+
+
+
+
+
+
+Tips
+
+
+&amp;bull;
+TOTD #145: CDI Events - a light-weight producer/consumer in Java EE 6
+
+&amp;bull;
+Enterprise JavaBeans 3.1 with Contexts and Depen...</description>
+			<pubDate>Thu, 14 Oct 2010 13:59:09 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15509</guid>
+			<dc:creator>The Aquarium</dc:creator>
+			<dc:date>2010-10-14T13:59:09Z</dc:date>
+		</item>
+		<item>
+			<title>Working with Transactions in Grails</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15508</link>
+			<description>At a certain point when developing an application you will run into a situation that requires you to use transactions. With transactions (in it&amp;#8217;s simplest form) you basically control when/whethe...</description>
+			<pubDate>Thu, 14 Oct 2010 13:40:18 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15508</guid>
+			<dc:creator>Train of Thought</dc:creator>
+			<dc:date>2010-10-14T13:40:18Z</dc:date>
+		</item>
+		<item>
+			<title>Rich Domain Model in Grails</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15507</link>
+			<description>I have been working on grails for quite some time now. As a beginner, I had doubts about where to place the business logic in grails. Seeing the CRUD, one can easily be misled into putting most of the...</description>
+			<pubDate>Thu, 14 Oct 2010 13:40:13 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15507</guid>
+			<dc:creator>IntelliGrape Blog</dc:creator>
+			<dc:date>2010-10-14T13:40:13Z</dc:date>
+		</item>
+		<item>
+			<title>Working with Excel Import Plugin</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15506</link>
+			<description>In a use case, I needed to import excel spreadsheet and save the data in the database, that was when I came across grails&amp;#8217; excel import plugin. All I had to do was install the plugin and start u...</description>
+			<pubDate>Thu, 14 Oct 2010 13:40:11 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15506</guid>
+			<dc:creator>IntelliGrape Blog</dc:creator>
+			<dc:date>2010-10-14T13:40:11Z</dc:date>
+		</item>
+		<item>
+			<title>Grails Pdf Viewer Plugin</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15505</link>
+			<description>In one of our recent Grails project we had to provide support for Viewing Pdf even if end user&amp;#8217;s browser did not have any  pdf viewer plugin or add on installed. So we decided that we would open...</description>
+			<pubDate>Thu, 14 Oct 2010 13:40:09 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15505</guid>
+			<dc:creator>IntelliGrape Blog</dc:creator>
+			<dc:date>2010-10-14T13:40:09Z</dc:date>
+		</item>
+		<item>
+			<title>Grails Liquibase plugin: dbDiff tool workaround</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15504</link>
+			<description>Workaround to use DBDiff tool for any other environment than test</description>
+			<pubDate>Thu, 14 Oct 2010 13:40:06 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15504</guid>
+			<dc:creator>IntelliGrape Blog</dc:creator>
+			<dc:date>2010-10-14T13:40:06Z</dc:date>
+		</item>
+		<item>
+			<title>Artikel: Interaktiver Build-Vergleich: Ergebnisse - Ant</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15503</link>
+			<description>In der finalen Runde des interaktiven Vergleichs zwischen den Buildsystemen Maven, Ant und Gradle beantwortet Jan Matï¿½rne die Fragen aus der Community zum Apache-Projekt Ant. Dabei werden auch kriti...</description>
+			<pubDate>Thu, 14 Oct 2010 13:37:18 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15503</guid>
+			<dc:creator>Java Magazin</dc:creator>
+			<dc:date>2010-10-14T13:37:18Z</dc:date>
+		</item>
+		<item>
+			<title>IntelliJ IDEA mit neuem Code Completion UI</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15502</link>
+			<description>Ein Update fï¿½r die Entwicklungsumgebung IntelliJ IDEA 10 ist verfï¿½gbar. Der Build 98.117 enthï¿½lt u.a. ein neues Code Completion UI, erweiterte Refactoring-Mï¿½glichkeiten und Unterstï¿½tzung fï¿...</description>
+			<pubDate>Thu, 14 Oct 2010 13:37:11 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15502</guid>
+			<dc:creator>Java Magazin</dc:creator>
+			<dc:date>2010-10-14T13:37:11Z</dc:date>
+		</item>
+		<item>
+			<title>Groovy-GAE-Toolkit Gaelyk mit erweitertem Routing</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15501</link>
+			<description>Das Groovy-Toolkit fï¿½r die Google App Engine Gaelyk liegt in Version 0.5.5 vor. Neben einer ï¿½berarbeiteten Dokumentation beinhaltet das Release erweiterte Routing-Mï¿½glichkeiten, etwa das URL-Rou...</description>
+			<pubDate>Thu, 14 Oct 2010 13:36:57 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15501</guid>
+			<dc:creator>Java Magazin</dc:creator>
+			<dc:date>2010-10-14T13:36:57Z</dc:date>
+		</item>
+		<item>
+			<title>Daily Dose - Spring Web Flow 2.2 GA</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15500</link>
+			<description>The final release of Spring Web Flow 2.2 is here bringing JSF 2.0 support and Portlet 2.0 support.�� This version of Spring Web Flow implements Dojo 1.5, dojox, and a Facelets tag library for Spring S...</description>
+			<pubDate>Thu, 14 Oct 2010 13:34:48 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15500</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-14T13:34:48Z</dc:date>
+		</item>
+		<item>
+			<title>Gossip Game Requirements</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15499</link>
+			<description>Do you remember the &amp;quot;gossip game&amp;quot; we played in elementary school? Our teacher would give one person a sentence or two and ask them to repeat it to the next person. They would repeat the sent...</description>
+			<pubDate>Thu, 14 Oct 2010 13:34:44 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15499</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-14T13:34:44Z</dc:date>
+		</item>
+		<item>
+			<title>Daily Dose - GWT 2.1 RC1 Adds 2.2 Features</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15498</link>
+			<description>Developers are getting GWT (Google Web Toolkit) features that were originally planned for version 2.2 by downloading the 2.1 RC1 version, which was just released.�� GWT 2.1 features a Model-View-Prese...</description>
+			<pubDate>Thu, 14 Oct 2010 13:34:40 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15498</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-14T13:34:40Z</dc:date>
+		</item>
+		<item>
+			<title>Review of Groovy for Domain-Specific Languages</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15497</link>
+			<description>ISBN or ASIN:&amp;nbsp;
+    
+            
+                    184719690X        
+        
+
+
+      Book Author(s):&amp;nbsp;
+    
+            
+                    Fergal Dearle        
+        
+
+
+      Publish...</description>
+			<pubDate>Thu, 14 Oct 2010 13:34:37 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15497</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-14T13:34:37Z</dc:date>
+		</item>
+		<item>
+			<title>Daily Dose - Java SE Patched Today</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15496</link>
+			<description>Today Oracle is releasing an update that will fix 29 critical holes in the Java Development Kit and the Java Runtime Environment.�� The patch effects not only Java SE and Java for business, but also s...</description>
+			<pubDate>Thu, 14 Oct 2010 13:34:33 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15496</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-14T13:34:33Z</dc:date>
+		</item>
+		<item>
+			<title>Daily Dose - ZFS Finally Getting Data Encryption</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15495</link>
+			<description>Sun/Oracle developers have been working on bringing cryptography functions to ZFS, and now Oracle is announcing that this feature will likely be included in Solaris Express 2010.�� The blog post that ...</description>
+			<pubDate>Thu, 14 Oct 2010 13:34:29 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15495</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-14T13:34:29Z</dc:date>
+		</item>
+		<item>
+			<title>Daily Dose - Report Says Microsoft/Adobe Merger Story is Bunk</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15494</link>
+			<description>While it 
+certainly didn't hurt Adobe's stock prices, which rose by 11.5% this 
+week, the rumors that Microsoft is in talks to buy Adobe are &amp;quot;nonsense&amp;quot; 
+according to many sources
+ at both co...</description>
+			<pubDate>Thu, 14 Oct 2010 13:34:25 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15494</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-14T13:34:25Z</dc:date>
+		</item>
+		<item>
+			<title>Build Scripts? We Don't Need No Stinkin' Build Scripts!</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15493</link>
+			<description>Ahh, famous last words of the close-minded programmer.</description>
+			<pubDate>Thu, 14 Oct 2010 13:34:21 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15493</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-14T13:34:21Z</dc:date>
+		</item>
+		<item>
+			<title>Daily Dose - LLVM 2.8 Includes Drop-in System Assembler</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15492</link>
+			<description>Six months after the 2.7 release of the Low-Level Virtual Machine compiler infrastructure, the 2.8 version is now available.�� The previous version of the LLVM's front end, the Clang C/C++ compiler, w...</description>
+			<pubDate>Thu, 14 Oct 2010 13:34:17 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15492</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-14T13:34:17Z</dc:date>
+		</item>
+		<item>
+			<title>Daily Dose - W3C Official: Don't Use HTML5 Yet</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15491</link>
+			<description>Philippe Le Hegaret, a World Wide Web Consortium domain leader says it's too early for browsers to be settling on unconfirmed HTML5-related specification drafts and it's too early for websites to be u...</description>
+			<pubDate>Thu, 14 Oct 2010 13:34:13 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15491</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-14T13:34:13Z</dc:date>
+		</item>
+		<item>
+			<title>Gaelyk - From 4.4 to 5.5 in Less Than a Month!</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15490</link>
+			<description>The 'lightweight' Groovy toolkit for Google AppEngine (Java) called Gaelyk has made a serious development push in the last month by releasing Gaelyk 0.4.4 on September 10, 0.5 on September 27, and fin...</description>
+			<pubDate>Thu, 14 Oct 2010 13:34:09 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15490</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-14T13:34:09Z</dc:date>
+		</item>
+		<item>
+			<title>You're a Bad Manager. Embrace It.</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15489</link>
+			<description>You manage developers and you'd like to think you're a good manager... but look at the evidence. Most, if not all, of your projects are late. Your team often delivers products riddled with bugs. Quite...</description>
+			<pubDate>Thu, 14 Oct 2010 13:34:05 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15489</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-14T13:34:05Z</dc:date>
+		</item>
+		<item>
+			<title>Daily Dose - Android Adds More Countries to the Marketplace, Plus Skype</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15488</link>
+			<description>A lot of Android news has happened in this past week.�� Google CEO Eric Schmidt claims that the increase in advertising due to Android has already covered the cost of the platform's development, but B...</description>
+			<pubDate>Thu, 14 Oct 2010 13:33:59 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15488</guid>
+			<dc:creator>Groovy Zone - Everything for the Groovy &amp; Grails developer</dc:creator>
+			<dc:date>2010-10-14T13:33:59Z</dc:date>
+		</item>
+		<item>
+			<title>Grails Image Processing with the ImageTools Plugin</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15487</link>
+			<description>I recently had a requirement on my side project to add some simple image processing. &amp;nbsp;I had previously used the ImageTools plugin, but that seems to have falled into a bit of disrepair. &amp;nbsp;I h...</description>
+			<pubDate>Thu, 14 Oct 2010 13:31:54 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15487</guid>
+			<dc:creator>Kirk's World</dc:creator>
+			<dc:date>2010-10-14T13:31:54Z</dc:date>
+		</item>
+		<item>
+			<title>Gradle als Alternative zu Ant und Maven</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15486</link>
+			<description>Das neue Build-Management-Tool ist eine Alternative zu Ant und Maven. Im Gegensatz zu Maven l��dt Gradle zur Buildzeit keine zus��tzlichen (Gradle-Spezifischen) Komponenten herunter. Einige Standard-B...</description>
+			<pubDate>Thu, 14 Oct 2010 13:18:56 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15486</guid>
+			<dc:creator>techscouting through the news » Groovy and Grails</dc:creator>
+			<dc:date>2010-10-14T13:18:56Z</dc:date>
+		</item>
+		<item>
+			<title>Groovy as a SalesForce API client</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15485</link>
+			<description>Having been through a Sugar to SalesForce migration, there were a number of rounds of tidying up to be done - using Groovy as a SalesForce API client massively simplified the task. Continue reading &amp;#...</description>
+			<pubDate>Thu, 14 Oct 2010 13:18:23 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15485</guid>
+			<dc:creator>Lean Java Engineering</dc:creator>
+			<dc:date>2010-10-14T13:18:23Z</dc:date>
+		</item>
+		<item>
+			<title>Dica Grails: par��metros com nomes duplicados</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15484</link>
+			<description>H�� situa����es nas quais �� interessante ter mais de um par��metro passado ao nosso controlador com o mesmo nome. Para ilustrar a situa����o, eis um exemplo: imagine que voc�� deseje criar um sistema...</description>
+			<pubDate>Thu, 14 Oct 2010 13:12:00 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15484</guid>
+			<dc:creator>/dev/Kico</dc:creator>
+			<dc:date>2010-10-14T13:12:00Z</dc:date>
+		</item>
+		<item>
+			<title>Grails: usando invoca����o din��mica de m��todos</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15483</link>
+			<description>Ent��o voc�� sabe que Groovy possui invoca����o din��mica de m��todos (j�� falei sobre isto aqui) mas n��o faz a menor id��ia de como tirar proveito deste recurso, certo? Aqui vai um exemplo.
+Imagine ...</description>
+			<pubDate>Thu, 14 Oct 2010 13:11:58 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15483</guid>
+			<dc:creator>/dev/Kico</dc:creator>
+			<dc:date>2010-10-14T13:11:58Z</dc:date>
+		</item>
+		<item>
+			<title>Running grails on a virtual server with limited resources</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15482</link>
+			<description>I&amp;rsquo;ve been running some tests for the past few days of how Grails performs under load on a limited memory server - actually a virtual server. Running tomcat with a max heap of 128M (-Xmx128M) ...</description>
+			<pubDate>Thu, 14 Oct 2010 13:11:23 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15482</guid>
+			<dc:creator>thecoderscorner</dc:creator>
+			<dc:date>2010-10-14T13:11:23Z</dc:date>
+		</item>
+		<item>
+			<title>One week on - progress with JFreeChart groovy builder</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15481</link>
+			<description>Well one week has gone by since I last reported back on my progress. I have to admit I have not got as far as I wanted, but some progress is better than none.&#13;
+&#13;
+	I&amp;#39;ve downloaded and looked ove...</description>
+			<pubDate>Thu, 14 Oct 2010 13:11:22 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15481</guid>
+			<dc:creator>thecoderscorner</dc:creator>
+			<dc:date>2010-10-14T13:11:22Z</dc:date>
+		</item>
+		<item>
+			<title>Progress with GroovyChart - the JFreeChart builder for Groovy</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15480</link>
+			<description>Its been several weeks since I last discussed wrapping JFreeChart in Groovy. Although I&amp;#39;ve been quiet - there is some good news. I have taken the java.net project groovychart and started to dev...</description>
+			<pubDate>Thu, 14 Oct 2010 13:11:20 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15480</guid>
+			<dc:creator>thecoderscorner</dc:creator>
+			<dc:date>2010-10-14T13:11:20Z</dc:date>
+		</item>
+		<item>
+			<title>Have you tried your site without CSS and Javascript?</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15479</link>
+			<description>Have you ever tried loading up your site without CSS and Javascript? If not give it a try, in firefox its as easy as:&#13;
+&#13;
+	Turn off CSS from the menu. (View -&amp;gt; Page Style -&amp;gt; No Style )&#13;
+&#13;
+	&#13;
+&#13;...</description>
+			<pubDate>Thu, 14 Oct 2010 13:11:19 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15479</guid>
+			<dc:creator>thecoderscorner</dc:creator>
+			<dc:date>2010-10-14T13:11:19Z</dc:date>
+		</item>
+		<item>
+			<title>Wrapping JFreeChart as a builder for Groovy</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15478</link>
+			<description>I&amp;rsquo;ve started looking into the possibility of wrapping up JFreeChart to make it a little groovier. I know there&amp;rsquo;s no end of web packages for graphing, but what if you don&amp;rsquo;t want to...</description>
+			<pubDate>Thu, 14 Oct 2010 13:11:16 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15478</guid>
+			<dc:creator>thecoderscorner</dc:creator>
+			<dc:date>2010-10-14T13:11:16Z</dc:date>
+		</item>
+		<item>
+			<title>GroovyChart - first hurdle removed!</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15477</link>
+			<description>Yesterday, I logged in to java.net to find that I have been granted owner and developer status on groovychart. The team at sun worked quickly to get the issues with ownership resolved. Thanks again to...</description>
+			<pubDate>Thu, 14 Oct 2010 13:11:14 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15477</guid>
+			<dc:creator>thecoderscorner</dc:creator>
+			<dc:date>2010-10-14T13:11:14Z</dc:date>
+		</item>
+		<item>
+			<title>GroovyChart - snapshot binary release available.</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15476</link>
+			<description>We have built an initial snapshot for people to give GroovyChart a try. This snapshot will build all charts in the examples script directory.&#13;
+Groovy chart is the builder that makes building JFreeChar...</description>
+			<pubDate>Thu, 14 Oct 2010 13:11:11 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15476</guid>
+			<dc:creator>thecoderscorner</dc:creator>
+			<dc:date>2010-10-14T13:11:11Z</dc:date>
+		</item>
+		<item>
+			<title>Gradle Goodness: Set Task Values with Project Convention</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15475</link>
+			<description>In a previous post we wrote a custom task to generate a file with version information. When we created the task in our build file we had to provide values for the task properties version and outputFil...</description>
+			<pubDate>Thu, 14 Oct 2010 12:21:45 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15475</guid>
+			<dc:creator>Messages from mrhaki</dc:creator>
+			<dc:date>2010-10-14T12:21:45Z</dc:date>
+		</item>
+		<item>
+			<title>Gradle Goodness: Add Incremental Build Support to Custom Tasks with Annotations</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15474</link>
+			<description>In a previous post we learned how we can use the inputs and outputs properties to set properties or files that need to be checked to see if a task is up to date. In this post we learn how a custom tas...</description>
+			<pubDate>Thu, 14 Oct 2010 12:21:43 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15474</guid>
+			<dc:creator>Messages from mrhaki</dc:creator>
+			<dc:date>2010-10-14T12:21:43Z</dc:date>
+		</item>
+		<item>
+			<title>Gradle Goodness: Add Incremental Build Support to Tasks</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15473</link>
+			<description>Gradle has a very powerful incremental build feature. This means Gradle will not execute a task unless it is necessary. We can help Gradle and configure our task so it is ready for an incremental buil...</description>
+			<pubDate>Thu, 14 Oct 2010 12:21:40 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15473</guid>
+			<dc:creator>Messages from mrhaki</dc:creator>
+			<dc:date>2010-10-14T12:21:40Z</dc:date>
+		</item>
+		<item>
+			<title>Gradle Goodness: Group Similar Tasks</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15472</link>
+			<description>In Gradle we can assign a task to a group. Gradle uses the group for example in the output of $ gradle -t to output all the tasks of the same group together. We only have to set the group property wit...</description>
+			<pubDate>Thu, 14 Oct 2010 12:21:38 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15472</guid>
+			<dc:creator>Messages from mrhaki</dc:creator>
+			<dc:date>2010-10-14T12:21:38Z</dc:date>
+		</item>
+		<item>
+			<title>Gradle Goodness: Run a Build Script With a Different Name</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15471</link>
+			<description>Normally Gradle looks for a build script file with the name build.gradle in the current directory to execute a build. But we can easily use a different name or directory for the build file. We only ha...</description>
+			<pubDate>Thu, 14 Oct 2010 12:21:36 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15471</guid>
+			<dc:creator>Messages from mrhaki</dc:creator>
+			<dc:date>2010-10-14T12:21:36Z</dc:date>
+		</item>
+		<item>
+			<title>Gradle Goodness: Pass Command-line Arguments to Build Script</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15470</link>
+			<description>The Gradle command-line parser will add all non-option arguments as tasks to be executed to the build. So if we want to pass an extra argument to our build script via the command-line we must use the ...</description>
+			<pubDate>Thu, 14 Oct 2010 12:21:34 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15470</guid>
+			<dc:creator>Messages from mrhaki</dc:creator>
+			<dc:date>2010-10-14T12:21:34Z</dc:date>
+		</item>
+		<item>
+			<title>Gradle Goodness: Parse Output from Exec Invocation</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15469</link>
+			<description>We can run executable commands from Gradle build scripts with the exec() method. We pass a closure with the name of the executable and arguments to the method. The executable is than executed with the...</description>
+			<pubDate>Thu, 14 Oct 2010 12:21:31 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15469</guid>
+			<dc:creator>Messages from mrhaki</dc:creator>
+			<dc:date>2010-10-14T12:21:31Z</dc:date>
+		</item>
+		<item>
+			<title>Dynamic GORM Domain Classes</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15466</link>
+			<description>A recent discussion on the Grails Dev mailing list about creating a dynamic form builder involved needing to compile new domain classes at runtime. The consensus seemed to be that it's not possible an...</description>
+			<pubDate>Wed, 13 Oct 2010 15:18:49 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15466</guid>
+			<dc:creator>An Army of Solipsists</dc:creator>
+			<dc:date>2010-10-13T15:18:49Z</dc:date>
+		</item>
+		<item>
+			<title>Dataflow Speculations</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15465</link>
+			<description>Let's dip our toe in the waters of speculative dataflow systems. I couldn't help it but had to make the GPars dataflow operators to speculate. After reading the Greg Barish's paper on Speculative Pla...</description>
+			<pubDate>Wed, 13 Oct 2010 05:38:17 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15465</guid>
+			<dc:creator>Vaclav Pech</dc:creator>
+			<dc:date>2010-10-13T05:38:17Z</dc:date>
+		</item>
+		<item>
+			<title>Grails with Redis: Painless NoSQL</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15464</link>
+			<description>In the leadup to JavaOne, I whipped up a little competition app in Grails using the new Redis support. Graeme has written up a great GORM for Redis intro post that gives you all the info you need to...</description>
+			<pubDate>Wed, 13 Oct 2010 04:41:43 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15464</guid>
+			<dc:creator>Glen Smith - Groovy Related category</dc:creator>
+			<dc:date>2010-10-13T04:41:43Z</dc:date>
+		</item>
+		<item>
+			<title>Using Hudson to run tests in parallel</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15461</link>
+			<description>We have been using Hudson to do CI on our grails application for a few months now.  We use it to run unit, integration, jsunit, and functional (via selenium) tests, as well as code coverage metrics us...</description>
+			<pubDate>Tue, 12 Oct 2010 13:34:58 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15461</guid>
+			<dc:creator>Sword Systems</dc:creator>
+			<dc:date>2010-10-12T13:34:58Z</dc:date>
+		</item>
+		<item>
+			<title>New Grails Plugin - Woopra</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15459</link>
+			<description>Over the weekend I&amp;#160;decided to get more familiar with Grails plugins and opted to create a taglib to wrap the functionality of the Woopra Live Analytics tracking script.</description>
+			<pubDate>Mon, 11 Oct 2010 22:39:48 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15459</guid>
+			<dc:creator>Blog</dc:creator>
+			<dc:date>2010-10-11T22:39:48Z</dc:date>
+		</item>
+		<item>
+			<title>Detecting the Grails Environment in a GSP</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15458</link>
+			<description>Last night I needed to make sure that my analytics tracking script was not running anywhere but in my production environment. After reading another blog post I came up with this simple GSP if block.</description>
+			<pubDate>Mon, 11 Oct 2010 22:39:47 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15458</guid>
+			<dc:creator>Blog</dc:creator>
+			<dc:date>2010-10-11T22:39:47Z</dc:date>
+		</item>
+		<item>
+			<title>Grails Collection Sorting Strangeness</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15457</link>
+			<description>I'm trying to move some sorting functionality from a view to the controller but it's not behaving the way I expect. Ideas?</description>
+			<pubDate>Mon, 11 Oct 2010 22:39:44 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15457</guid>
+			<dc:creator>Blog</dc:creator>
+			<dc:date>2010-10-11T22:39:44Z</dc:date>
+		</item>
+		<item>
+			<title>Using Spring DI in your Gaelyk projects</title>
+			<link>http://www.groovyblogs.org/entries/jump?id=15456</link>
+			<description>Since I started using&amp;#160;Gaelyk, one of the features I missed most (coming from a&amp;#160;Grails&amp;#160;background) is Spring's dependency injection. Until recently I didn't even know if it wa...</description>
+			<pubDate>Mon, 11 Oct 2010 14:37:50 GMT</pubDate>
+			<guid>http://www.groovyblogs.org/entries/jump?id=15456</guid>
+			<dc:creator>Tech Beats</dc:creator>
+			<dc:date>2010-10-11T14:37:50Z</dc:date>
+		</item>
+	</channel>
+</rss>

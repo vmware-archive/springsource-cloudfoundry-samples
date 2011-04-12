@@ -1,0 +1,53 @@
+body h1 {
+	margin-top:30px;
+	font-family:Times;
+	font-size: 4.0em;
+	text-align:center;
+	width:100%;
+}
+h2{
+	font-family:Times;
+	font-size:2.0em;
+}
+hr {
+	margin: 20px;
+}
+.addFeed {
+	font-family:times;
+	font-weight:bold;
+}
+.addFeed h4 {
+	font-size: 1em;
+	font-weight: bold;
+	margin: 0.5em 0;
+}
+.addFeed ul {
+	list-style-type: none;
+	margin-bottom: 0.5em;
+	font-weight: normal;
+}
+.addFeed li {
+	float: left;
+	width: 12em;
+}
+.addFeed input[type='text'] {
+	width: 70%;
+}
+div.articleList {
+	margin:0px;
+}
+div.articleList  div{
+	margin:0px;
+	margin-bottom:4px;
+}		
+.article {
+	margin-bottom:30px;
+	padding:4px;
+}	
+#errors {
+	color:red;
+	padding:5px;
+}
+#sampleFeed {
+	font-size: 1.5em;
+}
