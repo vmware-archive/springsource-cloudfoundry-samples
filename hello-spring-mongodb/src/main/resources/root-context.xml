@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cloud="http://schema.cloudfoundry.org/spring"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.6.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	<bean id="mongoTemplate" class="org.springframework.data.document.mongodb.MongoTemplate">
+    	<constructor-arg ref="mongo"/>
+    	<constructor-arg name="databaseName" value="#{serviceProperties['mongodb-hello-mongo.db']}"/>
+    	<constructor-arg name="defaultCollectionName" value="person"/>
+    	<property name="username" value="#{serviceProperties['mongodb-hello-mongo.username']}"/>    	
+    	<property name="password" value="#{serviceProperties['mongodb-hello-mongo.password']}"/>     	
+  	</bean>
+  	
+	<beans profile="default">
+		<bean id="mongo" class="com.mongodb.Mongo"/>
+		<util:properties id="serviceProperties">		
+			<prop key="mongodb-hello-mongo.db">pwdtest</prop>
+			<prop key="mongodb-hello-mongo.username">test_user</prop>
+			<prop key="mongodb-hello-mongo.password">efgh</prop>
+		</util:properties>
+	</beans>
+        
+	<beans profile="cloud">
+		<cloud:mongo id="mongo"/>
+		<cloud:service-properties id="serviceProperties"/>		
+	</beans>
+	
+
+
+</beans>
