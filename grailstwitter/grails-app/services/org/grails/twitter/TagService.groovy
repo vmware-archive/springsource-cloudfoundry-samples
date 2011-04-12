@@ -31,74 +31,70 @@ class TagService {
     }
     
     def cacheTags() {
-		try {
-	        def result = Status.collection.mapReduce("""\
-	                function map() {
-	                    if (!this.tags) {
-	                        return;
-	                    }
+        try {
+            def result = Status.collection.mapReduce("""\
+                    function map() {
+                        if (!this.tags) {
+                            return;
+                        }
 
-	                    for (index in this.tags) {
-	                        emit(this.tags[index], 1);
-	                    }
-	                }
-	                """.stripIndent(),
-	                """\
-	                function reduce(key, values) {
-	                    var count = 0;
+                        for (index in this.tags) {
+                            emit(this.tags[index], 1);
+                        }
+                    }
+                    """.stripIndent(),
+                    """\
+                    function reduce(key, values) {
+                        var count = 0;
 
-	                    for (index in values) {
-	                        count += values[index];
-	                    }
+                        for (index in values) {
+                            count += values[index];
+                        }
 
-	                    return count;
-	                }
-	                """.stripIndent(),
-	                "mrresult",
-	                [:])
+                        return count;
+                    }
+                    """.stripIndent(),
+                    "mrresult",
+                    [:])
 
-	        redis.multi()
-	        redis.del TAGS_CACHE_KEY
-	        for (r in result.results()) {
-	            redis.zadd TAGS_CACHE_KEY, r.value.toDouble(), r._id 
-	        }
-	        redis.exec()
-	
-		}
-		finally {
-			redis.close()			
-		}
-
+            redis.multi()
+            redis.del TAGS_CACHE_KEY
+            for (r in result.results()) {
+                redis.zadd TAGS_CACHE_KEY, r.value.toDouble(), r._id 
+            }
+            redis.exec()
+        }
+        finally {
+            redis.close()			
+        }
     }
     
     Map getTags() {
-		try {
-	        def tags = getTagsInternal()
-	        if (!tags) {
-	            cacheTags()
-	            tags =  getTagsInternal()
-	        }
-			if(tags) {
-	        	return tags.reverse().inject([:]) { map, k -> map[k] = redis.zscore(TAGS_CACHE_KEY, k).toInteger(); return map }			
-			}
-			else {
-				return [:]
-			}			
-		}
-		catch(e) {
-			log.error(e.message, e)
-			return [:]
-		}
-
-
+        try {
+            def tags = getTagsInternal()
+            if (!tags) {
+                cacheTags()
+                tags = getTagsInternal()
+            }
+            if (tags) {
+                return tags.reverse().inject([:]) { map, k -> map[k] = redis.zscore(TAGS_CACHE_KEY, k).toInteger(); return map }
+            }
+            else {
+                return [:]
+            }
+        }
+        catch(e) {
+            log.error(e.message, e)
+            return [:]
+        }
     }
 
-	private getTagsInternal() {
-		try {
-			redis.zrange(TAGS_CACHE_KEY, 0, -1) as List			
-		}
-		finally {
-			redis.close()
-		}
-	}
+    private getTagsInternal() {
+        try {
+            return redis.zrange(TAGS_CACHE_KEY, 0, -1) as List
+        }
+        finally {
+            redis.close()
+        }
+    }
 }
