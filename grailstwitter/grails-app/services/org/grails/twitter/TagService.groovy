@@ -65,13 +65,21 @@ class TagService {
     }
     
     Map getTags() {
-        def tags = redis.zrange(TAGS_CACHE_KEY, 0, -1) as List
+        def tags = getTagsInternal()
         if (!tags) {
             cacheTags()
-            return getTags()
+            tags =  getTagsInternal()
         }
-        else {
-            return tags.reverse().inject([:]) { map, k -> map[k] = redis.zscore(TAGS_CACHE_KEY, k).toInteger(); return map }
-        }
+		if(tags) {
+        	return tags.reverse().inject([:]) { map, k -> map[k] = redis.zscore(TAGS_CACHE_KEY, k).toInteger(); return map }			
+		}
+		else {
+			return [:]
+		}
+
     }
+
+	private getTagsInternal() {
+		redis.zrange(TAGS_CACHE_KEY, 0, -1) as List
+	}
 }
