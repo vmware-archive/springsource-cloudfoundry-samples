@@ -68,16 +68,53 @@ redisClient.on("message", function(channel, json) {
 });
 
 // Make up ticker information at random
-var ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var SYMBOLS = [
+	"DSA",
+	"YZI",
+	"KRQ",
+	"HWW",
+	"TXE",
+	"DMT",
+	"PIK",
+	"HVF",
+	"UWB",
+	"MDL",
+	"EAA",
+	"SWL",
+	"OX",
+	"DYP",
+	"WVL",
+	"DPN",
+	"WRB",
+	"MI",
+	"FCI",
+	"BIW",
+	"PWK",
+	"IAO",
+	"MYD",
+	"EBF",
+	"JTX",
+	"XWE",
+	"PRU",
+	"HQG",
+	"UVZ",
+	"MXT",
+	"YPB",
+	"OJY",
+	"FVC",
+	"URI",
+	"GVD",
+	"DMQ",
+	"UCJ",
+	"QWW"
+];
 function getRandomSymbol() {
-	var symbol = "";
-	for(i=0; i< 4; i++) {
-		var index = Math.round(Math.random() * 26);
-		if(ALPHA[index]) {
-			symbol += ALPHA[index];
-		}
+	var index = Math.round(Math.random() * SYMBOLS.length);
+	if(index) {
+		return SYMBOLS[index];
+	} else {
+		return getRandomSymbol();
 	}
-	return symbol;
 }
 
 function getRandomPrice(lastPrice) {
