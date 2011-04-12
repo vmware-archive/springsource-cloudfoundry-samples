@@ -177,13 +177,6 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<repository>
-			<id>springsource-snapshot</id>
-			<url>http://s3.amazonaws.com/private.maven.springsource.com/snapshot/</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
 	</repositories>
 	<build>
 		<plugins>

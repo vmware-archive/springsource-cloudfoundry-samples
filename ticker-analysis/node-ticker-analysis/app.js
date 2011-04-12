@@ -55,7 +55,7 @@ var TickerSummary = new Schema({
 mongoose.model('TickerSummary', TickerSummary);
 
 var mongoConfig = cf.getServiceConfig("ticker-analysis");
-var db = mongoose.createConnection("mongo://" + mongoConfig.hostname + ":" + mongoConfig.port + "/" + mongoConfig.name);
+var db = mongoose.createConnection("mongo://" + mongoConfig.username + ":" + mongoConfig.password + "@" + mongoConfig.hostname + ":" + mongoConfig.port + "/" + mongoConfig.db);
 
 // Connect to Redis
 var redisConfig = cf.getServiceConfig("ticker-stream");
