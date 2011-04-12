@@ -4,16 +4,17 @@ function handleSymbolClick(evt) {
 		url: "/summary/" + symbol,
 		handleAs: "json",
 		load: function(data) {
-			dojo.byId("t-d-symb-val").innerHTML = symbol;
-			dojo.byId("t-d-name").innerHTML = data.name;
-			dojo.byId("t-d-s-p-high-val").innerHTML = data.high.toFixed(2);
-			dojo.byId("t-d-s-p-avg-val").innerHTML = data.average.toFixed(2);
-			dojo.byId("t-d-s-p-low-val").innerHTML = data.low.toFixed(2);
-			dojo.byId("t-d-v-val").innerHTML = data.volume;
-			
-			var dpStyle = dojo.style("ticker-detail");
-			if(dpStyle["opacity"] == "0") {
-				dojo.fadeIn({ node: "ticker-detail" }).play();
+			if(data) {
+				dojo.byId("t-d-symb-val").innerHTML = symbol;
+				dojo.byId("t-d-s-p-high-val").innerHTML = data.max.toFixed(2);
+				dojo.byId("t-d-s-p-avg-val").innerHTML = data.average.toFixed(2);
+				dojo.byId("t-d-s-p-low-val").innerHTML = data.min.toFixed(2);
+				dojo.byId("t-d-v-val").innerHTML = data.volume;
+
+				var dpStyle = dojo.style("ticker-detail");
+				if(dpStyle["opacity"] == "0") {
+					dojo.fadeIn({ node: "ticker-detail" }).play();
+				}
 			}
 		}
 	});
