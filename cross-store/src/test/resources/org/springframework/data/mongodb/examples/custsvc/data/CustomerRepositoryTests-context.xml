@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd">
+
+  <!-- Relational Database setup -->
+  <bean id="entityManagerFactory"
+    class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <property name="jpaVendorAdapter">
+      <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="generateDdl" value="true" />
+        <property name="database" value="HSQL" />
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="entityManagerFactory" />
+  </bean>
+  
+  <jdbc:embedded-database id="dataSource" type="HSQL" />
+  
+  <!--  Mongo config -->
+  <mongo:mongo host="localhost" port="27017"/>
+
+  <bean id="mongoTemplate" class="org.springframework.data.document.mongodb.MongoTemplate">
+    <constructor-arg name="mongo" ref="mongo"/>
+    <constructor-arg name="databaseName" value="test"/>
+    <constructor-arg name="defaultCollectionName" value="cross-store"/>
+  </bean>
+
+  <bean class="org.springframework.data.document.mongodb.MongoExceptionTranslator"/>
+
+  <!--  Mongo aspect config -->
+  <bean class="org.springframework.data.persistence.document.mongo.MongoDocumentBacking"
+        factory-method="aspectOf">
+    <property name="changeSetPersister" ref="mongoChangeSetPersister"/>
+  </bean>
+  <bean id="mongoChangeSetPersister" 
+      class="org.springframework.data.persistence.document.mongo.MongoChangeSetPersister">
+    <property name="mongoTemplate" ref="mongoTemplate"/>
+    <property name="entityManagerFactory" ref="entityManagerFactory"/>
+  </bean>
+
+  <!-- Configure JPA Repositories -->
+  <jpa:repositories base-package="org.springframework.data.mongodb.examples.custsvc.data"/>
+
+  <!-- Necessary to get the entity manager injected into the factory bean -->
+  <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+  <!-- Adds transaparent exception translation to the DAOs -->
+  <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+</beans>
