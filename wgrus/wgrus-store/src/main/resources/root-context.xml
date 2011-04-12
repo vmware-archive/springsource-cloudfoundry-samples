@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration"
 	xmlns:amqp="http://www.springframework.org/schema/integration/amqp"
 	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:util="http://www.springframework.org/schema/util"
-	xmlns:cloud="http://schema.cloudfoundry.org/spring"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:cloud="http://schema.cloudfoundry.org/spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp-2.0.xsd
 		http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.6.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-2.0.xsd
@@ -28,9 +26,9 @@
 	<bean id="messageStore"
 		class="org.springframework.integration.mongodb.store.MongoMessageStore">
 		<constructor-arg ref="mongo" />
-		<constructor-arg value="#{serviceProperties['mongo.name']?:'wgrus'}" />
-		<!-- <property name="username" value="#{serviceProperties['mongo.username']}"/> 
-			<property name="password" value="#{serviceProperties['mongo.password']}"/> -->
+		<constructor-arg value="#{serviceProperties['mongo.db']?:'wgrus'}" />
+		<property name="username" value="#{serviceProperties['mongo.username']}" />
+		<property name="password" value="#{serviceProperties['mongo.password']}" />
 	</bean>
 
 	<rabbit:queue name="orders" />
