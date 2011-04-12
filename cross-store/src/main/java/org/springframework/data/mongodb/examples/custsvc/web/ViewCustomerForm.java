@@ -49,9 +49,11 @@ public class ViewCustomerForm {
 		if (customer.getSurveyInfo() == null) {
 			customer.setSurveyInfo(new SurveyInfo());
 		}
-		customer.getSurveyInfo().addQuestionsAndAnswer(survey);
-		customerRepository.save(customer);
-		return "redirect:/customer";
+		if (survey.getQuestion() != null && survey.getQuestion().trim().length() > 0) {
+			customer.getSurveyInfo().addQuestionsAndAnswer(survey);
+			customerRepository.save(customer);
+		}
+		return "redirect:/customer/"+id;
 	}
 
 }
