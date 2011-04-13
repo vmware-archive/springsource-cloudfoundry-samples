@@ -6,10 +6,10 @@
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:cloud="http://schema.cloudfoundry.org/spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
-		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
 		http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.6.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
@@ -31,41 +31,7 @@
 
     <tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/>
 
-	<!--  Cloud properties -->
-	<cloud:service-properties id="serviceProperties"/>  
-
-	<!--  DataSource - cloud -->
-	<cloud:data-source id="dataSource"/>
-	<!--  DataSource - local -->
-	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/test" />
-		<property name="username" value="spring" />
-		<property name="password" value="spring" />
-	</bean> -->
-
-	<!-- Mongo config - cloud -->
-	<cloud:mongo id="mongo"/>
-	<bean id="mongoTemplate" class="org.springframework.data.document.mongodb.MongoTemplate">
-    	<constructor-arg ref="mongo"/>
-    	<constructor-arg name="databaseName" value="#{serviceProperties['cs-mongo.db']}"/>
-    	<constructor-arg name="defaultCollectionName" value="cloud"/>
-    	<property name="username" value="#{serviceProperties['cs-mongo.username']}"/>     
-    	<property name="password" value="#{serviceProperties['cs-mongo.password']}"/> 
-  	</bean>
-	<!-- Mongo config - local -->
-	<!-- <mongo:mongo host="localhost" port="27017" />
-	<bean id="mongoTemplate" class="org.springframework.data.document.mongodb.MongoTemplate">
-		<constructor-arg name="mongo" ref="mongo" />
-		<constructor-arg name="databaseName" value="test" />
-		<constructor-arg name="defaultCollectionName" value="cross-store" />
-	</bean> -->
-
-	<bean
-		class="org.springframework.data.document.mongodb.MongoExceptionTranslator" />
-
-	<!-- Mongo aspect config -->
+	<!-- Mongo aspect config for cross-store features -->
 	<bean
 		class="org.springframework.data.persistence.document.mongo.MongoDocumentBacking"
 		factory-method="aspectOf">
@@ -80,12 +46,40 @@
 	<!-- Configure JPA Repositories -->
 	<bean class="org.springframework.data.mongodb.examples.custsvc.data.CrossStoreCustomerRepository"/>
 
-	<!-- Necessary to get the entity manager injected into the factory bean -->
-	<bean
-		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	<!-- Necessary to get the entity manager injected into the repository -->
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
-	<!-- Adds transaparent exception translation to the DAOs -->
-	<bean
-		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	<!-- Adds transparent exception translation to the DAOs -->
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	<bean class="org.springframework.data.document.mongodb.MongoExceptionTranslator" />
+
+	<!-- MySQL DataSource / Mongo configuration profiles -->
+	<beans profile="default">
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+			destroy-method="close">
+			<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+			<property name="url" value="jdbc:mysql://127.0.0.1:3306/test" />
+			<property name="username" value="spring" />
+			<property name="password" value="spring" />
+		</bean>
+		<mongo:mongo host="localhost" port="27017" />
+		<bean id="mongoTemplate" class="org.springframework.data.document.mongodb.MongoTemplate">
+			<constructor-arg name="mongo" ref="mongo" />
+			<constructor-arg name="databaseName" value="test" />
+			<constructor-arg name="defaultCollectionName" value="cross-store" />
+		</bean>
+	</beans>  
+	<beans profile="cloud">
+		<cloud:data-source id="dataSource"/>
+		<cloud:mongo id="mongo"/>
+		<cloud:service-properties id="serviceProperties"/>  
+		<bean id="mongoTemplate" class="org.springframework.data.document.mongodb.MongoTemplate">
+	    	<constructor-arg ref="mongo"/>
+	    	<constructor-arg name="databaseName" value="#{serviceProperties['cs-mongo.db']}"/>
+	    	<constructor-arg name="defaultCollectionName" value="cloud"/>
+	    	<property name="username" value="#{serviceProperties['cs-mongo.username']}"/>     
+	    	<property name="password" value="#{serviceProperties['cs-mongo.password']}"/> 
+	  	</bean>
+	</beans>
 
 </beans>
