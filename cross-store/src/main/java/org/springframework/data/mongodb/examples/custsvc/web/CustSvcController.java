@@ -10,6 +10,8 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.document.mongodb.CollectionCallback;
 import org.springframework.data.document.mongodb.MongoTemplate;
 import org.springframework.data.mongodb.examples.custsvc.data.CustomerRepository;
 import org.springframework.data.mongodb.examples.custsvc.domain.Customer;
@@ -26,7 +28,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mongodb.CommandResult;
+import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
+import com.mongodb.MongoException;
 
 /**
  * Handles requests for the application home page.
@@ -77,12 +81,18 @@ public class CustSvcController {
 		model.addAttribute("sqlinfo", sqlInfo);
 		model.addAttribute("sqldata", sqlData);
 		String mongoInfo = mongoTemplate.getDb().getMongo().debugString();
-		StringBuilder mongoData = new StringBuilder();
+		final StringBuilder mongoData = new StringBuilder();
 		mongoData.append("[");
-		for (DBObject dbo : mongoTemplate.getCollection(Customer.class.getName()).find()) {
-			mongoData.append(mongoData.length() > 1 ? ", " : "");
-			mongoData.append(dbo.toString());
-		}
+		mongoTemplate.execute(Customer.class.getName(), 
+			new CollectionCallback<String>() {
+				public String doInCollection(DBCollection collection) throws MongoException, DataAccessException {
+					for (DBObject dbo : collection.find()) {
+						mongoData.append(mongoData.length() > 1 ? ", " : "");
+						mongoData.append(dbo.toString());
+					}
+					return null;
+				}
+			});
 		mongoData.append("]");
 		model.addAttribute("mongoinfo", mongoInfo);
 		model.addAttribute("mongodata", mongoData);
