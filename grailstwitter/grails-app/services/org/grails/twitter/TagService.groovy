@@ -83,18 +83,12 @@ class TagService {
                 return [:]
             }
         }
-        catch(e) {
-            log.error(e.message, e)
-            return [:]
+        finally {
+            redis.close()
         }
     }
 
     private getTagsInternal() {
-        try {
-            return redis.zrange(TAGS_CACHE_KEY, 0, -1) as List
-        }
-        finally {
-            redis.close()
-        }
+        return redis.zrange(TAGS_CACHE_KEY, 0, -1) as List
     }
 }
