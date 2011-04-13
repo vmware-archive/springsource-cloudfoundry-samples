@@ -8,7 +8,7 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.cloudfoundry-version>0.6.0-BUILD-SNAPSHOT</org.cloudfoundry-version>
+		<org.cloudfoundry-version>0.6.0</org.cloudfoundry-version>
 		<org.springframework-version>3.1.0.M1</org.springframework-version>
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<org.slf4j-version>1.5.10</org.slf4j-version>
@@ -221,13 +221,6 @@
 
 	</dependencies>
 	<repositories>
-		<repository>
-			<id>springsource-milestone</id>
-			<url>http://s3.amazonaws.com/private.maven.springsource.com/milestone/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
 		<!-- For testing against latest Spring snapshots -->
 		<repository>
 			<id>org.springframework.maven.snapshot</id>
@@ -247,13 +240,6 @@
 			<url>http://maven.springframework.org/milestone</url>
 			<snapshots>
 				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>springsource-snapshot</id>
-			<url>http://s3.amazonaws.com/private.maven.springsource.com/snapshot/</url>
-			<snapshots>
-				<enabled>true</enabled>
 			</snapshots>
 		</repository>
 	</repositories>
