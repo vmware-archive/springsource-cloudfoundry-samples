@@ -24,42 +24,16 @@
 			<!-- /header -->
 			<div id="container">
 				<div id="content" class="no-side-nav">
-					<div id="customerResults">
-						<h2>Customer List:</h2>
-						<div id='new-company-link'>
-							<a href="customer/new" title="Add a new customer">Add a new customer</a>
-						</div>
-						<hr/>
-						<table>
-							<thead>
-								<tr>
-									<th>FirstName</th>
-									<th>LastName</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:if test="${not empty customerList}">
-									<c:forEach var="customer" items="${customerList}">
-										<tr>
-											<td>${customer.firstName}</td>
-											<td>${customer.lastName}</td>
-											<td><a href="customer/${customer.id}" title="View customer">View Customer</a></td>
-											<td><a href="customerDelete/${customer.id}" title="Delete customer">Delete Customer</a></td>
-										</tr>
-									</c:forEach>
-								</c:if>
-								<c:if test="${empty customerList}">
-									<tr>
-										<td colspan="2">No Customers found</td>
-									</tr>
-								</c:if>
-							</tbody>
-						</table>
-					</div>
-				<div>
-					<hr/>
+					<h1>Database Info</h1>
+					<h4>SQL: <c:out value="${sqlinfo}"/></h4>
+					<p>
+  <c:out value="${sqldata}"/>
+					</p>
+					<h4>Mongo: <c:out value="${mongoinfo}"/></h4>
+					<p>
+  <c:out value="${mongodata}"/>
+					</p>
 					<a href="index">Home</a>
-				</div>
 				</div>
 			</div>
 		</div>

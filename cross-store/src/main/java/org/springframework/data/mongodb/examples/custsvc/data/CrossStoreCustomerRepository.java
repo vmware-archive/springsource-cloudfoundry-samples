@@ -33,4 +33,9 @@ public class CrossStoreCustomerRepository implements CustomerRepository {
 		em.merge(customer);
 	}
 
+	@Override
+	public void delete(Customer customer) {
+		em.remove(customer);
+	}
+
 }

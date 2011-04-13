@@ -29,8 +29,9 @@
 						provided by the <a href="http://www.springsource.org/spring-data/mongodb">Spring Data Document MongoDB</a> project
 					</h1>
 					<h2>Start by browsing the <a href="customer">Customer List</a></h2>
-					<p>The customer data is stored in an MySQL database and the survey data is stored using MongoDB. This is all 
+					<p>The customer data is stored in a MySQL database and the survey data is stored using MongoDB. This is all 
 					accomplished by using the "cross-store" feature.</p>
+					<p>You can see the data stored in the databases <a href="dump">here</a></p>
 					<p>Here is the code used in the Customer class. Take a look at the surveyInfo field. It is annotated with 
 					@RelatedDocument so it will be stored in a MongoDB collection named after the entity class. 
 					</p>
