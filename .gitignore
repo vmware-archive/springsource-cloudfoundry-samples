@@ -18,6 +18,7 @@ bin
 spring-integration-gemfire/BACKUP_*
 spring-integration-gemfire/KEYS_*
 spring-integration-gemfire/RECOVERY_*
+jredis.log
 .DS_Store
 **/.DS_Store
 
