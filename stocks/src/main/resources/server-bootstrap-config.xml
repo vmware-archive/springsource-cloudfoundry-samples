@@ -9,7 +9,7 @@
 
 	<import resource="redis-${REDIS:false}-config.xml"/>
 
-	<context:property-placeholder system-properties-mode="OVERRIDE" />
+	<context:property-placeholder system-properties-mode="OVERRIDE"/>
 
 	<!-- pick up rabbit broker configuration -->
 	<context:component-scan base-package="org.springframework.amqp.rabbit.stocks.config.server" />

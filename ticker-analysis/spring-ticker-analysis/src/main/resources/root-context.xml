@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+			 xmlns:cloud="http://schema.cloudfoundry.org/spring"
+			 xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+			 xmlns:p="http://www.springframework.org/schema/p"
+			 xmlns:util="http://www.springframework.org/schema/util"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			 http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.6.xsd
+			 http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+			 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<!-- MongoDB -->
+	<mongo:mapping-converter id="mappingConverter"/>
+	<bean id="mongoTemplate" class="org.springframework.data.document.mongodb.MongoTemplate"
+				p:username="#{serviceProperties['ticker-analysis.username']}"
+				p:password="#{serviceProperties['ticker-analysis.password']}">
+		<constructor-arg ref="mongo"/>
+		<constructor-arg name="databaseName" value="#{serviceProperties['ticker-analysis.db']}"/>
+		<constructor-arg name="defaultCollectionName" value="tickerdata"/>
+		<constructor-arg ref="mappingConverter"/>
+	</bean>
+
+	<!-- Redis -->
+	<bean id="redisTemplate" class="org.springframework.data.keyvalue.redis.core.RedisTemplate"
+				p:connectionFactory-ref="redisConnectionFactory"/>
+	<bean id="summaryService" class="org.cloudfoundry.samples.tickeranalysis.SummaryService"
+				p:mongoTemplate-ref="mongoTemplate"
+				p:redisTemplate-ref="redisTemplate"/>
+	<bean id="tickerStreamTopic" class="org.springframework.data.keyvalue.redis.listener.ChannelTopic">
+		<constructor-arg value="ticker-stream"/>
+	</bean>
+
+	<bean id="messageListenerContainer"
+				class="org.springframework.data.keyvalue.redis.listener.RedisMessageListenerContainer"
+				p:connectionFactory-ref="redisConnectionFactory">
+		<property name="messageListeners">
+			<map>
+				<entry key-ref="summaryService" value-ref="tickerStreamTopic"/>
+			</map>
+		</property>
+	</bean>
+
+	<beans profile="default">
+		<util:properties id="serviceProperties">
+			<prop key="ticker-analysis.db">tickeranalysis</prop>
+			<prop key="ticker-analysis.username">admin</prop>
+			<prop key="ticker-analysis.password">passwd</prop>
+		</util:properties>
+		<mongo:mongo id="mongo"/>
+		<bean id="redisConnectionFactory"
+					class="org.springframework.data.keyvalue.redis.connection.jedis.JedisConnectionFactory"/>
+	</beans>
+
+	<beans profile="cloud">
+		<cloud:service-properties id="serviceProperties"/>
+		<cloud:mongo id="mongo"/>
+		<cloud:redis-connection-factory id="redisConnectionFactory"/>
+	</beans>
+
+</beans>

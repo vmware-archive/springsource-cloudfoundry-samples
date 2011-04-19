@@ -44,6 +44,7 @@
 											<td>${customer.firstName}</td>
 											<td>${customer.lastName}</td>
 											<td><a href="customer/${customer.id}" title="View customer">View Customer</a></td>
+											<td><a href="customerDelete/${customer.id}" title="Delete customer">Delete Customer</a></td>
 										</tr>
 									</c:forEach>
 								</c:if>

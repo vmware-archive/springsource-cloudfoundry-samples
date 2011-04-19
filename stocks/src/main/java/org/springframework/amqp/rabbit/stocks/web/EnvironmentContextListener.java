@@ -18,6 +18,7 @@ import javax.servlet.ServletContextListener;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cloudfoundry.runtime.env.CloudEnvironment;
 
 /**
  * @author Dave Syer
@@ -28,24 +29,10 @@ public class EnvironmentContextListener implements ServletContextListener {
 	private static Log log = LogFactory.getLog(EnvironmentContextListener.class);
 
 	public void contextInitialized(ServletContextEvent sce) {
-		try {
-		if (System.getenv("VMC_APP_VERSION")!=null) {
-			String rabbit = System.getenv("VMC_RABBITMQ");
-			if (rabbit!=null) {
-				String[] split = rabbit.split(":");
-				System.setProperty("RABBIT_HOST", split[0]);
-				System.setProperty("RABBIT_PORT", split[1]);
-			}
-			String redis = System.getenv("VMC_REDIS");
-			if (redis!=null) {
-				System.setProperty("REDIS", "true");
-				String[] split = redis.split(":");
-				System.setProperty("REDIS_HOST", split[0]);
-				System.setProperty("REDIS_PORT", split[1]);
-			}
-		}
-		} catch (Exception e) {
-			log.warn("Could not set up environment on startup", e);
+		CloudEnvironment environment = new CloudEnvironment();
+		if (environment.getInstanceInfo()!=null) {
+			log.info("VCAP_SERVICES: " + environment.getServiceInfos());
+			System.setProperty("PLATFORM", "cloud");
 		}
 	}
 

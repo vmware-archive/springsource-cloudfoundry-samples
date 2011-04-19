@@ -5,7 +5,10 @@ require.paths.unshift('./node_modules')
 // Cloud Foundry 
 var cf       = require("cloudfoundry");
 // MongoDB
-var provider = require("mongodb-provider/lib");
+var mongoose = require("mongoose"),
+    Schema   = mongoose.Schema,
+    ObjectId = Schema.ObjectId,
+    DocumentObjectId = mongoose.Types.ObjectId;
 // Redis
 var redis    = require("redis");
 // Express
@@ -34,20 +37,25 @@ var io       = require("socket.io").listen(app, {
 		} 
 });
 
-// Connect to MongoDB
-var mongoConfig = cf.getServiceConfig("ticker-analysis");
-//util.debug("mongo config: "+JSON.stringify(mongoConfig));
-var mongo = provider.connect("mongo://"+mongoConfig.hostname+":"+mongoConfig.port+"/"+mongoConfig.name);
-var analysis;
-var tickerData;
-mongo.open(function(err, db) {
-	if(err) {
-		throw(err);
-	} else {
-		analysis = db;
-		tickerData = new provider.MongoProvider(analysis, "tickerdata");
-	}
+// Mongoose Models
+var TickerEvent = new Schema({
+	symbol: { type: String },
+	 price: { type: Number },
+	volume: { type: Number }
 });
+mongoose.model('TickerEvent', TickerEvent);
+var TickerSummary = new Schema({
+	      _id: { type: String },
+	timestamp: { type: Number },
+	      max: { type: Number },
+	      min: { type: Number },
+	  average: { type: Number },
+	   volume: { type: Number }
+});
+mongoose.model('TickerSummary', TickerSummary);
+
+var mongoConfig = cf.getServiceConfig("ticker-analysis");
+var db = mongoose.createConnection("mongo://" + mongoConfig.username + ":" + mongoConfig.password + "@" + mongoConfig.hostname + ":" + mongoConfig.port + "/" + mongoConfig.db);
 
 // Connect to Redis
 var redisConfig = cf.getServiceConfig("ticker-stream");
@@ -62,9 +70,18 @@ var watchers = {};
 redisClient.subscribe("ticker-stream");
 redisClient.on("message", function(channel, json) {
 	var data = JSON.parse(json);
-	tickerData.insert(data, function(docs) {
-		io.broadcast(json);
+	var TickerEvent = db.model('TickerEvent', 'tickerdata');
+	var te = new TickerEvent({
+		symbol: data.symbol,
+		price: data.price,
+		volume: data.volume
 	});
+	te.save(function(err) {
+		if(err) {
+			throw(err);
+		}
+	});
+	io.broadcast(json);
 });
 
 // Make up ticker information at random
@@ -158,12 +175,13 @@ app.get("/", function(req, resp) {
 });
 
 app.get("/summary/:symbol", function(req, resp) {
-	resp.send({
-		name: "Name, Inc.",
-		high: 100.0,
-		average: 75.0,
-		low: 50.0,
-		volume: 100000
+	var TickerSummary = db.model("TickerSummary", "tickersummary");
+	TickerSummary.findById(req.params.symbol, function(err, data) {
+		if(err) {
+			throw(err);
+		}
+		//util.debug("params: "+JSON.stringify(data));
+		resp.send(JSON.stringify(data));
 	});
 });
 

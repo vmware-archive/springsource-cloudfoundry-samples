@@ -60,9 +60,9 @@ document.observe("dom:loaded", function() {
     });
 
     new Ajax.PeriodicalUpdater(
-            'tagList',
+            {success: 'tagList'},
             '${createLink(controller: "tag", action: "index")}',
-            {asynchronous:true, frequency: 5});
+            {asynchronous:true, frequency: 5, onFailure: function() { this.stop(); }});
 });
 </script>
 </body>

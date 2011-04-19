@@ -64,6 +64,11 @@
 								</table>
 							</div>
 							<div>
+								<br/>
+								<br/>
+								<a href="../customerClear/${customer.id}" title="Clear survey data">Clear survey data</a>
+							</div>
+							<div>
 								<h1>New Survey Question</h1>
 							</div>
 							<form:form modelAttribute="survey">

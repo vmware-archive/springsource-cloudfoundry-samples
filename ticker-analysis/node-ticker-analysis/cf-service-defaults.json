@@ -2,7 +2,9 @@
   "ticker-analysis": {
     "hostname": "localhost",
     "port": 27017,
-    "name": "tickeranalysis"
+    "username": "admin",
+    "password": "passwd",
+    "db": "tickeranalysis"
   },
   "ticker-stream": {
     "hostname": "localhost",

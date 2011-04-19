@@ -13,4 +13,5 @@ public interface CustomerRepository {
 	
 	void save(Customer customer);
 
+	void delete(Customer customer);
 }
