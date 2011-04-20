@@ -11,20 +11,8 @@
 	
 	<publish-subscribe-channel id="chatPusher" />
 	
-	<beans:bean id="redisInbound" class="org.springframework.integration.redis.inbound.RedisInboundChannelAdapter" >
-		<beans:constructor-arg ref="redisConnectionFactory"/>
-		<beans:property name="topics" value="chat"/>
-		<beans:property name="outputChannel" ref="chatPusher"/>
-		<beans:property name="errorChannel" ref="nullChannel" />
-		<beans:property name="messageConverter" ref="jsonConverter" />
-	</beans:bean>
+	<si-redis:inbound-channel-adapter channel="chatPusher" error-channel="nullChannel" topics="chat" message-converter="jsonConverter" />
 	
-	<outbound-channel-adapter channel="chatReceiver" ref="redisOutbound"/>
-	
-	<beans:bean id="redisOutbound" class="org.springframework.integration.redis.outbound.RedisPublishingMessageHandler" >
-		<beans:constructor-arg ref="redisConnectionFactory"/>
-		<beans:constructor-arg ref="jsonConverter"/>
-		<beans:property name="defaultRedisChannel" value="chat"/>
-	</beans:bean>
+	<si-redis:outbound-channel-adapter channel="chatReceiver" message-converter="jsonConverter" topic="chat"/>
 	
 </beans:beans>
