@@ -32,16 +32,16 @@ class BootStrap {
         // Create a large number of messages to really exercise MongoDB.
         def sampleMessages = [
                 "Going out for a drink tonight",
-                "Hacking away on Grails",
+                "Hacking away on #grails",
                 "Bed time",
                 "Checking out BBC news",
-                "Delivering the Groovy & Grails training course",
+                "Delivering the #groovy & #grails training course",
                 "BBQ time!",
                 "Going to a friend's wedding",
                 "Team meeting approaching",
                 "Test message",
                 "Flying to a conference in Copenhagen"]
-        def messageCount = 100000
+        def messageCount = 1000
         if (Status.count() < messageCount) {
             def random = new Random()
             def start = System.currentTimeMillis()
