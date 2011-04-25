@@ -1,8 +1,8 @@
 var sys      = require("sys");
 var util     = require("util");
 // Use locally-installed modules
-require.paths.unshift('./node_modules')
-// Cloud Foundry 
+require.paths.unshift('./node_modules');
+// Cloud Foundry
 var cf       = require("cloudfoundry");
 // MongoDB
 var mongoose = require("mongoose"),
@@ -17,8 +17,8 @@ var app      = express.createServer();
 // Configure the app
 app.configure(function() {
 	app.use(express.methodOverride());
-  app.use(express.bodyParser());
-  app.use(app.router);	
+	app.use(express.bodyParser());
+	app.use(app.router);	
 	app.use(express.static(__dirname + '/public'));
 	
 	app.set('view engine', 'jade');
@@ -34,7 +34,7 @@ var io       = require("socket.io").listen(app, {
 	transports: ['xhr-polling'], 
 	transportOptions: {
 		'xhr-polling': {duration: 10000}
-		} 
+	} 
 });
 
 // Mongoose Models
@@ -59,7 +59,7 @@ var db = mongoose.createConnection("mongo://" + mongoConfig.username + ":" + mon
 
 // Connect to Redis
 var redisConfig = cf.getServiceConfig("ticker-stream");
-//util.debug("redis config: "+JSON.stringify(redisConfig));
+// util.debug("redis config: "+JSON.stringify(redisConfig));
 var redisClient = redis.createClient(redisConfig.port, redisConfig.hostname);
 var redisPublisher = redis.createClient(redisConfig.port, redisConfig.hostname);
 if(redisConfig.password) {
@@ -157,7 +157,7 @@ function sendTickerEvent() {
 		price: getRandomPrice(),
 		volume: getRandomVolume()
 	};
-	//util.debug("sending ticker event: " + JSON.stringify(symbolInfo));
+	// util.debug("sending ticker event: " + JSON.stringify(symbolInfo));
 	redisPublisher.publish("ticker-stream", JSON.stringify(symbolInfo));
 	
 	var timeout = Math.round(Math.random() * 7000);
@@ -180,7 +180,7 @@ app.get("/summary/:symbol", function(req, resp) {
 		if(err) {
 			throw(err);
 		}
-		//util.debug("params: "+JSON.stringify(data));
+		// util.debug("params: "+JSON.stringify(data));
 		resp.send(JSON.stringify(data));
 	});
 });
@@ -190,8 +190,8 @@ io.on("connection", function(client) {
 	if(!tickerSender) {
 		sendTickerEvent();
 	}
-	//util.debug("connection made..." + client);
-})
+	// util.debug("connection made..." + client);
+});
 
 // Listen for requests
 app.listen(cf.getAppPort());
