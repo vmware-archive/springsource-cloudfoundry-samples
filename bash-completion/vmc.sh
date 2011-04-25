@@ -6,12 +6,6 @@ _vmc() {
   options="--email --user --passwd --pass --password --app --name --bind --instance --instances --url --mem --path --no-start --nostart --force --all -t --trace -q --quiet --no-zip --nozip --no-resources --noresources --no-color --verbose -n --no-prompt --noprompt --non-interactive --prefix --prefix-logs --prefixlogs --json -v --version -h --help --runtime --exec --noframework --canary -u --options"
   commands="target login info apps push start stop restart delete rename update mem map unmap instances crashes crashlogs logs files stats instances env env-add env-del services create-service delete-service bind-service unbind-service clone-services user passwd logout add-user delete-user runtimes frameworks aliases unalias targets help"
 
-  # Try to complete options
-  if [[ ${cur} == -* ]] ; then
-      COMPREPLY=( $(compgen -W "${options}" -- ${cur}) )
-      return 0
-  fi
-
   # Try to complete commands
   if [[ ${COMP_CWORD} -ge 1 && "${prev}" != -* ]] ; then
       COMPREPLY=( $(compgen -W "${commands}" -- ${cur}) )
@@ -22,7 +16,6 @@ _vmc() {
     push|start|stop|restart|delete|rename|update|mem|map|unmap|instances|crashes|crashlogs|logs|files|stats|instances|env|evn-add|env-del)
       apps=$( vmc apps | sed -n '5,$ s/^|[ ]\(.*\)[ +]|\(.*|\)\{4,\}$/\1/p' )
       COMPREPLY=( $(compgen -W "${apps}" -- ${cur}) )
-      return 0
       ;;
     create-service)
       # Only load the list of available services once
@@ -47,6 +40,12 @@ _vmc() {
       bind-service|unbind-service)
         apps=$( vmc apps | sed -n '5,$ s/^|[ ]\(.*\)[ +]|\(.*|\)\{4,\}$/\1/p' )
         COMPREPLY=( $(compgen -W "${apps}" -- ${cur}) )
+        return 0
+        ;;
+      push)
+        push_opts="--path --url --instances --mem --no-start"
+        COMPREPLY=( $(compgen -W "${push_opts}" -- ${cur}) )
+        return 0
         ;;
     esac
   fi
@@ -60,5 +59,12 @@ _vmc() {
         ;;
     esac
   fi
+  
+  # Try to complete options
+  if [[ ${cur} == -* ]] ; then
+      COMPREPLY=( $(compgen -W "${options}" -- ${cur}) )
+      return 0
+  fi
+
 }
 complete -F _vmc vmc
