@@ -1,9 +1,10 @@
 _vmc() {
-  local cur prev opts apps avail_svcs
+  local cur prev opts push_opts apps my_svcs
   COMPREPLY=()
   cur="${COMP_WORDS[COMP_CWORD]}"
   prev="${COMP_WORDS[COMP_CWORD-1]}"
   options="--email --user --passwd --pass --password --app --name --bind --instance --instances --url --mem --path --no-start --nostart --force --all -t --trace -q --quiet --no-zip --nozip --no-resources --noresources --no-color --verbose -n --no-prompt --noprompt --non-interactive --prefix --prefix-logs --prefixlogs --json -v --version -h --help --runtime --exec --noframework --canary -u --options"
+  push_opts="--path --url --instances --mem --no-start"
   commands="target login info apps push start stop restart delete rename update mem map unmap instances crashes crashlogs logs files stats instances env env-add env-del services create-service delete-service bind-service unbind-service clone-services user passwd logout add-user delete-user runtimes frameworks aliases unalias targets help"
 
   # Try to complete commands
@@ -21,16 +22,13 @@ _vmc() {
       # Only load the list of available services once
       if [[ "${VCAP_AVAIL_SVCS}" == "" ]]; then
         export VCAP_AVAIL_SVCS=$( vmc services | sed -n '7,/Provisioned/ s/^|[ ]\(.*\)[ +]|\(.*|\)\{2,\}$/\1/p' )
-        export VCAP_MY_SVCS=$( vmc services | sed -n '/^| Name.*/,$ s/^|[ ]\(.*\)[ +]|.*|$/\1/p' | sed -n '2,$ p' )
       fi
       COMPREPLY=( $(compgen -W "${VCAP_AVAIL_SVCS}" -- ${cur}) )
       return 0
       ;;
     delete-service|bind-service|unbind-service)
-      if [[ "${VCAP_MY_SVCS}" == "" ]]; then
-        export VCAP_MY_SVCS=$( vmc services | sed -n '/^| Name.*/,$ s/^|[ ]\(.*\)[ +]|.*|$/\1/p' | sed -n '2,$ p' )
-      fi
-      COMPREPLY=( $(compgen -W "${VCAP_MY_SVCS}" -- ${cur}) )
+      my_svcs=$( vmc services | sed -n '/^| Name.*/,$ s/^|[ ]\(.*\)[ +]|.*|$/\1/p' | sed -n '2,$ p' )
+      COMPREPLY=( $(compgen -W "${my_svcs}" -- ${cur}) )
       ;;
   esac
 
@@ -43,7 +41,6 @@ _vmc() {
         return 0
         ;;
       push)
-        push_opts="--path --url --instances --mem --no-start"
         COMPREPLY=( $(compgen -W "${push_opts}" -- ${cur}) )
         return 0
         ;;
