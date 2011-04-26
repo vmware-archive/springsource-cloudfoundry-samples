@@ -1,3 +1,17 @@
+#   Copyright (c) 2011, SpringSource
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+   
 _vmc() {
   local cur prev opts push_opts apps my_svcs
   COMPREPLY=()
@@ -27,6 +41,7 @@ _vmc() {
       return 0
       ;;
     delete-service|bind-service|unbind-service)
+      # Load provisioned services all the time so we don't miss one
       my_svcs=$( vmc services | sed -n '/^| Name.*/,$ s/^|[ ]\(.*\)[ +]|.*|$/\1/p' | sed -n '2,$ p' )
       COMPREPLY=( $(compgen -W "${my_svcs}" -- ${cur}) )
       ;;
