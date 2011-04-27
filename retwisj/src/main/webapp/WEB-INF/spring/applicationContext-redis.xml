@@ -6,11 +6,11 @@
 		xsi:schemaLocation="
 			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-      		http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring.xsd">
+			http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring.xsd">
 
-  	<cloud:service-properties id="cfoundryEnv" />
+	<cloud:service-properties id="cfoundryEnv" />
 	<context:property-placeholder properties-ref="cfoundryEnv"/>
-	  
+	
 	<bean id="connectionFactory" class="org.springframework.data.keyvalue.redis.connection.jedis.JedisConnectionFactory"
 		p:host-name="${redis.hostname}" p:port="${redis.port}" p:password="${redis.password}"/>
 
