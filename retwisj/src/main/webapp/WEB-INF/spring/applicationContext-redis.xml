@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:cloud="http://schema.cloudfoundry.org/spring"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+      http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring.xsd">
+
+  <bean id="out" class="debug.Debug" p:props="cfoundryEnv"/>
+  
+	<bean id="connectionFactory" class="org.springframework.data.keyvalue.redis.connection.jedis.JedisConnectionFactory"
+		p:host-name="${redis.hostname}" p:port="${redis.port}" p:password="${redis.password}"/>
+	
+	<!-- Configurer that replaces ${...} placeholders with values from a properties file
+	<context:property-placeholder location="classpath:redis.properties"/>
+	-->
+
+	<!-- For CloudFoundry, replace the definition above with -->
+	<context:property-placeholder properties-ref="cfoundryEnv"/>
+	
+	<cloud:service-properties id="cfoundryEnv" />
+  <!--
+	<bean id="cfoundryEnv" class="org.cloudfoundry.runtime.env.CloudEnvironmentPropertiesFactoryBean"/>
+	 -->
+	<context:annotation-config />
+
+	<context:component-scan base-package="org.springframework.data.redis.samples"/>
+
+	<bean id="redisTemplate" class="org.springframework.data.keyvalue.redis.core.StringRedisTemplate" 
+		p:connection-factory-ref="connectionFactory"/>
+	
+</beans>
