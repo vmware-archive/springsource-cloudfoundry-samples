@@ -19,6 +19,7 @@ import javax.servlet.ServletContextListener;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cloudfoundry.runtime.env.CloudEnvironment;
+import org.cloudfoundry.runtime.env.RedisServiceInfo;
 
 /**
  * @author Dave Syer
@@ -33,6 +34,10 @@ public class EnvironmentContextListener implements ServletContextListener {
 		if (environment.getInstanceInfo()!=null) {
 			log.info("VCAP_SERVICES: " + environment.getServiceInfos());
 			System.setProperty("PLATFORM", "cloud");
+		}
+		if (environment.getServiceInfo("redis", RedisServiceInfo.class)!=null) {
+			log.info("Redis service detected");
+			System.setProperty("REDIS", "true");
 		}
 	}
 

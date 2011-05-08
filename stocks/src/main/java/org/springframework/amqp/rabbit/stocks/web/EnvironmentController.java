@@ -86,7 +86,7 @@ public class EnvironmentController {
 	 * Use this endpoint to refresh the cron trigger that is used to send market data to the broker. It builds a refresh
 	 * request and sends it to the broker using the AMQP template provided.
 	 * 
-	 * @param trigger a cron trigger expression, e.g. "0/10 * * * * *" is every 10 seconds
+	 * @param bean a bean id
 	 * @return a refresh request object (as information for the caller)
 	 * 
 	 * @see #handleRefresh(RefreshRequest) a handler for the request generated here

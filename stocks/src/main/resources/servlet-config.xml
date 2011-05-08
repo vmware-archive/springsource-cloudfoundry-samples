@@ -15,9 +15,9 @@
 		<property name="defaultReplyTo" value="fanout://broadcast.responses/" />
 	</bean>
 
-	<rabbit:queue id="tradeQueue" />
-
 	<rabbit:queue id="refreshQueue" />
+
+	<rabbit:queue id="tradeQueue" />
 
 	<rabbit:queue id="marketDataQueue" />
 
@@ -28,19 +28,19 @@
 		</bindings>
 	</fanout-exchange>
 
-	<fanout-exchange name="broadcast.refresh" xmlns="http://www.springframework.org/schema/rabbit">
-		<bindings>
-			<!-- Bind a fanout to an anonymous queue unique for this node, then all nodes in a cluster get the same request -->
-			<binding queue="refreshQueue" />
-		</bindings>
-	</fanout-exchange>
-
 	<topic-exchange name="app.stock.marketdata" xmlns="http://www.springframework.org/schema/rabbit">
 		<bindings>
 			<!-- Bind to anonymous queue for market data so all nodes configured this way get all quotes -->
 			<binding queue="marketDataQueue" pattern="${stocks.quote.pattern}" />
 		</bindings>
 	</topic-exchange>
+
+	<fanout-exchange name="broadcast.refresh" xmlns="http://www.springframework.org/schema/rabbit">
+		<bindings>
+			<!-- Bind a fanout to an anonymous queue unique for this node, then all nodes in a cluster get the same request -->
+			<binding queue="refreshQueue" />
+		</bindings>
+	</fanout-exchange>
 
 	<listener-container connection-factory="connectionFactory" message-converter="jsonMessageConverter"
 		xmlns="http://www.springframework.org/schema/rabbit">
@@ -59,16 +59,11 @@
 
 	<bean id="envController" class="org.springframework.amqp.rabbit.stocks.web.EnvironmentController">
 		<property name="refreshScope" ref="refreshScope" />
-		<property name="amqpTemplate">
-			<bean class="org.springframework.amqp.rabbit.core.RabbitTemplate">
-				<property name="connectionFactory" ref="connectionFactory" />
-				<property name="exchange" value="broadcast.refresh" />
-				<property name="messageConverter" ref="jsonMessageConverter" />
-			</bean>
-		</property>
+		<property name="amqpTemplate" ref="rabbitTemplate" />
+		<property name="environmentProperties" ref="environmentProperties" />
 	</bean>
-	
-	<import resource="servlet-redis-${REDIS:false}-config.xml"/>
+
+	<import resource="servlet-redis-${REDIS:false}-config.xml" />
 
 	<mvc:resources location="file:./src/main/resources/static/,classpath:/static/" mapping="static/**" />
 

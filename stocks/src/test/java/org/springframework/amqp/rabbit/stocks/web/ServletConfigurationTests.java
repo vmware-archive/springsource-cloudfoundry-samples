@@ -45,11 +45,13 @@ public class ServletConfigurationTests {
 				Map<String, Properties> env = controller.env();
 				assertTrue(env.containsKey("env"));
 
-			} finally {
+			}
+			finally {
 				context.close();
 			}
 
-		} finally {
+		}
+		finally {
 
 			parent.close();
 
@@ -77,11 +79,13 @@ public class ServletConfigurationTests {
 				Map<String, Properties> env = controller.env();
 				assertTrue(env.containsKey("env"));
 
-			} finally {
+			}
+			finally {
 				context.close();
 			}
 
-		} finally {
+		}
+		finally {
 
 			System.clearProperty("REDIS");
 			parent.close();
@@ -89,5 +93,4 @@ public class ServletConfigurationTests {
 		}
 
 	}
-
 }

@@ -16,15 +16,10 @@
 
 package org.springframework.amqp.rabbit.stocks.config;
 
-import org.cloudfoundry.runtime.env.CloudEnvironment;
-import org.cloudfoundry.runtime.service.messaging.RabbitServiceCreator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.connection.SingleConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.JsonMessageConverter;
@@ -34,78 +29,48 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Provides shared configuration between Client and Server.
- * <p>
- * The abstract method configureRabbitTemplate lets the Client and Server
- * further customize the rabbit template to their specific needs.
+ * Provides shared configuration between Client and Server.  
+ * <p>The abstract method configureRabbitTemplate lets the Client and Server further customize
+ * the rabbit template to their specific needs.
  * 
  * @author Mark Pollack
  * @author Mark Fisher
  */
 @Configuration
 public abstract class AbstractStockAppRabbitConfiguration {
-	
-	private static Logger logger = LoggerFactory.getLogger(AbstractStockAppRabbitConfiguration.class);
 
 	/**
-	 * Shared topic exchange used for publishing any market data (e.g. stock
-	 * quotes)
+	 * Shared topic exchange used for publishing any market data (e.g. stock quotes) 
 	 */
 	protected static String MARKET_DATA_EXCHANGE_NAME = "app.stock.marketdata";
 
 	/**
-	 * The server-side consumer's queue that provides point-to-point semantics
-	 * for stock requests.
+	 * The server-side consumer's queue that provides point-to-point semantics for stock requests.
 	 */
 	protected static String STOCK_REQUEST_QUEUE_NAME = "app.stock.request";
 
 	/**
-	 * Key that clients will use to send to the stock request queue via the
-	 * default direct exchange.
+	 * Key that clients will use to send to the stock request queue via the default direct exchange.
 	 */
 	protected static String STOCK_REQUEST_ROUTING_KEY = STOCK_REQUEST_QUEUE_NAME;
-
-	@Value("${RABBIT_PORT:5672}")
+	
+	@Value("${amqp.port:5672}") 
 	private int port = 5672;
-
-	@Value("${RABBIT_HOST:localhost}")
-	private String host = "localhost";
-
-	@Value("#{systemProperties['RABBIT_USERNAME']}")
-	private String username = null;
-
-	@Value("#{systemProperties['RABBIT_PASSWORD']}")
-	private String password = null;
-
-	@Value("#{systemProperties['RABBIT_VHOST']}")
-	private String vhost = null;
+	
 
 	protected abstract void configureRabbitTemplate(RabbitTemplate template);
 
 	@Bean
 	public ConnectionFactory connectionFactory() {
-		// TODO make it possible to customize in subclasses.
-		CloudEnvironment environment = new CloudEnvironment();
-		if (environment.getInstanceInfo() == null) {
-			CachingConnectionFactory connectionFactory = new CachingConnectionFactory(
-					host);
-			connectionFactory.setPort(port);
-			if (username != null) {
-				connectionFactory.setUsername(username);
-				connectionFactory.setPassword(password);
-				connectionFactory.setVirtualHost(vhost);
-			}
-			return connectionFactory;
-		} else {
-			ConnectionFactory connectionFactory = new RabbitServiceCreator(environment).createService("rabbit");
-			if (connectionFactory instanceof SingleConnectionFactory) {
-				logger.info(String.format("ConnectionFactory: %s:%d (%s)", connectionFactory.getHost(), connectionFactory.getPort(), connectionFactory.getVirtualHost()));
-			}
-			return connectionFactory ;			
-		}
+		//TODO make it possible to customize in subclasses.
+		CachingConnectionFactory connectionFactory = new CachingConnectionFactory("localhost");
+		connectionFactory.setUsername("guest");
+		connectionFactory.setPassword("guest");
+		connectionFactory.setPort(port);
+		return connectionFactory;
 	}
 
-	@Bean
+	@Bean 
 	public RabbitTemplate rabbitTemplate() {
 		RabbitTemplate template = new RabbitTemplate(connectionFactory());
 		template.setMessageConverter(jsonMessageConverter());
@@ -117,7 +82,7 @@ public abstract class AbstractStockAppRabbitConfiguration {
 	public MessageConverter jsonMessageConverter() {
 		return new JsonMessageConverter();
 	}
-
+	
 	@Bean
 	public TopicExchange marketDataExchange() {
 		return new TopicExchange(MARKET_DATA_EXCHANGE_NAME);
@@ -129,7 +94,7 @@ public abstract class AbstractStockAppRabbitConfiguration {
 	@Bean
 	public AmqpAdmin amqpAdmin() {
 		RabbitAdmin rabbitAdmin = new RabbitAdmin(connectionFactory());
-		return rabbitAdmin;
+		return rabbitAdmin ;
 	}
 
 }
