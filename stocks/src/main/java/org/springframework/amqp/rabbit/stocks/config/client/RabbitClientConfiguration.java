@@ -16,7 +16,6 @@
 
 package org.springframework.amqp.rabbit.stocks.config.client;
 
-
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
@@ -43,22 +42,21 @@ public class RabbitClientConfiguration extends AbstractStockAppRabbitConfigurati
 
 	@Value("${stocks.quote.pattern}")
 	private String marketDataRoutingKey;
-	
+
 	@Autowired
 	private ClientHandler clientHandler;
-	
+
 	/**
-	 * The client's template will by default send to the exchange defined 
-	 * in {@link org.springframework.amqp.rabbit.config.AbstractRabbitConfiguration#rabbitTemplate()}
-	 * with the routing key {@link AbstractStockAppRabbitConfiguration#STOCK_REQUEST_QUEUE_NAME}
+	 * The client's template will by default send to the exchange defined in {@link #rabbitTemplate()} with the routing
+	 * key {@link AbstractStockAppRabbitConfiguration#STOCK_REQUEST_QUEUE_NAME}
 	 * <p>
 	 * The default exchange will delivery to a queue whose name matches the routing key value.
 	 */
 	@Override
 	public void configureRabbitTemplate(RabbitTemplate rabbitTemplate) {
-		rabbitTemplate.setRoutingKey(STOCK_REQUEST_QUEUE_NAME);		
+		rabbitTemplate.setRoutingKey(STOCK_REQUEST_QUEUE_NAME);
 	}
-	
+
 	@Bean
 	public StockServiceGateway stockServiceGateway() {
 		RabbitStockServiceGateway gateway = new RabbitStockServiceGateway();
@@ -67,53 +65,54 @@ public class RabbitClientConfiguration extends AbstractStockAppRabbitConfigurati
 		return gateway;
 	}
 
-	@Bean 
+	@Bean
 	public SimpleMessageListenerContainer messageListenerContainer() {
-		SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory());		
+		SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory());
 		container.setQueues(marketDataQueue(), traderJoeQueue());
 		container.setMessageListener(messageListenerAdapter());
 		return container;
 
-		//container(using(connectionFactory()).listenToQueues(marketDataQueue(), traderJoeQueue()).withListener(messageListenerAdapter()).
+		// container(using(connectionFactory()).listenToQueues(marketDataQueue(),
+		// traderJoeQueue()).withListener(messageListenerAdapter()).
 	}
-	
-	@Bean 
-	public MessageListenerAdapter messageListenerAdapter() {
-		return new MessageListenerAdapter(clientHandler, jsonMessageConverter());		
-	}
-		
-	
-	// Broker Configuration
-	
-//	@PostContruct
-//	public void declareClientBrokerConfiguration() {
-//		declare(marketDataQueue);
-//		declare(new Binding(marketDataQueue, MARKET_DATA_EXCHANGE, marketDataRoutingKey));
-//		declare(traderJoeQueue);
-//		// no need to bind traderJoeQueue as it is automatically bound to the default direct exchanage, which is what we will use
-//				
-//		//add as many declare statements as needed like a script.
-//	}
-	
+
 	@Bean
-	public Queue marketDataQueue() {		
+	public MessageListenerAdapter messageListenerAdapter() {
+		return new MessageListenerAdapter(clientHandler, jsonMessageConverter());
+	}
+
+	// Broker Configuration
+
+	// @PostContruct
+	// public void declareClientBrokerConfiguration() {
+	// declare(marketDataQueue);
+	// declare(new Binding(marketDataQueue, MARKET_DATA_EXCHANGE, marketDataRoutingKey));
+	// declare(traderJoeQueue);
+	// // no need to bind traderJoeQueue as it is automatically bound to the default direct exchanage, which is what we
+	// will use
+	//
+	// //add as many declare statements as needed like a script.
+	// }
+
+	@Bean
+	public Queue marketDataQueue() {
 		return amqpAdmin().declareQueue();
 	}
-	
+
 	/**
 	 * Binds to the market data exchange. Interested in any stock quotes.
-	 */	
+	 */
 	@Bean
-	public Binding marketDataBinding() {		
+	public Binding marketDataBinding() {
 		return BindingBuilder.bind(marketDataQueue()).to(marketDataExchange()).with(marketDataRoutingKey);
 	}
 
 	/**
 	 * This queue does not need a binding, since it relies on the default exchange.
-	 */	
+	 */
 	@Bean
-	public Queue traderJoeQueue() {	
-		return amqpAdmin().declareQueue();		
+	public Queue traderJoeQueue() {
+		return amqpAdmin().declareQueue();
 	}
 
 }
