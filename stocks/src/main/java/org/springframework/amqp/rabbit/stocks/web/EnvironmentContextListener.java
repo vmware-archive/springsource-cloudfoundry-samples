@@ -26,18 +26,23 @@ import org.cloudfoundry.runtime.env.RedisServiceInfo;
  * 
  */
 public class EnvironmentContextListener implements ServletContextListener {
-	
+
 	private static Log log = LogFactory.getLog(EnvironmentContextListener.class);
 
 	public void contextInitialized(ServletContextEvent sce) {
 		CloudEnvironment environment = new CloudEnvironment();
-		if (environment.getInstanceInfo()!=null) {
+		if (environment.getInstanceInfo() != null) {
 			log.info("VCAP_SERVICES: " + environment.getServiceInfos());
 			System.setProperty("PLATFORM", "cloud");
 		}
-		if (environment.getServiceInfo("redis", RedisServiceInfo.class)!=null) {
-			log.info("Redis service detected");
-			System.setProperty("REDIS", "true");
+		try {
+			if (environment.getServiceInfo("redis", RedisServiceInfo.class) != null) {
+				log.info("Redis service detected");
+				System.setProperty("REDIS", "true");
+			}
+		}
+		catch (Exception e) {
+			log.error("Could not detect redis server.", e);
 		}
 	}
 
