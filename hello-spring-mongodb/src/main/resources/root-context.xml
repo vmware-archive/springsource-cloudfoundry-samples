@@ -11,18 +11,18 @@
 
 	<bean id="mongoTemplate" class="org.springframework.data.document.mongodb.MongoTemplate">
     	<constructor-arg ref="mongo"/>
-    	<constructor-arg name="databaseName" value="#{serviceProperties['mongodb-hello-mongo.db']}"/>
+    	<constructor-arg name="databaseName" value="#{serviceProperties['mongodb-hello.db']}"/>
     	<constructor-arg name="defaultCollectionName" value="person"/>
-    	<property name="username" value="#{serviceProperties['mongodb-hello-mongo.username']}"/>    	
-    	<property name="password" value="#{serviceProperties['mongodb-hello-mongo.password']}"/>     	
+    	<property name="username" value="#{serviceProperties['mongodb-hello.username']}"/>    	
+    	<property name="password" value="#{serviceProperties['mongodb-hello.password']}"/>     	
   	</bean>
   	
 	<beans profile="default">
 		<bean id="mongo" class="com.mongodb.Mongo"/>
 		<util:properties id="serviceProperties">		
-			<prop key="mongodb-hello-mongo.db">pwdtest</prop>
-			<prop key="mongodb-hello-mongo.username">test_user</prop>
-			<prop key="mongodb-hello-mongo.password">efgh</prop>
+			<prop key="mongodb-hello.db">pwdtest</prop>
+			<prop key="mongodb-hello.username">test_user</prop>
+			<prop key="mongodb-hello.password">efgh</prop>
 		</util:properties>
 	</beans>
         
