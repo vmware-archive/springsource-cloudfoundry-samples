@@ -13,6 +13,8 @@
 
 	<mongo:db-factory id="mongoDbFactory"
 					  dbname="#{serviceProperties['mongodb-hello.db']}"
+					  host="#{serviceProperties['mongodb-hello.hostname']}"
+					  port="#{serviceProperties['mongodb-hello.port']}"
 	                  username="#{serviceProperties['mongodb-hello.username']}" 
 	                  password="#{serviceProperties['mongodb-hello.password']}"/>
 			                  
@@ -21,8 +23,10 @@
   	</bean>
   	
 	<beans profile="default">
-		<util:properties id="serviceProperties">		
-			<prop key="mongodb-hello.db">pwdtest</prop>
+		<util:properties id="serviceProperties">
+		    <prop key="mongodb-hello.db">pwdtest</prop>
+		    <prop key="mongodb-hello.hostname">127.0.0.1</prop>		
+			<prop key="mongodb-hello.port">27017</prop>
 			<prop key="mongodb-hello.username">test_user</prop>
 			<prop key="mongodb-hello.password">efgh</prop>
 		</util:properties>
