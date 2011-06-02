@@ -14,6 +14,7 @@
 		<property name="username" value="spring" />
 		<property name="password" value="spring" />
 	</bean>
+
 	<jdbc:initialize-database data-source="dataSource">
 		<jdbc:script location="classpath:db-schema.sql"/>
 	</jdbc:initialize-database>

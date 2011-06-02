@@ -1,9 +1,10 @@
-package org.springframework.data;
+package org.cloudfoundry.samples;
 
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,8 @@ public class HomeController {
 	private ReferenceDataRepository referenceRepository;
 	
 	/**
-	 * Simply selects the home view to render by returning its name.
+	 * Prepares the Model with some metadata and the list of States retrieved
+	 * from the DB. Then, selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String home(Model model) {
@@ -30,6 +32,5 @@ public class HomeController {
 		model.addAttribute("states", referenceRepository.findAll());
 		return "home";
 	}
-	
-}
 
+}

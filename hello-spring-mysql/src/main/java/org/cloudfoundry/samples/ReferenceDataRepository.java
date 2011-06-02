@@ -1,4 +1,4 @@
-package org.springframework.data;
+package org.cloudfoundry.samples;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

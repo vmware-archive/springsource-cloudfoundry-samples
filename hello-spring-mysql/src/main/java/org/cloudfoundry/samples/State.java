@@ -1,4 +1,4 @@
-package org.springframework.data;
+package org.cloudfoundry.samples;
 
 public class State {
 
