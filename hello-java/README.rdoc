@@ -1,0 +1,3 @@
+= Hello Java Sample
+
+This sample aims to demonstrate the simplest possible Servlet-based Java webapp.
