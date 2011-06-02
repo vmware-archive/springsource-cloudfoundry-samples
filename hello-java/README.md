@@ -127,3 +127,9 @@ That will ask a few questions, and in most cases you can simply accept the defau
 Notice that it detected the app type as "Java Web Application". In this case, it's only recognizing a runtime (Java)
 but not a framework (e.g. Spring or Grails), since this really is just a barebones Java web application. If you were
 to create a Spring or Grails application, you would see that it detects both the runtime and the framework.
+
+The result when visiting the 'Application Deployed URL' should look something like this:
+
+	Hello from 172.30.49.150:20488
+
+That's all. Have fun!
