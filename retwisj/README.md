@@ -1,7 +1,7 @@
 Spring Data - Key Value - Redis Twitter Example
 ===============================================
 
-An improved Java implementation of the [Redis Twitter Clone](http://redis.io/topics/twitter-clone) using Spring Data. Tutorial available [here](http://static.springsource.org/spring-data/data-keyvalue/examples/retwisj/current/)
+An improved Java implementation of the [Redis Twitter Clone](http://redis.io/topics/twitter-clone) using Spring Data. Tutorial available [here](http://static.springsource.org/spring-data/data-keyvalue/examples/retwisj/current/) and blog post [here](http://blog.springsource.com/2011/04/27/getting-started-redis-spring-cloud-foundry/)
 
 Live instance available on [CloudFoundry](http://www.cloudfoundry.com/) [here](http://retwisj.cloudfoundry.com/)
 
