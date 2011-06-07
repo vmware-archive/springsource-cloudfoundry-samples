@@ -26,9 +26,15 @@ class StatusController {
     }
 
     def updateStatus = {
-        statusService.updateStatus lookupPersonId(), params.message
-        def messages = statusService.currentTimeline(lookupPersonId(), params.max?.toInteger() ?: 0)
-        render template: 'statusMessages', collection: messages, var: 'statusMessage'
+        try {
+            statusService.updateStatus lookupPersonId(), params.message
+
+            def messages = statusService.currentTimeline(lookupPersonId(), params.max?.toInteger() ?: 0)
+            render template: 'statusMessages', collection: messages, var: 'statusMessage'
+        }
+        catch (Exception ex) {
+            render "Message is too long"
+        }
     }
 
     def fetchMessagesForUser = {

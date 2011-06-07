@@ -14,4 +14,8 @@ class Status {
     Person getAuthor() {
         return Person.get(authorId)
     }
+
+    static constraints = {
+        message maxSize: 160
+    }
 }

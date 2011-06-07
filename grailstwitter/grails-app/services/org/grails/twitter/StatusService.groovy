@@ -7,7 +7,7 @@ class StatusService {
     def tagService
     
     void updateStatus(long userId, String message) {
-        def status = new Status(message: message, authorId: userId).save(flush: true)
+        def status = new Status(message: message, authorId: userId).save(flush: true, failOnError: true)
         
         runAsync {
             tagService.extractTagsFromMessage(status)

@@ -1,5 +1,5 @@
 <div class="statusMessage">
-    <strong>${statusMessage.author.realName} said</strong>
-    ${statusMessage.message}<br/>
+    <strong>${statusMessage.author.realName.encodeAsHTML()} said</strong>
+    ${statusMessage.message.encodeAsHTML()}<br/>
     <div class="statusMessageTime">at <g:formatDate date="${statusMessage.dateCreated}"/></div>
 </div>
