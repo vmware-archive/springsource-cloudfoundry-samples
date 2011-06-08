@@ -25,25 +25,16 @@ import org.apache.commons.logging.LogFactory;
  */
 public class EnvironmentContextListener implements ServletContextListener {
 
-	private static Log logger = LogFactory
-			.getLog(EnvironmentContextListener.class);
+	private static Log logger = LogFactory.getLog(EnvironmentContextListener.class);
 
 	public void contextInitialized(ServletContextEvent sce) {
 
 		logger.info("Attempting to detect cloud environment");
 
-		if (!initializeCloudEnvironment("VMC_")) {
-
-			logger.info("Attempting to detect VCAP environment");
-
-			if (initializeCloudEnvironment("VCAP_")) {
-				logger.info("Found VCAP environment");
-			} else {
-				logger.info("No cloud environment");
-			}
-
+		if (initializeCloudEnvironment("VCAP_")) {
+			logger.info("Found VCAP environment");
 		} else {
-			logger.info("Found VMC environment");
+			logger.info("No cloud environment");
 		}
 
 	}
@@ -65,15 +56,11 @@ public class EnvironmentContextListener implements ServletContextListener {
 		String mysql = System.getenv(prefix + "MYSQL");
 		if (mysql != null) {
 			try {
-				JsonWrapper wrapper = new JsonWrapper(System.getenv(prefix
-						+ "SERVICES"));
+				JsonWrapper wrapper = new JsonWrapper(System.getenv(prefix + "SERVICES"));
 				logger.info(prefix + "SERVICES: " + wrapper);
-				System.setProperty("MYSQL_USER",
-						wrapper.get("mysql.options.user", String.class));
-				System.setProperty("MYSQL_PASSWORD",
-						wrapper.get("mysql.options.password", String.class));
-				System.setProperty("MYSQL_DATABASE",
-						wrapper.get("mysql.options.name", String.class));
+				System.setProperty("MYSQL_USER", wrapper.get("mysql.options.user", String.class));
+				System.setProperty("MYSQL_PASSWORD", wrapper.get("mysql.options.password", String.class));
+				System.setProperty("MYSQL_DATABASE", wrapper.get("mysql.options.name", String.class));
 				String[] split = mysql.split(":");
 				System.setProperty("MYSQL_HOST", split[0]);
 				System.setProperty("MYSQL_PORT", split[1]);

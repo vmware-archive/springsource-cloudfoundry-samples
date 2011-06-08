@@ -13,6 +13,8 @@ bin
 **/**.iws
 **.iws
 .idea
+*~
+\#*
 */src/main/java/META-INF
 */src/main/webapp/META-INF
 spring-integration-gemfire/BACKUP_*
