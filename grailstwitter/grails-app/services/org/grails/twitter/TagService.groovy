@@ -77,6 +77,9 @@ class TagService {
                 tags = getTagsInternal()
             }
             if (tags) {
+                // Return a map of tag names -> tag counts. At this point,
+                // 'tags' is a list of tag names, so we use redis.zscore()
+                // to get the associated tag count.
                 return tags.reverse().inject([:]) { map, k -> map[k] = redis.zscore(TAGS_CACHE_KEY, k).toInteger(); return map }
             }
             else {
