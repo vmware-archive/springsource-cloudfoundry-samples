@@ -38,6 +38,7 @@
 	
 	<import resource="classpath:server-handlers.xml" />
 	<import resource="classpath:server-messaging.xml" />
+	<import resource="classpath:server-${PLATFORM}.xml" />
 	<import resource="classpath:server-services.xml" />
 
 </beans>

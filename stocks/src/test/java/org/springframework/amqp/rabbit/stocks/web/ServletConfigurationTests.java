@@ -18,6 +18,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.Map;
 import java.util.Properties;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -26,6 +28,16 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * 
  */
 public class ServletConfigurationTests {
+	
+	@Before
+	public void init() {
+		System.setProperty("PLATFORM", "default");		
+	}
+
+	@After
+	public void close() {
+		System.clearProperty("PLATFORM");
+	}
 
 	@Test
 	public void testContext() throws Exception {

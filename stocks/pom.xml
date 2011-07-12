@@ -18,6 +18,7 @@
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
 		<spring.framework.version>3.0.5.RELEASE</spring.framework.version>
 		<spring.amqp.version>1.0.0.RC2</spring.amqp.version>
+		<org.cloudfoundry-version>0.6.1</org.cloudfoundry-version>
 	</properties>
 	<profiles>
 		<profile>
@@ -33,7 +34,7 @@
 		<dependency>
 			<groupId>org.cloudfoundry</groupId>
 			<artifactId>cloudfoundry-runtime</artifactId>
-			<version>0.6.1</version>
+			<version>${org.cloudfoundry-version}</version>
 		</dependency>
 
 		<dependency>

@@ -34,6 +34,8 @@ public class EnvironmentContextListener implements ServletContextListener {
 		if (environment.getInstanceInfo() != null) {
 			log.info("VCAP_SERVICES: " + environment.getServiceInfos());
 			System.setProperty("PLATFORM", "cloud");
+		} else {
+			System.setProperty("PLATFORM", "default");
 		}
 		try {
 			if (environment.getServiceInfo("redis", RedisServiceInfo.class) != null) {

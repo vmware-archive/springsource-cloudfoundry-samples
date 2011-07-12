@@ -7,9 +7,6 @@
 	</configSuffixes>
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
-		<config>src/main/resources/client-bootstrap-config.xml</config>
-		<config>src/main/resources/client-handlers.xml</config>
-		<config>src/main/resources/client-messaging.xml</config>
 		<config>src/main/resources/server-bootstrap-config.xml</config>
 		<config>src/main/resources/server-handlers.xml</config>
 		<config>src/main/resources/server-messaging.xml</config>
