@@ -13,6 +13,7 @@
 	</parent>
 	<packaging>war</packaging>
 	<name>batch</name>
+	<properties><spring.batch.version>2.1.8.RELEASE</spring.batch.version></properties>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
