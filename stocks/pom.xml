@@ -17,7 +17,7 @@
 	<properties>
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
 		<spring.framework.version>3.0.5.RELEASE</spring.framework.version>
-		<spring.amqp.version>1.0.0.BUILD-SNAPSHOT</spring.amqp.version>
+		<spring.amqp.version>1.0.0.RC2</spring.amqp.version>
 	</properties>
 	<profiles>
 		<profile>
@@ -49,7 +49,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>
-			<version>1.0.0.M2</version>
+			<version>1.0.0.M3</version>
 		</dependency>
 
 		<dependency>

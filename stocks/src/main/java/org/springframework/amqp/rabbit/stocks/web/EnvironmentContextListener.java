@@ -42,7 +42,7 @@ public class EnvironmentContextListener implements ServletContextListener {
 			}
 		}
 		catch (Exception e) {
-			log.error("Could not detect redis server.", e);
+			log.warn("Could not detect redis server.", e);
 		}
 	}
 

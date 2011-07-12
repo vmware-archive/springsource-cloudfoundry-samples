@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[2.5.1.201011101000-RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[2.6.0.201104111100-PATCH]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
@@ -12,7 +12,6 @@
 		<config>src/main/resources/client-messaging.xml</config>
 		<config>src/main/resources/server-bootstrap-config.xml</config>
 		<config>src/main/resources/server-handlers.xml</config>
-		<config>src/main/resources/server-jmx.xml</config>
 		<config>src/main/resources/server-messaging.xml</config>
 		<config>src/main/resources/server-services.xml</config>
 		<config>src/main/resources/servlet-config.xml</config>
