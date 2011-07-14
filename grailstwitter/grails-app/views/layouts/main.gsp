@@ -4,9 +4,9 @@
         <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
         <link rel="stylesheet" href="${resource(dir:'css',file:'grailstwitter.css')}" />
         <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
-        <blueprint:resources/>
+        <r:require modules="blueprint"/>
         <g:layoutHead />
-        <g:javascript library="application" />
+        <r:layoutResources/>
     </head>
     <body>
 
@@ -39,5 +39,6 @@
             <div class="span-2 last">&nbsp;</div>
         </div>
 
+        <r:layoutResources/>
     </body>
 </html>

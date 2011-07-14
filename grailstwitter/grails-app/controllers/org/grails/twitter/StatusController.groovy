@@ -9,13 +9,13 @@ class StatusController {
     def springSecurityService
     def statusService
 
-    def index = {
+    def index() {
         def currentUser = lookupPerson()
         def messages = statusService.currentTimeline(currentUser.id)
         [statusMessages: messages, currentUser: currentUser, moreMessagesUrl: g.createLink(action: "fetchMessagesForUser")]
     }
     
-    def tag = {
+    def tag() {
         def currentUser = lookupPerson()
         def messages = statusService.postsByTag(params.id, params.max?.toInteger() ?: 0)
         assert currentUser != null
@@ -25,7 +25,7 @@ class StatusController {
          moreMessagesUrl: g.createLink(action: "fetchMessagesForTag", id: params.id)]
     }
 
-    def updateStatus = {
+    def updateStatus() {
         try {
             statusService.updateStatus lookupPersonId(), params.message
 
@@ -33,21 +33,22 @@ class StatusController {
             render template: 'statusMessages', collection: messages, var: 'statusMessage'
         }
         catch (Exception ex) {
+            log.error "Failed to update status", ex
             render "Message is too long"
         }
     }
 
-    def fetchMessagesForUser = {
+    def fetchMessagesForUser() {
         def messages = statusService.currentTimeline(lookupPersonId(), params.max?.toInteger() ?: 0)
         render template: 'statusMessages', collection: messages, var: 'statusMessage'
     }
 
-    def fetchMessagesForTag = {
+    def fetchMessagesForTag() {
         def messages = statusService.postsByTag(params.id, params.max?.toInteger() ?: 0)
         render template: 'statusMessages', collection: messages, var: 'statusMessage'
     }
 
-    def follow = {
+    def follow() {
         statusService.follow lookupPersonId(), params.long('id')
         redirect action: 'index'
     }

@@ -1,6 +1,6 @@
 <g:applyLayout name="main">
 <head>
-    <g:javascript library="prototype" />
+    <r:require modules="prototype" />
     <g:layoutHead/>
 </head>
 <body>
@@ -28,7 +28,7 @@
             <g:include controller="tag"/>
         </div>
     </div>
-<script type="text/javascript">
+<r:script>
 document.observe("dom:loaded", function() {
 	var maxMessages = 30;
     $('moreLink').observe('click', function(event) {
@@ -64,6 +64,6 @@ document.observe("dom:loaded", function() {
             '${createLink(controller: "tag", action: "index")}',
             {asynchronous:true, frequency: 5, onFailure: function() { this.stop(); }});
 });
-</script>
+</r:script>
 </body>
 </g:applyLayout>
