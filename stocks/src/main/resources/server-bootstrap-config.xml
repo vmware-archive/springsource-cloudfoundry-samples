@@ -11,8 +11,6 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<import resource="classpath:/config/redis-${REDIS:false}-config.xml"/>
-
 	<context:property-placeholder system-properties-mode="OVERRIDE"/>
 
 	<bean id="refreshScope" class="org.springframework.amqp.rabbit.stocks.context.RefreshScope"/>
@@ -35,9 +33,7 @@
 		</property>
 	</bean>
 
-	<bean id="environmentProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-		<property name="properties" ref="redisEnvironmentProperties"/>
-	</bean>
+	<bean id="environmentProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean"/>
 
 	<!--  pick up rabbit broker configuration -->
 	<context:component-scan base-package="org.springframework.amqp.rabbit.stocks.config.server"/>
@@ -69,6 +65,7 @@
 		<listener ref="serverHandler" method="handleMessage" queue-names="#{stockRequestQueue.name}" />
 	</listener-container>
 
+	<import resource="classpath:/config/redis-${REDIS:false}-config.xml"/>
 	<import resource="classpath:/config/${PROFILE:default}/server-config.xml" />
 
 </beans>

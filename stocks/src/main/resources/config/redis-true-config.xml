@@ -10,7 +10,7 @@
 		<property name="connectionFactory" ref="redisConnectionFactory" />
 	</bean>
 
-	<bean id="redisEnvironmentProperties"
+	<bean id="environmentProperties"
 		class="org.springframework.data.redis.support.collections.RedisProperties">
 		<constructor-arg>
 			<props />
