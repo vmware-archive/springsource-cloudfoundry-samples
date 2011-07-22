@@ -20,6 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.RedisServiceInfo;
+import org.springframework.util.CollectionUtils;
 
 /**
  * @author Dave Syer
@@ -38,7 +39,7 @@ public class EnvironmentContextListener implements ServletContextListener {
 			System.setProperty("PROFILE", "default");
 		}
 		try {
-			if (environment.getServiceInfo("redis", RedisServiceInfo.class) != null) {
+			if (!CollectionUtils.isEmpty(environment.getServiceInfos(RedisServiceInfo.class))) {
 				log.info("Redis service detected");
 				System.setProperty("REDIS", "true");
 			}
