@@ -32,7 +32,7 @@ public class EnvironmentContextListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent sce) {
 		CloudEnvironment environment = new CloudEnvironment();
 		if (environment.getInstanceInfo() != null) {
-			log.info("VCAP_SERVICES: " + environment.getServiceInfos());
+			log.info("VCAP_SERVICES: " + environment.getServices());
 			System.setProperty("PLATFORM", "cloud");
 		} else {
 			System.setProperty("PLATFORM", "default");

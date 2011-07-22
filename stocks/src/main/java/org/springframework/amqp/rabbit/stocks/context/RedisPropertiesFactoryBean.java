@@ -19,8 +19,8 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.data.keyvalue.redis.core.BoundHashOperations;
-import org.springframework.data.keyvalue.redis.core.RedisOperations;
+import org.springframework.data.redis.core.BoundHashOperations;
+import org.springframework.data.redis.core.RedisOperations;
 
 /**
  * @author Dave Syer

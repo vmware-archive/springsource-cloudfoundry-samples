@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="redisConnectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="hostName"
+			value="#{systemProperties['REDIS_HOST']?:'localhost'}" />
+		<property name="port" value="#{systemProperties['REDIS_PORT']?:6379}" />
+		<property name="password" value="#{systemProperties['REDIS_PASSWORD']}" />
+	</bean>
+
+</beans>

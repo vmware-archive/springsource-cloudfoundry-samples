@@ -63,7 +63,7 @@
 		<property name="environmentProperties" ref="environmentProperties" />
 	</bean>
 
-	<import resource="servlet-redis-${REDIS:false}-config.xml" />
+	<import resource="classpath:/config/servlet/redis-${REDIS:false}-config.xml" />
 
 	<mvc:resources location="file:./src/main/resources/static/,classpath:/static/" mapping="static/**" />
 
