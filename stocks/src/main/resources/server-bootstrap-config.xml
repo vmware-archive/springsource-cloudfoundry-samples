@@ -69,6 +69,6 @@
 		<listener ref="serverHandler" method="handleMessage" queue-names="#{stockRequestQueue.name}" />
 	</listener-container>
 
-	<import resource="classpath:/config/${ENVIRONMENT:default}/server-config.xml" />
+	<import resource="classpath:/config/${PROFILE:default}/server-config.xml" />
 
 </beans>
