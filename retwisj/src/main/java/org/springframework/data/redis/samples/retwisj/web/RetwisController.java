@@ -76,7 +76,7 @@ public class RetwisController {
 	}
 
 	@RequestMapping("/signIn")
-	public String signIn(String name, String pass, Model model, HttpServletResponse response) {
+	public String signIn(@RequestParam(required = false) String name, @RequestParam(required = false) String pass, Model model, HttpServletResponse response) {
 		// add tracing cookie
 		if (retwis.auth(name, pass)) {
 			addAuthCookie(retwis.addAuth(name), name, response);
