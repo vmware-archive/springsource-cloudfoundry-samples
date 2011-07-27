@@ -8,12 +8,14 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class OrderQueue {
 
+	private static final int CAPACITY = 25;
+
 	private final AtomicLong count = new AtomicLong();
 
-	private Queue<String> queue = new LinkedBlockingQueue<String>(20);
+	private Queue<String> queue = new LinkedBlockingQueue<String>(CAPACITY);
 
 	public synchronized void add(String order) {
-		if (queue.size() >= 25) {
+		if (queue.size() >= CAPACITY) {
 			queue.remove();
 		}
 		count.incrementAndGet();
@@ -24,7 +26,7 @@ public class OrderQueue {
 		return count.get();
 	}
 
-	public List<?> list() {
+	public synchronized List<?> list() {
 		return Arrays.asList(this.queue.toArray());
 	}
 

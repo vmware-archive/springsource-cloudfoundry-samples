@@ -26,8 +26,9 @@
 		<div id="container">
 			<div id="content" class="no-side-nav">
 				<h1>Orders</h1>
-				<b>COUNT: ${count}</b>
+				<b>Total Received: ${count}</b>
 				<br/>
+				Last 25:
 				<ol>
 					<c:forEach var="order" items="${orders}">
 						<li><c:out value="${order}"/></li>
