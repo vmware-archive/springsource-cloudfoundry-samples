@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.document.mongodb.CollectionCallback;
+import org.springframework.data.document.mongodb.MongoDbFactory;
 import org.springframework.data.document.mongodb.MongoTemplate;
 import org.springframework.data.document.mongodb.query.Query;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,7 @@ import com.mongodb.MongoException;
 public class HomeController {
 
   @Autowired(required = false)
-  Mongo mongo;
+  MongoDbFactory mongoDbFactory;
   @Autowired(required = false)
   MongoTemplate mongoTemplate;
   @Autowired(required = false)
@@ -47,8 +48,8 @@ public class HomeController {
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String home(Model model) {
     List<String> services = new ArrayList<String>();
-    if (mongo != null) {
-      services.add("Mongo: " + mongo.getAddress());
+    if (mongoDbFactory != null) {
+      services.add("Mongo: " + mongoDbFactory.getDb().getMongo().getAddress());
     }
 
     Random generator = new Random();
