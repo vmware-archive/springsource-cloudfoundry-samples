@@ -12,8 +12,8 @@ The app is a vanilla Spring MVC web application, so you can build with
 Maven (or your tool of choice) and deploy with `vmc`, or use the
 SpringSource ToolSuite CloudFoundry server tooling.
 
-First create the services (the names are significant because they are
-hard-coded in the application).  Using the command line:
+First create the services (the names are not significant).  Using the
+command line:
 
     $ vmc create-service rabbitmq rabbitmq
     $ vmc create-service redis redis
@@ -25,6 +25,10 @@ Then build and deploy:
     $ vmc bind-service rabbitmq stocks
     $ vmc bind-service redis stocks
     $ vmc start stocks
+    
+The app works without redis, but you don't get persistent config
+changes, or consistent changes across a cluster at runtime (see
+polling frequency use case below).
 
 ## Basic Use Cases
 

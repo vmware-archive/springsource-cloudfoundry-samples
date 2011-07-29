@@ -11,10 +11,10 @@
 	<cloud:service-properties id="cfoundryEnv" />
 	<context:property-placeholder properties-ref="cfoundryEnv"/>
 	
-	<bean id="connectionFactory" class="org.springframework.data.keyvalue.redis.connection.jedis.JedisConnectionFactory"
+	<bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
 		p:host-name="${redis.hostname}" p:port="${redis.port}" p:password="${redis.password}"/>
 
-	<bean id="redisTemplate" class="org.springframework.data.keyvalue.redis.core.StringRedisTemplate" 
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate" 
 		p:connection-factory-ref="connectionFactory"/>
 	
 	<context:annotation-config />

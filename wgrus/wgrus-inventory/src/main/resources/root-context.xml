@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:int="http://www.springframework.org/schema/integration"
 	xmlns:amqp="http://www.springframework.org/schema/integration/amqp"
 	xmlns:http="http://www.springframework.org/schema/integration/http"
 	xmlns:mail="http://www.springframework.org/schema/integration/mail"
-	xmlns:rabbit="http://www.springframework.org/schema/rabbit" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:cloud="http://schema.cloudfoundry.org/spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http-2.0.xsd
 		http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp-2.0.xsd
@@ -14,6 +17,7 @@
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-2.0.xsd
 		http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
 		http://www.springframework.org/schema/cloud http://www.springframework.org/schema/cloud/spring-cloud.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
@@ -29,19 +33,41 @@
 
 	<int:chain input-channel="orderChannel" output-channel="warehouseChannel">
 		<int:claim-check-out />
+		<int:json-to-object-transformer type="org.wgrus.Order"/>
 		<mail:header-enricher>
 			<mail:to expression="payload.email" />
 		</mail:header-enricher>
 	</int:chain>
 
-	<bean id="messageStore"
-		class="org.springframework.integration.mongodb.store.MongoMessageStore">
-		<constructor-arg ref="mongo" />
-		<constructor-arg value="#{serviceProperties['mongo.db']?:'wgrus'}" />
-		<property name="username" value="#{serviceProperties['mongo.username']}" />
-		<property name="password" value="#{serviceProperties['mongo.password']}" />
+	<bean id="messageStore" class="org.springframework.integration.jdbc.JdbcMessageStore">
+		<constructor-arg ref="dataSource" />
 	</bean>
 
+	<jdbc:initialize-database enabled="false">
+		<jdbc:script location="classpath:/org/springframework/integration/jdbc/schema-mysql.sql"/>
+	</jdbc:initialize-database>
+
+	<int:publish-subscribe-channel id="warehouseChannel"/>
+
+	<int:chain input-channel="warehouseChannel">
+		<int:object-to-string-transformer/>
+		<int:service-activator ref="orderQueue" method="add"/>
+	</int:chain>
+
+	<int:logging-channel-adapter id="logger" channel="warehouseChannel" level="WARN"/>
+
+	<bean id="orderQueue" class="org.wgrus.OrderQueue"/>
+
+	<!--
+	<bean id="messageStore" class="..MongoMessageStore..">
+		<constructor-arg ref="mongo" />
+		<constructor-arg value="#{serviceProperties['wgrus-mongo.db']?:'wgrus'}" />
+		<property name="username" value="#{serviceProperties['wgrus-mongo.username']}" />
+		<property name="password" value="#{serviceProperties['wgrus-mongo.password']}" />
+	</bean>
+	-->
+	
+	<!-- 
 	<http:outbound-gateway request-channel="warehouseChannel"
 		url="#{environmentProperties['warehouse.url']?:'http://127.0.0.1:8124'}/{productId}"
 		http-method="GET" reply-channel="filterChannel"
@@ -66,12 +92,15 @@
 		output-channel="mailChannel" />
 
 	<int:publish-subscribe-channel id="mailChannel" />
+-->
 
 	<!-- mail:outbound-channel-adapter channel="mailChannel" username="${mail.username}" 
 		password="${mail.password}" host="${mail.host}"/ -->
 
+<!-- 
 	<int:logging-channel-adapter channel="mailChannel"
 		log-full-message="true" level="WARN" />
+-->
 
 	<rabbit:queue name="orders" />
 
@@ -85,7 +114,8 @@
 	</beans>
 
 	<beans profile="cloud">
-		<cloud:mongo id="mongo" />
+		<cloud:data-source id="dataSource"/>
+		<!--  cloud:mongo id="mongo" / -->
 		<cloud:rabbit-connection-factory id="rabbitConnectionFactory" />
 		<util:properties id="environmentProperties">
 			<prop key="warehouse.url">http://wgrus-warehouse.#{systemProperties['BASE_DOMAIN']?:'cloudfoundry.com'}

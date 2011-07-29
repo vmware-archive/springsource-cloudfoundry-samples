@@ -15,7 +15,9 @@
 
 	<int:channel id="orderChannel" />
 
-	<int:claim-check-in input-channel="orderChannel"
+	<int:object-to-json-transformer input-channel="orderChannel" output-channel="jsonOrders"/>
+
+	<int:claim-check-in input-channel="jsonOrders"
 		output-channel="amqpOut" />
 
 	<int:channel id="amqpOut" />
@@ -23,6 +25,11 @@
 	<amqp:outbound-channel-adapter channel="amqpOut"
 		amqp-template="rabbitTemplate" routing-key="orders" />
 
+	<bean id="messageStore" class="org.springframework.integration.jdbc.JdbcMessageStore">
+		<constructor-arg ref="dataSource"/>
+	</bean>
+
+	<!-- 
 	<bean id="messageStore"
 		class="org.springframework.integration.mongodb.store.MongoMessageStore">
 		<constructor-arg ref="mongo" />
@@ -30,7 +37,8 @@
 		<property name="username" value="#{serviceProperties['mongo.username']}" />
 		<property name="password" value="#{serviceProperties['mongo.password']}" />
 	</bean>
-
+	-->
+	
 	<rabbit:queue name="orders" />
 
 	<rabbit:admin connection-factory="rabbitConnectionFactory" />
@@ -45,7 +53,8 @@
 	</beans>
 
 	<beans profile="cloud">
-		<cloud:mongo id="mongo" />
+		<!-- cloud:mongo id="mongo" / -->
+		<cloud:data-source id="dataSource"/>
 		<cloud:rabbit-connection-factory id="rabbitConnectionFactory" />
 		<cloud:service-properties id="serviceProperties" />
 	</beans>

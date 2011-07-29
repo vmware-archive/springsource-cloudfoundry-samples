@@ -39,4 +39,8 @@ public class Order {
 		this.email = email;
 	}
 
+	public String toString() {
+		return "id=" + this.id + ", quantity=" + this.quantity + ", product=" + this.productId + ", email=" + this.email; 
+	}
+
 }
