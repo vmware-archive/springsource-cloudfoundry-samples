@@ -11,7 +11,7 @@ http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.6.xsd
 	<beans profile="default">
 		<jdbc:embedded-database id="dataSource"/>
 		<bean id="mongo" class="com.mongodb.Mongo"/>
-		<bean id="redis" class="org.springframework.data.keyvalue.redis.connection.jedis.JedisConnectionFactory"/>
+		<bean id="redis" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"/>
 	</beans>
 
 	<beans profile="cloud">
