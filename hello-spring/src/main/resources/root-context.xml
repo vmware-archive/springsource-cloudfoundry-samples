@@ -10,13 +10,20 @@ http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.7.xsd
 
 	<beans profile="default">
 		<jdbc:embedded-database id="dataSource"/>
-		<bean id="mongo" class="com.mongodb.Mongo"/>
+		<bean id="mongoDbFactory" class="org.springframework.data.document.mongodb.SimpleMongoDbFactory">
+			<constructor-arg>
+				<bean class="com.mongodb.Mongo"/>
+			</constructor-arg>
+			<constructor-arg value="hello"/>
+		</bean>
+		<bean id="rabbitConnectionFactory" class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory"/>
 		<bean id="redis" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"/>
 	</beans>
 
 	<beans profile="cloud">
 		<cloud:data-source id="dataSource"/>
-		<cloud:mongo id="mongo"/>
+		<cloud:mongo-db-factory id="mongoDbFactory"/>
+		<cloud:rabbit-connection-factory id="rabbitConnectionFactory"/>
 		<cloud:redis-connection-factory id="redisConnectionFactory"/>
 	</beans>
 

@@ -73,7 +73,7 @@ support for defining beans backed by services:</p>
 
 	&lt;cloud:redis-connection-factory/&gt;
 
-	&lt;cloud:mongo/&gt;
+	&lt;cloud:mongo-db-factory/&gt;
 </pre>
 
 <p>This style works as long as you have only one service of each type bound to the application.</p>
@@ -92,7 +92,7 @@ for example two MySql services), you need to specify the <code>service-name</cod
 <pre>
 	@Autowired DataSource dataSource;
 	@Autowired RedisConnectionFactory redisConnectionFactory;
-	@Autowired Mongo mongo;
+	@Autowired MongoDbFactory mongoDbFactory;
 </pre>
 				
 <p>You have access to services without breaking a sweat.
