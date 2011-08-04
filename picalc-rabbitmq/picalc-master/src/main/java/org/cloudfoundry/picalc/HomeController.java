@@ -36,7 +36,7 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired
-	private RabbitTemplate template;
+	private RabbitTemplate rabbitTemplate;
 	
 	@Autowired
 	private Queue workQueue;
@@ -64,7 +64,7 @@ public class HomeController {
 	@RequestMapping(value = "/purge", method = RequestMethod.GET) 
 	@ResponseBody
 	public String purgeQueue() {
-		RabbitAdmin admin = new RabbitAdmin(template.getConnectionFactory());		
+		RabbitAdmin admin = new RabbitAdmin(rabbitTemplate.getConnectionFactory());		
 		admin.purgeQueue(QueueNames.WORK_QUEUE_NAME, true);
 		admin.purgeQueue(QueueNames.RESULT_QUEUE_NAME, true);
 		return QueueNames.WORK_QUEUE_NAME + "and " + QueueNames.RESULT_QUEUE_NAME + " queues were purged.";
@@ -106,7 +106,7 @@ public class HomeController {
 			workMessage.setStart(i);
 			workMessage.setNrOfElements(nrOfElements);
 			
-			template.convertAndSend(workMessage, new MessagePostProcessor() {				
+			rabbitTemplate.convertAndSend(workMessage, new MessagePostProcessor() {				
 				public Message postProcessMessage(Message message) throws AmqpException {
 					message.getMessageProperties().setReplyToAddress(new Address("direct://piExchange/" + QueueNames.RESULT_QUEUE_NAME));
 					return message;
@@ -124,7 +124,7 @@ public class HomeController {
 	}
 	
 	public DeclareOk declareQueuePassive(final Queue queue) {
-		return  this.template.execute(new ChannelCallback<DeclareOk>() {
+		return  this.rabbitTemplate.execute(new ChannelCallback<DeclareOk>() {
 			public DeclareOk doInRabbit(Channel channel) throws Exception {
 				return channel.queueDeclarePassive(queue.getName());
 			}

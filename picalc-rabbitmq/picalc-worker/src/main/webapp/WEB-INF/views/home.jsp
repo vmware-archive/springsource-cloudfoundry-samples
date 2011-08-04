@@ -2,7 +2,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>RabbitMQ PI Calculator - Worker process</title>
+	<title>RabbitMQ &pi; Calculator - Worker process</title>
 </head>
 <body>
 <h1>

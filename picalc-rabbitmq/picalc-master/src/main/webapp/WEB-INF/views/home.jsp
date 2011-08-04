@@ -3,10 +3,10 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>RabbitMQ PI Calculator</title>
+	<title>RabbitMQ &pi; Calculator</title>
 </head>
 <body>
-<h1>Calculate PI using RabbitMQ workers</h1>
+<h1>Calculate &pi; using RabbitMQ workers</h1>
 <form:form modelAttribute="calcParams" action="${pageContext.request.contextPath}/calculate" method="post">
   <form:label for="nrOfMessages" path="nrOfMessages">Number of messages to publish per calculation request:</form:label>
   <form:input path="nrOfMessages" type="text"/>
