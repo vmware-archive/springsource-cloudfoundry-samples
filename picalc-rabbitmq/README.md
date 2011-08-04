@@ -19,7 +19,7 @@ After logging into CloudFoundry, create a RabbitMQ service.  Using the command l
     $ vmc create-service rabbitmq rabbitmq-calc
     
     
-Then build and deploy the master
+Then build and deploy the master (Note: pick a different name for the deployed URL)
 
     $ cd picalc-master
     $ mvn package
@@ -45,7 +45,10 @@ Then build and deploy the master
     
     $ vmc start picalc-master
 
-Then build and deploy the worker
+Note: pick a different name for the deployed URL
+
+
+Then build and deploy the worker (Note: pick a different name for the deployed URL)
 
     $ cd picalc-worker
     $ mvn package
@@ -92,6 +95,19 @@ Using the command line increas the number of workers to 4
 
      $vmc instances picalc-worker 4
      Scaling Application instances up to 4: OK
+     
+You can see how many instances are running by
+
+     $vmc instances picalc-worker
+     
+     +-------+---------+--------------------+
+     | Index | State   | Start Time         |
+     +-------+---------+--------------------+
+     | 0     | RUNNING | 08/04/2011 02:13PM |
+     | 1     | RUNNING | 08/04/2011 02:12PM |
+     | 2     | RUNNING | 08/04/2011 02:12PM |
+     | 3     | RUNNING | 08/04/2011 02:12PM |  
+     +-------+---------+--------------------+
      
 Now enter 5000 again in the form.  The new results are
     
