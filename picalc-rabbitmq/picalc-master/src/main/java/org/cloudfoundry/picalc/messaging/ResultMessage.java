@@ -2,15 +2,15 @@ package org.cloudfoundry.picalc.messaging;
 
 public class ResultMessage {
 
-	private String result;
+	private double result;
 	
 	private String correlationId;
 
-	public String getResult() {
+	public double getResult() {
 		return result;
 	}
 
-	public void setResult(String result) {
+	public void setResult(double result) {
 		this.result = result;
 	}
 

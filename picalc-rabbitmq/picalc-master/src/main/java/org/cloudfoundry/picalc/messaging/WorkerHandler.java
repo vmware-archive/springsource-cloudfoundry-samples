@@ -36,7 +36,7 @@ public class WorkerHandler {
 
 		ResultMessage resultMessage = new ResultMessage();
 		resultMessage.setCorrelationId(workMessage.getCorrelationId());
-		resultMessage.setResult(Double.toString(result));
+		resultMessage.setResult(result);
 		
 		//logger.debug("Working Returning " + resultMessage);
 

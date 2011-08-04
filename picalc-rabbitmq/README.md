@@ -1,12 +1,12 @@
-# Spring AMQP Pi Calculation Demo for CloudFoundry
+# Spring AMQP &pi; Calculation Demo for CloudFoundry
 
-This demo is an adaptation of the [Akka Getting Started Tutorial](http://akka.io/docs/akka/1.1.1/intro/getting-started-first-scala.html) that calculates the value of Pi but using RabbitMQ worker queues instead of Actors.  For an introduction to using worker queues with RabbitMQ see the [RabbitMQ Work Queues tutorial](http://www.rabbitmq.com/tutorials/tutorial-two-java.html).  
+This demo is an adaptation of the [Akka Getting Started Tutorial](http://akka.io/docs/akka/1.1.1/intro/getting-started-first-scala.html) that calculates the value of &pi; but using RabbitMQ worker queues instead of Actors.  For an introduction to using worker queues with RabbitMQ see the [RabbitMQ Work Queues tutorial](http://www.rabbitmq.com/tutorials/tutorial-two-java.html).  
 
 The demo consists of two web applications.  The first is named 'picalc-master' and the second is named 'picalc-worker'.  
 
-The master application takes input via a web form and splits up the calculation into multiple parts.  The number of parts the calculation it is split up into is entered on the picalc-master's form.  The master sends a message for each part of the calculation to a Task Queue.  Workers consume messages from the Task Queue and reply with the result to a Result Queue.  The Master reads from the Result Queue, aggregates all the individual calculations, and displays the result.
+The master application takes input from a form specifying the number of parts to split up the calculation.  The master sends a message for each part of the calculation to a Task Queue.  Workers consume messages from the Task Queue and reply with the result to a Result Queue.  The Master reads from the Result Queue, aggregates all the individual calculations, and displays the result.
 
-The advantage of this architecture is that you can parallelise the work by adding more workers as each worker will take messages from the Task Queue and process them concurrently.  Using the vmc command 'vmc instances picalc-worker 4' you can vary the the number of worker process. (In this case, to 4).  To maximize the effect of scaling up, each worker is single threaded.
+The advantage of this architecture is that you can parallelise the work by adding more workers.  This is because each worker will take messages from the Task Queue and process them concurrently.  Using the vmc command 'vmc instances picalc-worker 4' you can vary the the number of worker process. (In this case, to 4).  To maximize the effect of scaling up, each worker is single threaded.
 
 ## Setup
 
@@ -129,7 +129,7 @@ This project uses Spring AMQP and as such, the logic in the worker process for p
 
                 ResultMessage resultMessage = new ResultMessage();
                 resultMessage.setCorrelationId(workMessage.getCorrelationId());
-                resultMessage.setResult(Double.toString(result));               
+                resultMessage.setResult(result);               
                 return resultMessage;
            }
         

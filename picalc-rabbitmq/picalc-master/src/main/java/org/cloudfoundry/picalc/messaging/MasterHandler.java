@@ -19,7 +19,7 @@ public class MasterHandler {
 		
 		Aggregate aggregate = activeAggregates.get(corrId);			
 		
-		double result = Double.parseDouble(resultMessage.getResult());
+		double result = resultMessage.getResult();
 		logger.debug("Received: " + result);
 		if (aggregate != null) {
 			aggregate.process(result);
