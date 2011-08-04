@@ -4,7 +4,7 @@ This demo is an adaptation of the [Akka Getting Started Tutorial](http://akka.io
 
 The demo consists of two web applications.  The first is named 'picalc-master' and the second is named 'picalc-worker'.  
 
-The master application takes input from a form specifying the number of parts to split up the calculation.  The master sends a message for each part of the calculation to a Task Queue.  Workers consume messages from the Task Queue and reply with the result to a Result Queue.  The Master reads from the Result Queue, aggregates all the individual calculations, and displays the result.
+The master application takes input from a form specifying how to divide up the calculation into multiple parts.  For each part of the calculation, the master sends a message to a Task Queue.  Workers consume messages from the Task Queue and reply with the result to a Result Queue.  The Master reads from the Result Queue, aggregates all the individual results, and displays the final result.
 
 The advantage of this architecture is that you can parallelise the work by adding more workers.  This is because each worker will take messages from the Task Queue and process them concurrently.  Using the vmc command 'vmc instances picalc-worker 4' you can vary the the number of worker process. (In this case, to 4).  To maximize the effect of scaling up, each worker is single threaded.
 
