@@ -6,7 +6,7 @@ The demo consists of two web applications.  The first is named 'picalc-master' a
 
 The master application takes input from a form specifying how to divide up the calculation into multiple parts.  For each part of the calculation, the master sends a message to a Task Queue.  Workers consume messages from the Task Queue and reply with the result to a Result Queue.  The Master reads from the Result Queue, aggregates all the individual results, and displays the final result.
 
-The advantage of this architecture is that you can parallelise the work by adding more workers.  This is because each worker will take messages from the Task Queue and process them concurrently.  Using the vmc command 'vmc instances picalc-worker 4' you can vary the the number of worker process. (In this case, to 4).  To maximize the effect of scaling up, each worker is single threaded.
+The advantage of this architecture is that you can parallelize the work by adding more workers.  This is because each worker will take messages from the Task Queue and process them concurrently.  Using the vmc command 'vmc instances picalc-worker 4' you can vary the the number of worker process. (In this case, to 4).  To maximize the effect of scaling up, each worker is single threaded.
 
 ## Setup
 
@@ -45,9 +45,6 @@ Then build and deploy the master (Note: pick a different name for the deployed U
     
     $ vmc start picalc-master
 
-Note: pick a different name for the deployed URL
-
-
 Then build and deploy the worker (Note: pick a different name for the deployed URL)
 
     $ cd picalc-worker
@@ -76,7 +73,7 @@ Then build and deploy the worker (Note: pick a different name for the deployed U
     
 ## Using the application
 
-Open the URL [http://picalc-master.cloudfoundry.com/](http://picalc-master.cloudfoundry.com/)
+Open the URL of your master application.  In this demo it is [http://picalc-master.cloudfoundry.com/](http://picalc-master.cloudfoundry.com/)
 
 The form will ask you to enter the "Number of messages to publish per calculation request".  Enter 5000.
 
@@ -91,7 +88,7 @@ The form will then update when the calculation has been completed
     
 ## Increasing the number of workers
 
-Using the command line increas the number of workers to 4
+Using the command line increase the number of workers to 4
 
      $vmc instances picalc-worker 4
      Scaling Application instances up to 4: OK
