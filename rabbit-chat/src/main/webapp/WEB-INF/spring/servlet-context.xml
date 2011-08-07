@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xmlns:cloud="http://schema.cloudfoundry.org/spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
+		http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.7.xsd">
+
+	<context:component-scan base-package="org.cloudfoundry.samples.rabbitmq.chat"/>
+
+	<mvc:annotation-driven/>
+	<mvc:resources location="file:./src/main/resources/static/,classpath:/static/" mapping="static/**" />
+
+	<rabbit:queue name="messages"/>
+
+	<rabbit:template connection-factory="rabbitConnectionFactory" queue="messages" routing-key="messages"/>
+
+	<rabbit:admin connection-factory="rabbitConnectionFactory"/>
+
+	<cloud:rabbit-connection-factory id="rabbitConnectionFactory"/>
+
+	<rabbit:listener-container>
+		<rabbit:listener queue-names="messages" ref="chatController" method="handleMessage"/>
+	</rabbit:listener-container>
+
+</beans>
