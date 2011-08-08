@@ -13,7 +13,9 @@
 				url : "chat",
 				success : function(message) {
 					if (message && message.length) {
-						$('#messages').html(message);
+						var messagesDiv = $('#messages');
+						messagesDiv.html(message);
+						messagesDiv.animate({ scrollTop: messagesDiv.attr("scrollHeight") - messagesDiv.height() }, 150);
 					}
 					timer = poll();
 				},
