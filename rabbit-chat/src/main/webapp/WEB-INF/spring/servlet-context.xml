@@ -16,16 +16,22 @@
 	<mvc:annotation-driven/>
 	<mvc:resources location="file:./src/main/resources/static/,classpath:/static/" mapping="static/**" />
 
-	<rabbit:queue name="messages"/>
+	<rabbit:queue id="chatQueue"/>
 
-	<rabbit:template connection-factory="rabbitConnectionFactory" queue="messages" routing-key="messages"/>
+	<rabbit:fanout-exchange name="chatExchange">
+		<rabbit:bindings>
+			<rabbit:binding queue="chatQueue" />
+		</rabbit:bindings>
+	</rabbit:fanout-exchange>
+
+	<rabbit:template connection-factory="rabbitConnectionFactory" exchange="chatExchange"/>
 
 	<rabbit:admin connection-factory="rabbitConnectionFactory"/>
 
 	<cloud:rabbit-connection-factory id="rabbitConnectionFactory"/>
 
 	<rabbit:listener-container>
-		<rabbit:listener queue-names="messages" ref="chatController" method="handleMessage"/>
+		<rabbit:listener queues="chatQueue" ref="chatController" method="handleMessage"/>
 	</rabbit:listener-container>
 
 </beans>
