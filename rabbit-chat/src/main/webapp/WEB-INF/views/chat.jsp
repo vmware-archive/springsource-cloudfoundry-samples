@@ -10,7 +10,7 @@
 	function load() {
 		if (running) {
 			$.ajax({
-				url : "chat",
+				url : "chatlog",
 				success : function(message) {
 					if (message && message.length) {
 						var messagesDiv = $('#messages');

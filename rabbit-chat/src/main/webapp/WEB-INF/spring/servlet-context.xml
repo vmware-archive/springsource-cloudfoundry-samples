@@ -14,13 +14,14 @@
 	<context:component-scan base-package="org.cloudfoundry.samples.rabbitmq.chat"/>
 
 	<mvc:annotation-driven/>
-	<mvc:resources location="file:./src/main/resources/static/,classpath:/static/" mapping="static/**" />
+
+	<mvc:resources location="file:./src/main/resources/static/,classpath:/static/" mapping="static/**"/>
 
 	<rabbit:queue id="chatQueue"/>
 
 	<rabbit:fanout-exchange name="chatExchange">
 		<rabbit:bindings>
-			<rabbit:binding queue="chatQueue" />
+			<rabbit:binding queue="chatQueue"/>
 		</rabbit:bindings>
 	</rabbit:fanout-exchange>
 
@@ -28,10 +29,10 @@
 
 	<rabbit:admin connection-factory="rabbitConnectionFactory"/>
 
-	<cloud:rabbit-connection-factory id="rabbitConnectionFactory"/>
-
 	<rabbit:listener-container>
 		<rabbit:listener queues="chatQueue" ref="chatController" method="handleMessage"/>
 	</rabbit:listener-container>
+
+	<cloud:rabbit-connection-factory id="rabbitConnectionFactory"/>
 
 </beans>

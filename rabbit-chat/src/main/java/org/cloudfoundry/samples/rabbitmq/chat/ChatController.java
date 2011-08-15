@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ChatController {
 
 	@Autowired
-	private AmqpTemplate amqpTemplate;
+	private volatile AmqpTemplate amqpTemplate;
 
 	private final Queue<String> messages = new LinkedBlockingQueue<String>();
 
@@ -34,7 +34,7 @@ public class ChatController {
 		this.amqpTemplate.convertAndSend(username + ": " + text);
 	}
 
-	@RequestMapping(value = "/chat")
+	@RequestMapping(value = "/chatlog")
 	@ResponseBody
 	public String list() throws IOException {
 		return StringUtils.arrayToDelimitedString(this.messages.toArray(), "<br/>");
