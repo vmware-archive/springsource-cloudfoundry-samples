@@ -1,6 +1,5 @@
 package org.cloudfoundry.samples.rabbitmq.chat;
 
-import java.io.IOException;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -36,10 +35,13 @@ public class ChatController {
 
 	@RequestMapping(value = "/chatlog")
 	@ResponseBody
-	public String chatlog() throws IOException {
+	public String chatlog() {
 		return StringUtils.arrayToDelimitedString(this.messages.toArray(), "<br/>");
 	}
 
+	/**
+	 * This method is invoked when a RabbitMQ Message is received.
+	 */
 	public void handleMessage(String message) {
 		if (messages.size() > 100) {
 			messages.remove();
