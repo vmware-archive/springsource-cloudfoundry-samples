@@ -45,17 +45,17 @@
 		$.ajaxSetup({cache:false});
 		start();
 		$('#chatForm').submit(
-				function() {
-					$.post(
-						$('#chatForm').attr("action"),
-						$('#chatForm').serialize(),
-						function(request) {
-							if (request) {
-								confirm(request.id);
-							}
-						});
-					$('#text').val("");
-					return false;
+			function() {
+				$.post(
+					$('#chatForm').attr("action"),
+					$('#chatForm').serialize(),
+					function(request) {
+						if (request) {
+							confirm(request.id);
+						}
+					});
+				$('#text').val("");
+				return false;
 			});
 	});
 </script>
