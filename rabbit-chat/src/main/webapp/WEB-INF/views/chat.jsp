@@ -49,9 +49,9 @@
 				$.post(
 					$('#chatForm').attr("action"),
 					$('#chatForm').serialize(),
-					function(request) {
-						if (request) {
-							confirm(request.id);
+					function(response) {
+						if (response) {
+							confirm(response.id);
 						}
 					});
 				$('#text').val("");
