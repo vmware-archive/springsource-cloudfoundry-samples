@@ -36,7 +36,7 @@ public class ChatController {
 
 	@RequestMapping(value = "/chatlog")
 	@ResponseBody
-	public String list() throws IOException {
+	public String chatlog() throws IOException {
 		return StringUtils.arrayToDelimitedString(this.messages.toArray(), "<br/>");
 	}
 
