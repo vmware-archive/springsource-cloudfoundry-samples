@@ -13,7 +13,10 @@ class TagService {
             def m = status.message =~ /#(\w+)/
             def tags = [] as Set
             for (match in m) {
-                tags << match[1]
+                // Limit tags to 20 characters or less.
+                if (match[1].size() <= 20) {
+                    tags << match[1]
+                }
             }
             
             if (!tags) return
