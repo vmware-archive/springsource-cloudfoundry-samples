@@ -5,6 +5,11 @@ import org.grails.twitter.auth.Person
 class Status {
     static mapWith = "mongo"
     static transients = ["author"]
+
+    static searchable = {
+        only = ["message", "dateCreated"]
+        authorId index: "no", store: "yes"
+    }
 	
     String message
     Long authorId

@@ -87,8 +87,35 @@ log4j = {
 
     info 'org.springframework.amqp.rabbit', "grails.app"
     debug 'grails.app.controller.org.grails.twitter',
-          'grails.app.service.org.grails.twitter'
+          'grails.app.service.org.grails.twitter',
+          'grails.plugin.searchable'
           
+}
+searchable {
+    compassConnection = null
+    compassSettings = [
+            'compass.engine.analyzer.default.type': "Snowball",
+            'compass.engine.analyzer.default.name': "English"]
+    defaultExcludedProperties = ["password"]
+    defaultFormats = [:]
+    defaultMethodOptions = [
+        search: [reload: false, escape: false, offset: 0, max: 10, defaultOperator: "and"],
+        suggestQuery: [userFriendly: true]
+    ]
+    mirrorChanges = false
+    bulkIndexOnStartup = false
+}
+
+rabbitmq {
+    connectionfactory {
+        username = 'guest'
+        password = 'guest'
+        hostname = 'localhost'
+    }
+
+    queues = {
+        exchange name: 'search.sync', type: fanout, durable: false
+    }
 }
 
 // Added by the Spring Security Core plugin:

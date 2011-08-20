@@ -26,6 +26,15 @@ body {
 	text-align: right;
 }
 
+#searchableForm input {
+    font-size: 1em;
+    margin: 30px 0;
+}
+
+#searchableForm input[type='text'] {
+    width: 75%;
+}
+
 a:link, a:visited, a:hover {
     color: #666;
     font-weight: bold;

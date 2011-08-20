@@ -16,13 +16,13 @@
                     <li>${ person.realName }
                 </g:each>
             </ul>
-		    <div class="searchForm">
-		        Search for users
-		        <g:form controller="searchable">
-		            <g:textField name="q" value=""/>
-		        </g:form>
-		        <p style="font-size: 0.8em;">(use * to search for all users)</p>
-		    </div>
+            <div class="searchForm">
+                Search for users
+                <g:form controller="person" action="search" method="get">
+                    <g:textField name="q" value=""/>
+                </g:form>
+                <p style="font-size: 0.8em;">(use * to search for all users)</p>
+            </div>
         </div>
         <div id="tagList">
             <g:include controller="tag"/>

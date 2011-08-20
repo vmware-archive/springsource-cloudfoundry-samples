@@ -5,11 +5,22 @@ import org.grails.twitter.auth.PersonAuthority
 
 class BootStrap {
 
+    def searchableService
     def springSecurityService
 
     def init = { servletContext ->
         if (!Person.count()) {
             createData()
+        }
+
+        // Index all Hibernate mapped domain classes.
+        searchableService.reindex()
+
+        // Index all status messages.
+        def statusMessages = Status.list()
+        log.info "Indexing ${statusMessages.size()} status messages"
+        for (status in statusMessages) {
+            searchableService.reindex(status)
         }
     }
 
