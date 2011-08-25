@@ -19,9 +19,8 @@ class BootStrap {
         // Index all status messages.
         def statusMessages = Status.list()
         log.info "Indexing ${statusMessages.size()} status messages"
-        for (status in statusMessages) {
-            searchableService.reindex(status)
-        }
+        Status.reindex(statusMessages)
+        log.info "Finished indexing"
     }
 
     def destroy = {
