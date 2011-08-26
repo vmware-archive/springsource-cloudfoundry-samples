@@ -91,6 +91,7 @@ log4j = {
           'grails.plugin.searchable'
           
 }
+
 searchable {
     compassConnection = null
     compassSettings = [
