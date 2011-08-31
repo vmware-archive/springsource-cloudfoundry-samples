@@ -13,7 +13,7 @@
 		<org.aspectj-version>1.6.11</org.aspectj-version>
 		<org.slf4j-version>1.5.10</org.slf4j-version>
 		<org.springframework.integration-version>2.1.0.BUILD-SNAPSHOT</org.springframework.integration-version>
-		<org.springframework.amqp-version>1.0.0.RC2</org.springframework.amqp-version>
+		<org.springframework.amqp-version>1.0.0.RELEASE</org.springframework.amqp-version>
 		<org.springframework.data.mongodb-version>1.0.0.M3</org.springframework.data.mongodb-version>
 	</properties>
 	<dependencies>
