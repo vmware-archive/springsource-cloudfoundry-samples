@@ -1,6 +1,6 @@
 package org.cloudfoundry.services;
 
-import static org.springframework.data.document.mongodb.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.document.mongodb.CollectionCallback;
-import org.springframework.data.document.mongodb.MongoDbFactory;
-import org.springframework.data.document.mongodb.MongoTemplate;
-import org.springframework.data.document.mongodb.query.Query;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.core.CollectionCallback;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
