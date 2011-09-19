@@ -6,46 +6,41 @@
 	xmlns:amqp="http://www.springframework.org/schema/integration/amqp"
 	xmlns:http="http://www.springframework.org/schema/integration/http"
 	xmlns:mail="http://www.springframework.org/schema/integration/mail"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
 	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:cloud="http://schema.cloudfoundry.org/spring"
-	xsi:schemaLocation="http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http-2.0.xsd
-		http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp-2.0.xsd
-		http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.6.xsd
-		http://www.springframework.org/schema/integration/mail http://www.springframework.org/schema/integration/mail/spring-integration-mail-2.0.xsd
-		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-2.0.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http-2.1.xsd
+		http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp-2.1.xsd
+		http://www.springframework.org/schema/integration/mail http://www.springframework.org/schema/integration/mail/spring-integration-mail-2.1.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-2.1.xsd
 		http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
+		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
-		http://www.springframework.org/schema/cloud http://www.springframework.org/schema/cloud/spring-cloud.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.8.xsd">
 
 	<context:property-placeholder location="classpath:/mail.properties" />
 
 	<amqp:inbound-channel-adapter channel="orderChannel"
-		connection-factory="rabbitConnectionFactory" queue-names="orders"
+		connection-factory="rabbitConnectionFactory"
+		queue-names="orders"
 		advice-chain="retryInterceptor" />
 
-	<bean id="retryInterceptor"
-		class="org.springframework.amqp.rabbit.config.StatelessRetryOperationsInterceptorFactoryBean" />
+	<bean id="retryInterceptor" class="org.springframework.amqp.rabbit.config.StatelessRetryOperationsInterceptorFactoryBean" />
 
 	<int:chain input-channel="orderChannel" output-channel="warehouseChannel">
-		<int:claim-check-out />
+		<int:claim-check-out/>
 		<int:json-to-object-transformer type="org.wgrus.Order"/>
+		<!--
 		<mail:header-enricher>
-			<mail:to expression="payload.email" />
+			<mail:to expression="payload.email"/>
 		</mail:header-enricher>
+		-->
 	</int:chain>
-
-	<bean id="messageStore" class="org.springframework.integration.jdbc.JdbcMessageStore">
-		<constructor-arg ref="dataSource" />
-	</bean>
-
-	<jdbc:initialize-database enabled="false">
-		<jdbc:script location="classpath:/org/springframework/integration/jdbc/schema-mysql.sql"/>
-	</jdbc:initialize-database>
 
 	<int:publish-subscribe-channel id="warehouseChannel"/>
 
@@ -58,13 +53,35 @@
 
 	<bean id="orderQueue" class="org.wgrus.OrderQueue"/>
 
-	<!--
-	<bean id="messageStore" class="..MongoMessageStore..">
-		<constructor-arg ref="mongo" />
-		<constructor-arg value="#{serviceProperties['wgrus-mongo.db']?:'wgrus'}" />
-		<property name="username" value="#{serviceProperties['wgrus-mongo.username']}" />
-		<property name="password" value="#{serviceProperties['wgrus-mongo.password']}" />
+	<bean id="messageStore" class="org.springframework.integration.mongodb.store.MongoDbMessageStore">
+		<constructor-arg ref="mongoDbFactory"/>
 	</bean>
+
+	<rabbit:queue name="orders"/>
+
+	<rabbit:admin connection-factory="rabbitConnectionFactory"/>
+
+	<beans profile="default">
+		<mongo:db-factory/>
+		<rabbit:connection-factory id="rabbitConnectionFactory"/>
+	</beans>
+
+	<beans profile="cloud">
+		<cloud:mongo-db-factory id="mongoDbFactory"/>
+		<cloud:rabbit-connection-factory id="rabbitConnectionFactory"/>
+	</beans>
+	
+
+
+
+	<!--
+	<bean id="messageStore" class="org.springframework.integration.jdbc.JdbcMessageStore">
+		<constructor-arg ref="dataSource" />
+	</bean>
+
+	<jdbc:initialize-database enabled="false">
+		<jdbc:script location="classpath:/org/springframework/integration/jdbc/schema-mysql.sql"/>
+	</jdbc:initialize-database>
 	-->
 	
 	<!-- 
@@ -101,27 +118,5 @@
 	<int:logging-channel-adapter channel="mailChannel"
 		log-full-message="true" level="WARN" />
 -->
-
-	<rabbit:queue name="orders" />
-
-	<rabbit:admin connection-factory="rabbitConnectionFactory" />
-
-	<beans profile="default">
-		<bean id="mongo" class="com.mongodb.Mongo" />
-		<rabbit:connection-factory id="rabbitConnectionFactory" />
-		<util:properties id="environmentProperties" />
-		<util:properties id="serviceProperties" />
-	</beans>
-
-	<beans profile="cloud">
-		<cloud:data-source id="dataSource"/>
-		<!--  cloud:mongo id="mongo" / -->
-		<cloud:rabbit-connection-factory id="rabbitConnectionFactory" />
-		<util:properties id="environmentProperties">
-			<prop key="warehouse.url">http://wgrus-warehouse.#{systemProperties['BASE_DOMAIN']?:'cloudfoundry.com'}
-			</prop>
-		</util:properties>
-		<cloud:service-properties id="serviceProperties" />
-	</beans>
 
 </beans>

@@ -8,13 +8,13 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.cloudfoundry-version>0.7.1</org.cloudfoundry-version>
+		<org.cloudfoundry-version>0.8.0</org.cloudfoundry-version>
 		<org.springframework-version>3.1.0.M2</org.springframework-version>
 		<org.aspectj-version>1.6.11</org.aspectj-version>
 		<org.slf4j-version>1.5.10</org.slf4j-version>
-		<org.springframework.integration-version>2.1.0.BUILD-SNAPSHOT</org.springframework.integration-version>
+		<org.springframework.integration-version>2.1.0.M1</org.springframework.integration-version>
 		<org.springframework.amqp-version>1.0.0.RELEASE</org.springframework.amqp-version>
-		<org.springframework.data.mongodb-version>1.0.0.M3</org.springframework.data.mongodb-version>
+		<org.springframework.data.mongodb-version>1.0.0.M4</org.springframework.data.mongodb-version>
 	</properties>
 	<dependencies>
 		<!-- CloudFoundry -->
@@ -30,13 +30,11 @@
 			<artifactId>spring-integration-amqp</artifactId>
 			<version>${org.springframework.integration-version}</version>
 		</dependency>
-		<!--
 		<dependency>
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-mongodb</artifactId>
 			<version>${org.springframework.integration-version}</version>
 		</dependency>
-		-->
 		<dependency>
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-jdbc</artifactId>
