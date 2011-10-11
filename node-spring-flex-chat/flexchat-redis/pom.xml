@@ -25,16 +25,21 @@
             <url>http://maven.springframework.org/milestone</url>
         </repository>
         <repository>
+            <id>spring-maven-snapshot</id>
+            <name>Spring Maven Snapshot Repository</name>
+            <url>http://maven.springframework.org/snapshot</url>
+        </repository>
+        <repository>
             <id>spring-roo-repository</id>
             <name>Spring Roo Repository</name>
             <url>http://spring-roo-repository.springsource.org/release</url>
         </repository>
-	<repository>
+		<repository>
             <id>spring-external</id>
             <url>http://maven.springframework.org/external</url>
             <name>Spring External Repository</name>
         </repository>
-    <repository>
+    	<repository>
             <id>flex</id>
             <url>http://repository.sonatype.org/content/groups/flexgroup</url>
             <name>Sonatype Flex Repo</name>
@@ -269,8 +274,8 @@
 		
 		<dependency>	
 			<groupId>org.cloudfoundry</groupId>
-			<artifactId>runtime</artifactId>
-			<version>0.5.0-BUILD-SNAPSHOT</version>
+			<artifactId>cloudfoundry-runtime</artifactId>
+			<version>0.8.1</version>
 		</dependency>
 		
 		<dependency>
