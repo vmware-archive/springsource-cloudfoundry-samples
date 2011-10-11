@@ -8,61 +8,62 @@
   <name>rabbit-rest</name>
   <description>RabbitMQ REST API</description>
   <properties>
-      <java-version>1.6</java-version>
-      <cloudfoundry-version>0.7.1</cloudfoundry-version>
-      <spring-version>3.0.5.RELEASE</spring-version>
-      <spring.integration-version>2.1.0.BUILD-SNAPSHOT</spring.integration-version>
+    <java-version>1.6</java-version>
+    <cloudfoundry-version>0.8.0</cloudfoundry-version>
+    <spring.integration-version>2.1.0.BUILD-SNAPSHOT</spring.integration-version>
   </properties>
   <repositories>
-      <repository>
-          <id>spring-milestone</id>
-          <name>Spring Maven Milestone Repository</name>
-          <url>http://maven.springframework.org/milestone</url>
-      </repository>
+    <repository>
+      <id>spring-milestone</id>
+      <name>Spring Maven Milestone Repository</name>
+      <url>http://maven.springframework.org/milestone</url>
+    </repository>
   </repositories>
   <dependencies>
-      <dependency>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-webmvc</artifactId>
-          <version>${spring-version}</version>
-      </dependency>
-      <dependency>
-          <groupId>org.springframework.integration</groupId>
-          <artifactId>spring-integration-amqp</artifactId>
-          <version>${spring.integration-version}</version>
-      </dependency>
-      <dependency>
-          <groupId>org.springframework.integration</groupId>
-          <artifactId>spring-integration-http</artifactId>
-          <version>${spring.integration-version}</version>
-      </dependency>
-      <dependency>
-          <groupId>org.cloudfoundry</groupId>
-          <artifactId>cloudfoundry-runtime</artifactId>
-          <version>${cloudfoundry-version}</version>
-      </dependency>
-      <dependency>
-          <groupId>javax.servlet</groupId>
-          <artifactId>servlet-api</artifactId>
-          <version>2.5</version>
-          <scope>provided</scope>
-      </dependency>
-      <dependency>
-          <groupId>javax.servlet</groupId>
-          <artifactId>jstl</artifactId>
-          <version>1.2</version>
-      </dependency>
+    <!--
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring-version}</version>
+    </dependency>
+    -->
+    <dependency>
+      <groupId>org.springframework.integration</groupId>
+      <artifactId>spring-integration-amqp</artifactId>
+      <version>${spring.integration-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.integration</groupId>
+      <artifactId>spring-integration-http</artifactId>
+      <version>${spring.integration-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.cloudfoundry</groupId>
+      <artifactId>cloudfoundry-runtime</artifactId>
+      <version>${cloudfoundry-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
   </dependencies>
   <build>
-      <plugins>
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-compiler-plugin</artifactId>
-              <configuration>
-                  <source>${java-version}</source>
-                  <target>${java-version}</target>
-              </configuration>
-          </plugin>
-      </plugins>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${java-version}</source>
+          <target>${java-version}</target>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
