@@ -8,6 +8,7 @@ class TagService {
     def redis
 
     def extractTagsFromMessage(Status status) {
+        status = Status.get(status.id)
         try {
             // Scan the status message for tags, i.e. text beginning with a '#'.
             def m = status.message =~ /#(\w+)/
@@ -23,6 +24,7 @@ class TagService {
         
             log.debug "Adding tags '${tags.join(', ')}' to status ${status.id}"
             status.tags.addAll tags
+            status.message += ' '   // HACK
             status.save(flush: true, failOnError: true)
             
             // Update tag cache in Redis.
