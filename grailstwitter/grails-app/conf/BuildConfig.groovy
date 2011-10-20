@@ -13,18 +13,21 @@ grails.project.dependency.resolution = {
         grailsCentral()
     }
     plugins {
-        compile ":spring-security-core:1.1.2"
+        compile ":spring-security-core:1.2.4"
         runtime ":blueprint:1.0.2",
-                ":cloud-foundry:1.0",
-                ":cloud-foundry-ui:1.0.1",
-                ":executor:0.2",
-                ":hibernate:2.0.0.BUILD-SNAPSHOT",
-                ":mongodb:1.0.0.M6.1",
-                ":redis:1.0.0.M6",
-                ":searchable:0.6"
-        build ":tomcat:2.0.0.BUILD-SNAPSHOT"
+                ":cloud-foundry:1.2",
+                ":cloud-support:1.0.6",
+                ":executor:0.3",
+                ":hibernate:$grailsVersion",
+                ":mongodb:1.0.0.RC1",
+                ":redis-gorm:1.0.0.M7",
+                ":searchable:0.6.3", {
+            excludes "grails-datastore-gorm", "grails-datastore-core"
+        }
+        build ":tomcat:$grailsVersion"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
+        runtime "hsqldb:hsqldb:1.8.0.10"
     }
 }
