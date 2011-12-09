@@ -12,32 +12,31 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
 @RequestMapping(value = "/customer/new")
 public class NewCustomerForm {
 
-	private static final Logger logger = LoggerFactory.getLogger(NewCustomerForm.class);
+    private static final Logger logger = LoggerFactory.getLogger(NewCustomerForm.class);
 
-	@Autowired
-	CustomerRepository customerRepository;
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public String setupForm(Model model) {
-		Customer customer = new Customer();
-		model.addAttribute("customer", customer);
-		return "customer/newCustomerForm";
-	}
+    @Autowired
+    CustomerRepository customerRepository;
 
-	@RequestMapping(method = RequestMethod.POST)
-	@Transactional
-	public String processSubmit(@ModelAttribute("customer") Customer customer, BindingResult result, SessionStatus status) {
-		status.setComplete();
-		logger.debug(customer.toString());
-		customerRepository.save(customer);
-		return "redirect:/customer";
-	}
+    @RequestMapping(method = RequestMethod.GET)
+    public String setupForm(Model model) {
+        Customer customer = new Customer();
+        model.addAttribute("customer", customer);
+        return "customer/newCustomerForm";
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    @Transactional
+    public String processSubmit(@ModelAttribute("customer") Customer customer, BindingResult result, SessionStatus status) {
+        status.setComplete();
+        logger.debug(customer.toString());
+        customerRepository.save(customer);
+        return "redirect:/customer";
+    }
 
 }

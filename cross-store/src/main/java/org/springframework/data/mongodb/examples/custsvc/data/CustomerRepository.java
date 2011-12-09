@@ -4,14 +4,13 @@ import java.util.List;
 
 import org.springframework.data.mongodb.examples.custsvc.domain.Customer;
 
-
 public interface CustomerRepository {
 
-	List<Customer> findAll();
+    List<Customer> findAll();
 
-	Customer findOne(Long id);
-	
-	void save(Customer customer);
+    Customer findOne(Long id);
 
-	void delete(Customer customer);
+    void save(Customer customer);
+
+    void delete(Customer customer);
 }

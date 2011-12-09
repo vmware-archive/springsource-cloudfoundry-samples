@@ -13,29 +13,27 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class CrossStoreCustomerRepository implements CustomerRepository {
 
-	@PersistenceContext
-	EntityManager em;
-	
-	@Override
-	public List<Customer> findAll() {
-		List<Customer> results = em.createQuery("select c from Customer c", Customer.class).getResultList();
-		return results;
-	}
+    @PersistenceContext
+    EntityManager em;
 
-	@Override
-	public Customer findOne(Long id) {
-		Customer found = em.find(Customer.class, id);
-		return found;
-	}
+    @Override
+    public List<Customer> findAll() {
+        return em.createQuery("select c from Customer c", Customer.class).getResultList();
+    }
 
-	@Override
-	public void save(Customer customer) {
-		em.merge(customer);
-	}
+    @Override
+    public Customer findOne(Long id) {
+        return em.find(Customer.class, id);
+    }
 
-	@Override
-	public void delete(Customer customer) {
-		em.remove(customer);
-	}
+    @Override
+    public void save(Customer customer) {
+        em.merge(customer);
+    }
+
+    @Override
+    public void delete(Customer customer) {
+        em.remove(customer);
+    }
 
 }
