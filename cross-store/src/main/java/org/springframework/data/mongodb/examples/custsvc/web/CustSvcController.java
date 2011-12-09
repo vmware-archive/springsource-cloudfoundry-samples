@@ -1,12 +1,8 @@
 package org.springframework.data.mongodb.examples.custsvc.web;
 
-import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
-
-import javax.sql.DataSource;
-
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
+import com.mongodb.MongoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +23,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
-import com.mongodb.MongoException;
+import javax.sql.DataSource;
+import java.sql.DatabaseMetaData;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Handles requests for the application home page.
@@ -48,13 +46,13 @@ public class CustSvcController {
     @Autowired
     MongoTemplate mongoTemplate;
 
-    @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
         logger.info("Welcome home!");
         return "index";
     }
 
-    @RequestMapping(value = { "/dump" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/dump"}, method = RequestMethod.GET)
     public String dump(Model model) {
         String sqlInfo = "?";
         String sqlData = "";
@@ -70,8 +68,7 @@ public class CustSvcController {
             List<Map<String, Object>> data = jdbcTemplate.queryForList("select * from customer");
             sqlData = data.toString();
         } catch (MetaDataAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("Error encountered when dumping the database." , e);
         }
         model.addAttribute("sqlinfo", sqlInfo);
         model.addAttribute("sqldata", sqlData);
@@ -100,14 +97,12 @@ public class CustSvcController {
         try {
             dbInfo = (String) JdbcUtils.extractDatabaseMetaData(dataSource, new DatabaseMetaDataCallback() {
                 public Object processMetaData(DatabaseMetaData dbmd) throws SQLException, MetaDataAccessException {
-                    String info = dbmd.getDatabaseProductName() + " " + dbmd.getDatabaseProductVersion();
-                    return info;
+                    return dbmd.getDatabaseProductName() + " " + dbmd.getDatabaseProductVersion();
                 }
 
             });
         } catch (MetaDataAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("Error encountered when dumping the database.", e);
         }
         List<Customer> customers = customerRepository.findAll();
         model.addAttribute("dbinfo", dbInfo);

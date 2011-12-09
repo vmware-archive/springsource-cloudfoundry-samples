@@ -14,7 +14,8 @@
     <div id="header">
         <div id="name-and-company">
             <div id='site-name'>
-                <a href="../index" title="Spring Data Cross-Store MySQL/MongoDB">Spring Data Cross-Store MySQL/MongoDB</a>
+                <a href="../index" title="Spring Data Cross-Store MySQL/MongoDB">Spring Data Cross-Store
+                    MySQL/MongoDB</a>
             </div>
             <div id='company-name'>
                 <a href="http://www.springsource.com" title="SpringSource">SpringSource Home</a>
@@ -74,7 +75,7 @@
         </div>
     </div>
 </div>
-<DIV class = "cloudEnvironment">
+<DIV class="cloudEnvironment">
     ${host}:${port}
 </DIV>
 

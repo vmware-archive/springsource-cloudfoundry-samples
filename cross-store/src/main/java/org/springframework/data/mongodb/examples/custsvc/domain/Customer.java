@@ -1,11 +1,11 @@
 package org.springframework.data.mongodb.examples.custsvc.domain;
 
+import org.springframework.data.mongodb.crossstore.RelatedDocument;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.springframework.data.mongodb.crossstore.RelatedDocument;
 
 @Entity
 public class Customer {

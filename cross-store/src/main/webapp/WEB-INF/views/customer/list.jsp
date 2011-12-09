@@ -1,5 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -26,6 +26,7 @@
         <div id="content" class="no-side-nav">
             <div id="customerResults">
                 <h2>Customer List:</h2>
+
                 <div id='new-company-link'>
                     <a href="customer/new" title="Add a new customer">Add a new customer</a>
                 </div>
@@ -44,7 +45,8 @@
                                 <td>${customer.firstName}</td>
                                 <td>${customer.lastName}</td>
                                 <td><a href="customer/${customer.id}" title="View customer">View Customer</a></td>
-                                <td><a href="customerDelete/${customer.id}" title="Delete customer">Delete Customer</a></td>
+                                <td><a href="customerDelete/${customer.id}" title="Delete customer">Delete Customer</a>
+                                </td>
                             </tr>
                         </c:forEach>
                     </c:if>
@@ -63,7 +65,7 @@
         </div>
     </div>
 </div>
-<DIV class = "cloudEnvironment">
+<DIV class="cloudEnvironment">
     ${host}:${port}
 </DIV>
 

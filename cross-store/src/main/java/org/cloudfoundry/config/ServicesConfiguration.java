@@ -1,8 +1,5 @@
 package org.cloudfoundry.config;
 
-import javax.sql.DataSource;
-
-
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.MongoServiceInfo;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
@@ -27,6 +24,8 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan(basePackageClasses = CrossStoreCustomerRepository.class)

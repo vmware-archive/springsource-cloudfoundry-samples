@@ -1,13 +1,12 @@
 package org.springframework.data.mongodb.examples.custsvc.data;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.springframework.data.mongodb.examples.custsvc.domain.Customer;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Transactional
 @Repository

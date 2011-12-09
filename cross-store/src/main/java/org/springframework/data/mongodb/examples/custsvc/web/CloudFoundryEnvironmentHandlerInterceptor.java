@@ -1,15 +1,14 @@
 package org.springframework.data.mongodb.examples.custsvc.web;
 
+import org.cloudfoundry.runtime.env.CloudEnvironment;
+import org.springframework.util.Assert;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.cloudfoundry.runtime.env.CloudEnvironment;
-import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 
 public class CloudFoundryEnvironmentHandlerInterceptor extends HandlerInterceptorAdapter {
