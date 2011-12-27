@@ -14,15 +14,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.keyvalue.redis.connection.RedisConnectionFactory;
-import org.springframework.data.keyvalue.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mongodb.Mongo;
 
 /**
  * Handles requests for the application home page.
@@ -35,7 +35,7 @@ public class HomeController {
 	@Autowired(required=false) DataSource dataSource;
 	@Autowired(required=false) ConnectionFactory rabbitConnectionFactory;
 	@Autowired(required=false) RedisConnectionFactory redisConnectionFactory;
-	@Autowired(required=false) Mongo mongo;
+	@Autowired(required=false) MongoDbFactory mongoDbFactory;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -55,8 +55,8 @@ public class HomeController {
 		if (redisConnectionFactory != null) {
 			services.add("Redis: " + ((JedisConnectionFactory) redisConnectionFactory).getHostName() + ":" + ((JedisConnectionFactory) redisConnectionFactory).getPort());
 		}
-		if (mongo != null) {
-			services.add("Mongo: " + mongo.getAddress());
+		if (mongoDbFactory != null) {
+			services.add("Mongo: " + mongoDbFactory.getDb().getMongo().getAddress());
 		}
 		model.addAttribute("services", services);
 		return "home";

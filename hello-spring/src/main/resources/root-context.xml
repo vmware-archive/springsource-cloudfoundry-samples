@@ -10,7 +10,7 @@ http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.7.xsd
 
 	<beans profile="default">
 		<jdbc:embedded-database id="dataSource"/>
-		<bean id="mongoDbFactory" class="org.springframework.data.document.mongodb.SimpleMongoDbFactory">
+		<bean id="mongoDbFactory" class="org.springframework.data.mongodb.core.SimpleMongoDbFactory">
 			<constructor-arg>
 				<bean class="com.mongodb.Mongo"/>
 			</constructor-arg>
