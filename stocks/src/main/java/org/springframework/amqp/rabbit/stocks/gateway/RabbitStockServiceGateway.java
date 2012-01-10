@@ -42,7 +42,7 @@ public class RabbitStockServiceGateway extends RabbitGatewaySupport implements S
 	public void send(TradeRequest tradeRequest) {
 		getRabbitTemplate().convertAndSend(tradeRequest, new MessagePostProcessor() {
 			public Message postProcessMessage(Message message) throws AmqpException {
-				message.getMessageProperties().setReplyTo(new Address(defaultReplyTo));
+				message.getMessageProperties().setReplyToAddress(new Address(defaultReplyTo));
 				try {
 					message.getMessageProperties().setCorrelationId(UUID.randomUUID().toString().getBytes("UTF-8"));
 				}
