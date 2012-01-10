@@ -9,8 +9,8 @@
   <description>RabbitMQ REST API</description>
   <properties>
     <java-version>1.6</java-version>
-    <cloudfoundry-version>0.8.0</cloudfoundry-version>
-    <spring.integration-version>2.1.0.BUILD-SNAPSHOT</spring.integration-version>
+    <cloudfoundry-version>0.8.1</cloudfoundry-version>
+    <spring.integration-version>2.1.0.RELEASE</spring.integration-version>
   </properties>
   <repositories>
     <repository>
