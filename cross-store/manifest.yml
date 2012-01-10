@@ -1,0 +1,18 @@
+--- 
+applications: 
+  target: 
+    name: xs-survey
+    url: ${name}.${target-base}
+    framework: 
+      name: spring
+      info: 
+        mem: 512M
+        description: Java SpringSource Spring Application
+        exec: 
+    mem: 512M
+    instances: 1
+    services: 
+      survey-mongo: 
+        type: :mongodb
+      survey-mysql: 
+        type: :mysql
