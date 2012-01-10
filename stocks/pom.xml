@@ -17,8 +17,8 @@
 	<properties>
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
 		<spring.framework.version>3.0.5.RELEASE</spring.framework.version>
-		<spring.amqp.version>1.0.0.RC2</spring.amqp.version>
-		<org.cloudfoundry-version>0.7.0</org.cloudfoundry-version>
+		<spring.amqp.version>1.0.0.RELEASE</spring.amqp.version>
+		<org.cloudfoundry-version>0.8.1</org.cloudfoundry-version>
 	</properties>
 	<profiles>
 		<profile>
@@ -50,7 +50,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>
-			<version>1.0.0.M4</version>
+			<version>1.0.0.RELEASE</version>
 		</dependency>
 
 		<dependency>
