@@ -9,10 +9,10 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.cloudfoundry-version>0.8.0</org.cloudfoundry-version>
+		<org.cloudfoundry-version>0.8.1</org.cloudfoundry-version>
 		<org.cloudfoundry-group>org.cloudfoundry</org.cloudfoundry-group>
-		<org.springframework-version>3.1.0.M2</org.springframework-version>
-		<org.spring-data-mongo-version>1.0.0.M4</org.spring-data-mongo-version>
+		<org.springframework-version>3.1.0.RELEASE</org.springframework-version>
+		<org.spring-data-mongo-version>1.0.0.RELEASE</org.spring-data-mongo-version>
 		<org.aspectj-version>1.6.11</org.aspectj-version>
 		<org.slf4j-version>1.5.10</org.slf4j-version>
 	</properties>
@@ -130,12 +130,6 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
 			<version>${org.spring-data-mongo-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>dbcp</artifactId>
-			<version>6.0.29</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<!-- Test -->
