@@ -119,7 +119,7 @@ public class HomeController {
 					}
 				});
 		out.println("Deleted " + count + " entries");
-		mongoTemplate.dropCollection("Person");
+		mongoTemplate.dropCollection(Person.class);
 	}
 
 }
