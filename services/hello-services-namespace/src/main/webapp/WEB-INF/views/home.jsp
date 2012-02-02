@@ -23,7 +23,7 @@ To use this, add the following lines in your application context:
 
 	&lt;cloud:redis-connection-factory/&gt;
 
-	&lt;cloud:mongo/&gt;
+	&lt;cloud:mongo-db-factory/&gt;
 </pre>
 <p>
 This style works as long as you have only one service of each type bound to the application.
@@ -45,7 +45,7 @@ In your Java code, simply add @Autowired dependencies for each bounded service:
 	@Autowired DataSource dataSource;
 	@Autowired ConnectionFactory rabbitConnectionFactory;
 	@Autowired RedisConnectionFactory redisConnectionFactory;
-	@Autowired Mongo mongo;
+	@Autowired MongoDbFactory mongoDbFactory;
 </pre>
 
 You have access to services without breaking a sweat.
