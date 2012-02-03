@@ -10,17 +10,17 @@ grails.project.dependency.resolution = {
     repositories {
         grailsPlugins()
         grailsHome()
-        mavenLocal()
         grailsCentral()
     }
     plugins {
-        compile ":spring-security-core:1.2.7.1"
+        compile ":spring-security-core:1.2.4"
         runtime ":blueprint:1.0.2",
-                ":cloud-foundry:1.2.2.BUILD-SNAPSHOT",
+                ":cloud-foundry:1.2",
+                ":cloud-support:1.0.6",
                 ":executor:0.3",
                 ":hibernate:$grailsVersion",
-                ":mongodb:1.0.0.RC3",
-                ":redis:1.2",
+                ":mongodb:1.0.0.RC1",
+                ":redis-gorm:1.0.0.M7",
                 ":searchable:0.6.3", {
             excludes "grails-datastore-gorm", "grails-datastore-core"
         }
