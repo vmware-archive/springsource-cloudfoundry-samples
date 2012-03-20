@@ -1,3 +1,6 @@
+import grails.plugin.cloudfoundry.AppCloudEnvironment
+import org.springframework.amqp.rabbit.log4j.AmqpAppender
+
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
@@ -48,47 +51,6 @@ grails.logging.jul.usebridge = true
 // packages to include in Spring bean scanning
 grails.spring.bean.packages = []
 
-// set per-environment serverURL stem for creating absolute links
-environments {
-    production {
-    }
-    development {
-    }
-    test {
-    }
-
-}
-
-// log4j configuration
-log4j = {
-    // Example of changing the log pattern for the default console
-    // appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
-
-    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
-           'org.codehaus.groovy.grails.web.pages', //  GSP
-           'org.codehaus.groovy.grails.web.sitemesh', //  layouts
-           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-           'org.codehaus.groovy.grails.web.mapping', // URL mapping
-           'org.codehaus.groovy.grails.commons', // core / classloading
-           'org.codehaus.groovy.grails.plugins', // plugins
-           'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
-           'org.springframework',
-           'org.hibernate',
-           'net.sf.ehcache.hibernate'
-
-    warn   'org.mortbay.log'
-
-    info 'org.springframework.amqp.rabbit', "grails.app"
-    debug 'grails.app.controller.org.grails.twitter',
-          'grails.app.service.org.grails.twitter',
-          'grails.plugin.searchable'
-          
-}
-
 searchable {
     compassConnection = null
     compassSettings = [
@@ -114,6 +76,71 @@ rabbitmq {
     queues = {
         exchange name: 'search.sync', type: fanout, durable: false
     }
+}
+
+// log4j configuration
+log4j = {
+    // AMQP appender needs RabbitMQ connection settings. Pull from
+    // VCAP_SERVICES.
+    def rabbitConfig
+    def cloudEnv = new AppCloudEnvironment()
+    if (cloudEnv.available) {
+        def serviceInfo = new AppCloudEnvironment().getServiceByVendor('rabbitmq')
+        if (serviceInfo) {
+        }
+
+        rabbitConfig = [
+                host: serviceInfo.host,
+                username: serviceInfo.userName,
+                password: serviceInfo.password,
+                virtualHost: serviceInfo.virtualHost,
+                port: serviceInfo.port]
+
+    }
+    else {
+        def connFactory = owner.rabbitmq.connectionfactory
+        rabbitConfig = [
+                host: connFactory.hostname,
+                username: connFactory.username,
+                password: connFactory.password,
+                virtualHost: connFactory.virtualHost]
+    }
+
+    appenders {
+        rabbitConfig << [
+                name: "rabbit",
+                exchangeName: "amq.topic",
+                exchangeType: "topic",
+                routingKeyPattern: "logs.grailstwitter",
+                contentEncoding: "UTF-8",
+                applicationId: "grailstwitter" ]
+        
+        appender new AmqpAppender(rabbitConfig)
+        console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+    }
+
+    root {
+        info 'stdout', 'rabbit'
+    }
+
+    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
+           'org.codehaus.groovy.grails.web.pages', //  GSP
+           'org.codehaus.groovy.grails.web.sitemesh', //  layouts
+           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+           'org.codehaus.groovy.grails.web.mapping', // URL mapping
+           'org.codehaus.groovy.grails.commons', // core / classloading
+           'org.codehaus.groovy.grails.plugins', // plugins
+           'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
+           'org.springframework',
+           'org.hibernate',
+           'net.sf.ehcache.hibernate'
+
+    warn   'org.mortbay.log'
+
+    info   'grails.app'
+    debug  'grails.app.controllers.org.grails.twitter',
+           'grails.app.services.org.grails.twitter'
+          
 }
 
 // Added by the Spring Security Core plugin:

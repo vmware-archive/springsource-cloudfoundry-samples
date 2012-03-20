@@ -9,6 +9,7 @@ class StatusService {
     void updateStatus(long userId, String message) {
         def status = new Status(message: message, authorId: userId).save(flush: true, failOnError: true)
         rabbitSend 'search.sync', '', "${status.id}:${status.class.name}"
+        log.info "Event: reindex status ${status.id}"
         
         runAsync {
             tagService.extractTagsFromMessage(status)

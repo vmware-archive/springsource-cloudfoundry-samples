@@ -16,6 +16,7 @@ grails.project.dependency.resolution = {
         compile ":spring-security-core:1.2.4"
         runtime ":blueprint:1.0.2",
                 ":cloud-foundry:1.2.1",
+                ":cloud-support:1.0.9",
                 ":executor:0.3",
                 ":hibernate:2.0.1",
                 ":mongodb:1.0.0.RC4",
