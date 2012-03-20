@@ -34,7 +34,7 @@ document.observe("dom:loaded", function() {
     $('moreLink').observe('click', function(event) {
         new Ajax.Updater(
                 'messages',
-                '${moreMessagesUrl}',
+                '${createLink(action: moreMessagesAction, id: moreMessagesId)}',
                 {asynchronous:true,
                     parameters:'max=' + maxMessages,
                     onLoading: function() { $('moreSpinner').show(); },

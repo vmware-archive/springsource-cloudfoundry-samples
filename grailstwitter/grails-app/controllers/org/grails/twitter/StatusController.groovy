@@ -12,7 +12,7 @@ class StatusController {
     def index() {
         def currentUser = lookupPerson()
         def messages = statusService.currentTimeline(currentUser.id)
-        [statusMessages: messages, currentUser: currentUser, moreMessagesUrl: g.createLink(action: "fetchMessagesForUser")]
+        [statusMessages: messages, currentUser: currentUser, moreMessagesAction: "fetchMessagesForUser"]
     }
     
     def tag() {
@@ -22,7 +22,8 @@ class StatusController {
         [tag: params.id,
          statusMessages: messages,
          currentUser: currentUser,
-         moreMessagesUrl: g.createLink(action: "fetchMessagesForTag", id: params.id)]
+         moreMessagesAction: "fetchMessagesForTag",
+         moreMessagesId: params.id]
     }
 
     def updateStatus() {
