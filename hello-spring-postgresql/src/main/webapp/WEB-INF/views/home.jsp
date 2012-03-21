@@ -2,10 +2,10 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Hello Spring MySQL</title>
+	<title>Hello Spring PostgreSQL</title>
 </head>
 <body>
-	<h1>Hello Spring MySQL!</h1>
+	<h1>Hello Spring PostgreSQL!</h1>
 
 	<h4>Database Info:</h4>
 	DataSource: <c:out value="${dbinfo}"/></br>
