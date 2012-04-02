@@ -1,8 +1,5 @@
 package org.cloudfoundry.config;
 
-import javax.sql.DataSource;
-
-
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.cloudfoundry.runtime.env.MongoServiceInfo;
 import org.cloudfoundry.runtime.env.RdbmsServiceInfo;
@@ -28,15 +25,12 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
+
 @Configuration
 @ComponentScan(basePackageClasses = CrossStoreCustomerRepository.class)
 @EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
 public class ServicesConfiguration {
-
-
-    private String mongoDatabaseServiceName = "survey-mongo";
-
-    private String mysqlDatabaseServiceName = "survey-mysql";
 
     @Bean
     public CloudEnvironment cloudEnvironment() {
@@ -45,7 +39,9 @@ public class ServicesConfiguration {
 
     @Bean
     public MongoServiceInfo mongoServiceInfo() {
-        return cloudEnvironment().getServiceInfo(mongoDatabaseServiceName, MongoServiceInfo.class);
+        MongoServiceInfo mongoServiceInfo = cloudEnvironment().getServiceInfos(    MongoServiceInfo.class).iterator().next();
+        assert null != mongoServiceInfo : "there needs to be at least one MongoDB instance bound to this application" ;
+        return mongoServiceInfo;
     }
 
     @Bean
@@ -56,10 +52,10 @@ public class ServicesConfiguration {
 
     @Bean
     public DataSource dataSource() {
-        RdbmsServiceInfo rdbmsServiceInfo = cloudEnvironment().getServiceInfo(mysqlDatabaseServiceName, RdbmsServiceInfo.class);
+        RdbmsServiceInfo rdbmsServiceInfo = cloudEnvironment().getServiceInfos(  RdbmsServiceInfo.class).iterator().next();
+        assert null != rdbmsServiceInfo : "there needs to be at least one MySQL RDBMS bound to this application";
         RdbmsServiceCreator rdbmsServiceCreator = new RdbmsServiceCreator();
-        DataSource dataSource = rdbmsServiceCreator.createService(rdbmsServiceInfo);
-        return dataSource;
+        return rdbmsServiceCreator.createService(rdbmsServiceInfo);
     }
 
     @Bean

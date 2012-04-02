@@ -1,18 +1,18 @@
 --- 
 applications: 
-  target: 
-    name: xs-survey
+  target/customer-survey-1.0.0-BUILD-SNAPSHOT/: 
+    name: customer-survey
     url: ${name}.${target-base}
     framework: 
-      name: spring
+      name: java_web
       info: 
         mem: 512M
-        description: Java SpringSource Spring Application
+        description: Java Web Application
         exec: 
     mem: 512M
     instances: 1
     services: 
-      survey-mongo: 
-        type: :mongodb
-      survey-mysql: 
-        type: :mysql
+      mongodb-67f01: 
+        type: mongodb
+      mysql-7bfaa: 
+        type: mysql
