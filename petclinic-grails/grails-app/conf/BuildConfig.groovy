@@ -7,6 +7,18 @@ grails.project.dependency.resolution = {
     repositories {
         grailsHome()
         mavenCentral()	
-		grailsCentral()
+        grailsCentral()
+        mavenRepo "http://maven.springframework.org/milestone/"
+    }
+
+    dependencies {
+        runtime "hsqldb:hsqldb:1.8.0.10", "postgresql:postgresql:9.1-901-1.jdbc4"
+    }
+
+    plugins {
+        compile ":cloud-foundry:1.2.2",
+                ":hibernate:$grailsVersion",
+                ":webxml:1.4.1"
+        build   ":tomcat:$grailsVersion"
     }
 }
