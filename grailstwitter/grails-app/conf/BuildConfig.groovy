@@ -13,22 +13,21 @@ grails.project.dependency.resolution = {
         grailsCentral()
     }
     plugins {
-        compile ":spring-security-core:1.2.4"
+        compile ":spring-security-core:1.2.7.3", ":webxml:1.4.1"
         runtime ":blueprint:1.0.2",
-                ":cloud-foundry:1.2.1",
-                ":cloud-support:1.0.9",
+                ":cloud-foundry:1.2.2",
                 ":executor:0.3",
-                ":hibernate:2.0.1",
-                ":mongodb:1.0.0.RC4",
+                ":hibernate:2.0.4",
+                ":mongodb:1.0.0.GA",
                 ":profiler:0.4.1",
                 ":prototype:1.0",
-                ":rabbitmq:0.4-SNAPSHOT",
+                ":rabbitmq:1.0.0.RC1",
                 ":resources:1.1.6",
-                ":redis:1.2",
+                ":redis:1.3.1",
                 ":searchable:0.6.3", {
             excludes "slf4j-simple"
         }
-        build ":tomcat:2.0.1"
+        build ":tomcat:2.0.4"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
