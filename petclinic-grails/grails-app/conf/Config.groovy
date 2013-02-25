@@ -32,13 +32,6 @@ grails.converters.encoding="UTF-8"
 // enabled native2ascii conversion of i18n properties files
 grails.enable.native2ascii = true
 
-// set per-environment serverURL stem for creating absolute links
-environments {
-    production {
-        grails.serverURL = "http://www.changeme.com"
-    }
-}
-
 // log4j configuration
 log4j = {
     error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
