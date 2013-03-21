@@ -10,5 +10,6 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+<P>  Invoke the <a href="env">env</a> endpoint to show all environment variables. </P>
 </body>
 </html>
