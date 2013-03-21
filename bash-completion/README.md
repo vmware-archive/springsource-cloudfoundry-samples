@@ -2,7 +2,8 @@
 
 This is a bash completion script for the Cloud Foundry command-line utility vmc.
 
-### Update: 03/21/13 - this script needs to be updated to reflect various changes to vmc (including the renaming of "vmc" to "cf" for talking to v2 CF components)
+### Update: 03/21/13
+This script needs to be updated to reflect various changes to vmc (including the renaming of "vmc" to "cf" for talking to v2 CF components)
 
 ### Installation
 
