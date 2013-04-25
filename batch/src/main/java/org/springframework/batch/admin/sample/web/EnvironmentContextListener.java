@@ -13,69 +13,53 @@
 
 package org.springframework.batch.admin.sample.web;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import org.apache.commons.logging.*;
+import org.cloudfoundry.runtime.env.*;
+import org.springframework.util.Assert;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import javax.servlet.*;
+import java.util.*;
 
 /**
  * @author Dave Syer
- * 
+ * @author Josh Long
  */
 public class EnvironmentContextListener implements ServletContextListener {
 
-	private static Log logger = LogFactory.getLog(EnvironmentContextListener.class);
+    private static Log logger = LogFactory.getLog(EnvironmentContextListener.class);
 
-	public void contextInitialized(ServletContextEvent sce) {
+    public void contextInitialized(ServletContextEvent sce) {
+        logger.info("Attempting to detect cloud environment");
+        logger.info(initializeCloudEnvironment() ? "Found VCAP environment" : "No cloud environment");
+    }
 
-		logger.info("Attempting to detect cloud environment");
+    private boolean initializeCloudEnvironment() {
+        CloudEnvironment cloudEnvironment = new CloudEnvironment();
+        boolean detected = cloudEnvironment.isCloudFoundry();
 
-		if (initializeCloudEnvironment("VCAP_")) {
-			logger.info("Found VCAP environment");
-		} else {
-			logger.info("No cloud environment");
-		}
+        if (detected) {
 
-	}
+            Collection<RdbmsServiceInfo> serviceInfos = cloudEnvironment.getServiceInfos(RdbmsServiceInfo.class);
+            RdbmsServiceInfo rdbmsServiceInfo = serviceInfos.iterator().next();
+            Assert.isTrue(serviceInfos.size() > 0, "there should be at least one MySQL service provisioned!");
 
-	private boolean initializeCloudEnvironment(String prefix) {
+            Map<String, String> propsToSet = new HashMap<String, String>();
+            propsToSet.put("ENVIRONMENT", "vmc");
+            propsToSet.put("DISCOVERY", "dynamic");
+            propsToSet.put("TOPOLOGY", "cluster");
+            propsToSet.put("MYSQL_PORT", Integer.toString(rdbmsServiceInfo.getPort()));
+            propsToSet.put("MYSQL_HOST", rdbmsServiceInfo.getHost());
+            propsToSet.put("MYSQL_USER", rdbmsServiceInfo.getUserName());
+            propsToSet.put("MYSQL_PASSWORD", rdbmsServiceInfo.getPassword());
+            propsToSet.put("MYSQL_DATABASE", rdbmsServiceInfo.getDatabase());
 
-		boolean detected = false;
+            for (Map.Entry<String, String> entry : propsToSet.entrySet())
+                System.setProperty(entry.getKey(), entry.getValue());
+        }
+        return detected;
+    }
 
-		if (System.getenv(prefix + "APP_VERSION") != null) {
-			System.setProperty("TOPOLOGY", "cluster");
-			System.setProperty("DISCOVERY", "dynamic");
-			detected = true;
-		}
-
-		if (!detected) {
-			return false;
-		}
-
-		String mysql = System.getenv(prefix + "MYSQL");
-		if (mysql != null) {
-			try {
-				JsonWrapper wrapper = new JsonWrapper(System.getenv(prefix + "SERVICES"));
-				logger.info(prefix + "SERVICES: " + wrapper);
-				System.setProperty("MYSQL_USER", wrapper.get("mysql.options.user", String.class));
-				System.setProperty("MYSQL_PASSWORD", wrapper.get("mysql.options.password", String.class));
-				System.setProperty("MYSQL_DATABASE", wrapper.get("mysql.options.name", String.class));
-				String[] split = mysql.split(":");
-				System.setProperty("MYSQL_HOST", split[0]);
-				System.setProperty("MYSQL_PORT", split[1]);
-				System.setProperty("ENVIRONMENT", "vmc");
-			} catch (Exception e) {
-				// Ignore it...
-				logger.debug(prefix + "SERVICES not discovered ", e);
-			}
-		}
-
-		return detected;
-
-	}
-
-	public void contextDestroyed(ServletContextEvent sce) {
-	}
+    public void contextDestroyed(ServletContextEvent sce) {
+    }
 
 }

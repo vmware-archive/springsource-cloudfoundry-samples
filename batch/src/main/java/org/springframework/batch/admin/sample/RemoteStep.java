@@ -43,8 +43,6 @@ public class RemoteStep implements Step {
 	/**
 	 * Set the name property. Always overrides the default value if this object
 	 * is a Spring bean.
-	 * 
-	 * @see #setBeanName(java.lang.String)
 	 */
 	public void setName(String name) {
 		this.name = name;

@@ -1,0 +1,14 @@
+--- 
+applications: 
+- framework: spring
+  services: 
+    mysql-6a0: 
+      tier: free
+      version: "5.1"
+      vendor: mysql
+  instances: 1
+  name: batch-dmin-on-cloudfoundry
+  path: target
+  url: batch-dmin-on-cloudfoundry.${target-base}
+  runtime: java
+  memory: 512M
