@@ -3,8 +3,10 @@ package org.cloudfoundry.services;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
@@ -12,7 +14,8 @@ import javax.sql.DataSource;
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.document.mongodb.MongoDbFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
@@ -31,6 +34,8 @@ public class HomeController {
 	@Autowired(required=false) RedisConnectionFactory redisConnectionFactory;
 	@Autowired(required=false) MongoDbFactory mongoDbFactory;
 	@Autowired(required=false) ConnectionFactory rabbitConnectionFactory;
+	
+	@Autowired @Qualifier("cloudProperties") Properties cloudProperties;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -71,6 +76,14 @@ public class HomeController {
 		out.println("System Environment:");
 		for (Map.Entry<String, String> envvar : System.getenv().entrySet()) {
 			out.println(envvar.getKey() + ": " + envvar.getValue());
+		}
+		out.println();
+		out.println("Cloud Properties:");
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		List<String> keys = new ArrayList(cloudProperties.keySet());
+		Collections.sort(keys);
+		for (Object key : keys) {
+			out.println(key + ": " + cloudProperties.get(key));
 		}
 	}
 
