@@ -5,12 +5,12 @@
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://schema.cloudfoundry.org/spring
-http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.7.xsd
+		http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.8.xsd
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd">
 
 	<beans profile="default">
 		<jdbc:embedded-database id="dataSource"/>
-		<bean id="mongoDbFactory" class="org.springframework.data.document.mongodb.SimpleMongoDbFactory">
+		<bean id="mongoDbFactory" class="org.springframework.data.mongodb.core.SimpleMongoDbFactory">
 			<constructor-arg>
 				<bean class="com.mongodb.Mongo"/>
 			</constructor-arg>

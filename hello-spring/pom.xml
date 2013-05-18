@@ -9,11 +9,14 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.cloudfoundry-version>0.7.1</org.cloudfoundry-version>
-		<org.springframework-version>3.1.0.M2</org.springframework-version>
+		<org.cloudfoundry-version>0.8.2</org.cloudfoundry-version>
+		<org.springframework-version>3.1.4.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.11</org.aspectj-version>
 		<org.slf4j-version>1.5.10</org.slf4j-version>
-		<org.springframework.amqp-version>1.0.0.RC2</org.springframework.amqp-version>
+
+		<spring.amqp.version>1.1.4.RELEASE</spring.amqp.version>
+		<spring-data-redis.version>1.0.4.RELEASE</spring-data-redis.version>
+		<spring-data-mongo.version>1.2.1.RELEASE</spring-data-mongo.version>
 	</properties>
 	<dependencies>
 		<!-- CloudFoundry -->
@@ -127,7 +130,7 @@
 		<dependency>
 			<groupId>org.springframework.amqp</groupId> 
 			<artifactId>spring-rabbit</artifactId>
-			<version>${org.springframework.amqp-version}</version> 
+			<version>${spring.amqp.version}</version> 
 		</dependency>
 
 		<!-- Data -->
@@ -144,12 +147,12 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>
-			<version>1.0.0.BUILD-SNAPSHOT</version>
+			<version>${spring-data-redis.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
-			<version>1.0.0.M3</version>
+			<version>${spring-data-mongo.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
