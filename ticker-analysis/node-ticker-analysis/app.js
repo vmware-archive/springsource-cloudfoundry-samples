@@ -1,7 +1,5 @@
 var sys      = require("sys");
 var util     = require("util");
-// Use locally-installed modules
-require.paths.unshift('./node_modules');
 // Cloud Foundry
 var cf       = require("cloudfoundry");
 // MongoDB
@@ -22,9 +20,9 @@ app.configure(function() {
 	app.use(express.static(__dirname + '/public'));
 	
 	app.set('view engine', 'jade');
-	app.set('running in cloud', cf.isRunningInCloud());
+	app.set('running in cloud', cf.cloud);
 
-	if(!cf.isRunningInCloud()) {
+	if(!cf.cloud) {
 		// Only use this in public for samples or development
 		app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 	}
@@ -54,11 +52,11 @@ var TickerSummary = new Schema({
 });
 mongoose.model('TickerSummary', TickerSummary);
 
-var mongoConfig = cf.getServiceConfig("ticker-analysis");
+var mongoConfig = cf.mongodb['ticker-analysis'].credentials;
 var db = mongoose.createConnection("mongo://" + mongoConfig.username + ":" + mongoConfig.password + "@" + mongoConfig.hostname + ":" + mongoConfig.port + "/" + mongoConfig.db);
 
 // Connect to Redis
-var redisConfig = cf.getServiceConfig("ticker-stream");
+var redisConfig = cf.redis['ticker-stream'].credentials;
 // util.debug("redis config: "+JSON.stringify(redisConfig));
 var redisClient = redis.createClient(redisConfig.port, redisConfig.hostname);
 var redisPublisher = redis.createClient(redisConfig.port, redisConfig.hostname);
@@ -194,4 +192,4 @@ io.on("connection", function(client) {
 });
 
 // Listen for requests
-app.listen(cf.getAppPort());
+app.listen(cf.port || 3000);
