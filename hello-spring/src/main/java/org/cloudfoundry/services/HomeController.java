@@ -21,6 +21,7 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -35,7 +36,7 @@ public class HomeController {
 	@Autowired(required=false) MongoDbFactory mongoDbFactory;
 	@Autowired(required=false) ConnectionFactory rabbitConnectionFactory;
 	
-	@Autowired @Qualifier("cloudProperties") Properties cloudProperties;
+	@Autowired(required=false) @Qualifier("cloudProperties") Properties cloudProperties;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -43,8 +44,13 @@ public class HomeController {
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String home(Model model) {
 		List<String> services = new ArrayList<String>();
-		if (dataSource instanceof BasicDataSource) {
-			services.add("Data Source: " + ((BasicDataSource) dataSource).getUrl());
+		if (ClassUtils.isPresent("org.apache.tomcat.dbcp.dbcp.BasicDataSource", ClassUtils.getDefaultClassLoader())
+				&& dataSource instanceof org.apache.tomcat.dbcp.dbcp.BasicDataSource) {
+			services.add("Data Source: " + ((org.apache.tomcat.dbcp.dbcp.BasicDataSource) dataSource).getUrl());
+		}
+		else if (ClassUtils.isPresent("org.apache.commons.dbcp.BasicDataSource", ClassUtils.getDefaultClassLoader())
+				&& dataSource instanceof org.apache.commons.dbcp.BasicDataSource) {
+			services.add("Data Source: " + ((org.apache.commons.dbcp.BasicDataSource) dataSource).getUrl());
 		}
 		else if (dataSource instanceof SimpleDriverDataSource) {
 			services.add("Data Source: " + ((SimpleDriverDataSource) dataSource).getUrl());
@@ -79,11 +85,15 @@ public class HomeController {
 		}
 		out.println();
 		out.println("Cloud Properties:");
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		List<String> keys = new ArrayList(cloudProperties.keySet());
-		Collections.sort(keys);
-		for (Object key : keys) {
-			out.println(key + ": " + cloudProperties.get(key));
+		if (cloudProperties != null) {
+			@SuppressWarnings({ "rawtypes", "unchecked" })
+			List<String> keys = new ArrayList(cloudProperties.keySet());
+			Collections.sort(keys);
+			for (Object key : keys) {
+				out.println(key + ": " + cloudProperties.get(key));
+			}
+		} else {
+			out.println("Cloud properties not set");
 		}
 	}
 
