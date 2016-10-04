@@ -31,12 +31,12 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-         registry.addViewController("/").setViewName("index");
+        registry.addViewController("/").setViewName("index");
     }
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-     configurer.enable();
+        configurer.enable();
     }
 
     @Bean

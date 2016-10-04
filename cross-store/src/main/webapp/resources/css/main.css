@@ -13,150 +13,130 @@
  * COMMON STYLES
  */
 
-body
-{
+body {
     font: 12px Arial, Helvetica, "Bitstream Vera Sans", sans-serif;
 }
 
-#page
-{
-    margin:8px;
+#page {
+    margin: 8px;
 }
-
-
-
 
 /*
 * HEADER STYLES
 */
 
-#header
-{
+#header {
     background: #6c940b url(../images/header-stretch.png);
     width: 100%;
-    height:	72px;
+    height: 72px;
 }
 
-#name-and-company
-{
+#name-and-company {
     background: url(../images/header-left.png) top left no-repeat;
     width: 100%;
     height: 72px;
-    position:relative;
-    top:0px;
-    left:0px;
+    position: relative;
+    top: 0px;
+    left: 0px;
 }
 
-#site-name
-{
+#site-name {
     margin: 0;
     display: inline;
     font-size: 150%;
 }
 
-#site-name a, #site-name a:hover
-{
+#site-name a, #site-name a:hover {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-weight: bold;
-    position:absolute;
-    top:30px;
-    left:16px;
-    text-decoration:none;
+    position: absolute;
+    top: 30px;
+    left: 16px;
+    text-decoration: none;
 }
 
-#company-name a
-{
-    position:absolute;
-    right:0px;
+#company-name a {
+    position: absolute;
+    right: 0px;
     background: url(../images/header-right.png) top right no-repeat;
-    height:72px;
-    width:190px;
-    font-size:8px;
+    height: 72px;
+    width: 190px;
+    font-size: 8px;
     text-align: center;
 }
 
-
 /*
- * TEXT FORMATTING STYLES
- */
+* TEXT FORMATTING STYLES
+*/
 
 h1 {
     font-size: 1.4em;
-    padding:12px 0 5px 0;
-    line-height:125%;
+    padding: 12px 0 5px 0;
+    line-height: 125%;
 }
 
 h2 {
     font-size: 1.2em;
-    padding:10px 0 2px 0;
+    padding: 10px 0 2px 0;
 }
 
 h3 {
     font-size: 1em;
-    padding:8px 0 5px 0;
+    padding: 8px 0 5px 0;
 }
 
 h4 {
     font-size: 1em;
-    padding-top:8px;
+    padding-top: 8px;
 }
 
-
-
 /*
- * MENU STYLES
- */
+* MENU STYLES
+*/
 
-#primary-navigation
-{
+#primary-navigation {
     padding: 0;
     background: url(../images/primary-menu-stretch.png) repeat-x;
-    height:23px;
-    position:relative;
+    height: 23px;
+    position: relative;
     margin: 8px 0 0 0;
 }
 
-#primary-left
-{
+#primary-left {
     background-image: url(../images/primary-wrapper-left.png);
-    background-repeat:no-repeat;
-    background-position:top left;
+    background-repeat: no-repeat;
+    background-position: top left;
     font-size: 93%;
     line-height: normal;
     padding: 0 0 0 8px;
-    height:23px;
-    position:relative;
-    float:left;
+    height: 23px;
+    position: relative;
+    float: left;
 }
 
-#primary-right
-{
+#primary-right {
     background-image: url(../images/primary-wrapper-right.png);
-    background-repeat:no-repeat;
-    background-position:top right;
+    background-repeat: no-repeat;
+    background-position: top right;
     font-size: 93%;
     line-height: normal;
     padding: 0 8px 0 0;
-    height:23px;
-    position:relative;
-    float:right;
+    height: 23px;
+    position: relative;
+    float: right;
 }
 
-#primary-left ul, #primary-right ul
-{
+#primary-left ul, #primary-right ul {
     padding: 0 0 0 5px;
     margin: 0;
     list-style: none;
 }
 
-#primary-left li, #primary-right li
-{
-    display:inline;
+#primary-left li, #primary-right li {
+    display: inline;
 }
 
-
-#primary-left a, #primary-right a
-{
+#primary-left a, #primary-right a {
     font-weight: normal;
     display: block;
     float: left;
@@ -167,50 +147,42 @@ h4 {
     background-repeat: repeat-x;
 }
 
-#primary-left a:hover, #primary-right a:hover
-{
-    background-image:none;
+#primary-left a:hover, #primary-right a:hover {
+    background-image: none;
 }
 
-
-#secondary-navigation
-{
-    width:212px;
-    height:100%;
-    margin-left:16px;
-    float:left;
+#secondary-navigation {
+    width: 212px;
+    height: 100%;
+    margin-left: 16px;
+    float: left;
 }
 
-#secondary-navigation ul
-{
+#secondary-navigation ul {
     margin: 0;
     padding: 12px 0 0 0;
     list-style: none;
 }
 
-#secondary-navigation li a
-{
+#secondary-navigation li a {
     display: block;
     text-decoration: none;
     padding: 6px 5px;
 }
 
-#secondary-navigation ul ul
-{
+#secondary-navigation ul ul {
     margin: 0;
     padding: 0 0 0 12px;
     list-style: none;
 }
 
-#content
-{
-    display:block;
-    margin:10px 16px 0 244px;
-    padding-bottom:20px;
+#content {
+    display: block;
+    margin: 10px 16px 0 244px;
+    padding-bottom: 20px;
 }
 
-#content.no-side-nav
-{
+#content.no-side-nav {
     margin-left: 10px;
 }
 
@@ -218,78 +190,67 @@ h4 {
 * CONTAINER STYLES
 */
 
-#container
-{
+#container {
     margin: 0;
-    padding-bottom:20px;
-    overflow:hidden;
+    padding-bottom: 20px;
+    overflow: hidden;
 }
 
 /*
 * TABLE STYLES
 */
 
-table
-{
-    border-spacing:0;
-    margin:0;
-    border-collapse:collapse;
+table {
+    border-spacing: 0;
+    margin: 0;
+    border-collapse: collapse;
 }
 
-th
-{
-    height:19px;
-    text-align:left;
-    font-weight:bold;
-    margin:0;
-    padding:3px 6px 0 6px;
-    line-height:19px;
+th {
+    height: 19px;
+    text-align: left;
+    font-weight: bold;
+    margin: 0;
+    padding: 3px 6px 0 6px;
+    line-height: 19px;
 }
 
-.bordered-table th
-{
+.bordered-table th {
     background-image: url(../images/table-header-background.png);
     background-repeat: repeat-x;
 }
 
-td
-{
-    margin:0;
-    padding:4px 6px;
-    vertical-align:top;
+td {
+    margin: 0;
+    padding: 4px 6px;
+    vertical-align: top;
 }
 
-th.table-meta-data
-{
+th.table-meta-data {
     text-align: right;
     vertical-center;
 }
 
-.name-sublevel1-odd
-{
-    padding-left:20px;
-    font-weight:bold;
+.name-sublevel1-odd {
+    padding-left: 20px;
+    font-weight: bold;
 }
 
-.name-sublevel1-even
-{
-    padding-left:20px;
-    font-weight:bold;
+.name-sublevel1-even {
+    padding-left: 20px;
+    font-weight: bold;
 }
 
-.two-tables
-{
-    width:100%;
+.two-tables {
+    width: 100%;
 }
 
-.two-tables .left
-{
-    float:left;
+.two-tables .left {
+    float: left;
 }
 
-.two-tables .right
-{
-    float:right;
+.two-tables .right {
+    float: right;
 }
 
 .controlLinks {
@@ -316,43 +277,36 @@ th.table-meta-data
  * FORM STYLES
  */
 
-input, textarea, textfield
-{
+input, textarea, textfield {
     margin: 0;
     font-family: Arial, Helvetica, "Bitstream Vera Sans", sans-serif;
     padding: 1px;
     font-size: 100%;
 }
 
-input.small
-{
+input.small {
     font-size: 80%;
     width: 3em;
     padding: 0px;
 }
 
-input.form-checkbox, input.form-radio
-{
+input.form-checkbox, input.form-radio {
     border: none;
 }
 
-#search .form-text, #user-login-form .form-text
-{
+#search .form-text, #user-login-form .form-text {
     padding: 2px;
 }
 
-.form-submit, .button
-{
+.form-submit, .button {
     padding: 1px;
 }
 
-#user-login-form
-{
+#user-login-form {
     text-align: left;
 }
 
-#user-login-form .item-list ul
-{
+#user-login-form .item-list ul {
     margin-top: 10px;
 }
 
@@ -360,14 +314,12 @@ input.form-checkbox, input.form-radio
  * ALERTS, STATUS, HELP MESSAGE STYLES
  */
 
-.messages
-{
+.messages {
     padding: 1.3em 1em .3em 52px;
     margin: 10px 0;
 }
 
-.messages ul
-{
+.messages ul {
     padding: 0 0 0 20px;
     margin: 0;
 }
@@ -376,44 +328,39 @@ input.form-checkbox, input.form-radio
  * FOOTER STYLES
  */
 
-#footer-wrapper
-{
-    clear:both;
+#footer-wrapper {
+    clear: both;
     margin: 0;
     background-image: url(../images/footer-stretch.png);
-    background-repeat:repeat-x;
+    background-repeat: repeat-x;
     height: 29px;
-    width:100%;
+    width: 100%;
 }
 
-#footer-left, #footer-right
-{
+#footer-left, #footer-right {
     margin: 0;
     font-size: 85%;
     padding: 1em;
-    height:29px;
+    height: 29px;
 }
 
-
-#footer-left
-{
-    text-align:left;
+#footer-left {
+    text-align: left;
     background-image: url(../images/footer-left.png);
-    background-repeat:no-repeat;
-    position:relative;
-    left:0;
-    float:left;
+    background-repeat: no-repeat;
+    position: relative;
+    left: 0;
+    float: left;
 }
 
-#footer-right
-{
-    text-align:right;
+#footer-right {
+    text-align: right;
     background-image: url(../images/footer-right.png);
-    background-repeat:no-repeat;
-    background-position:top right;
-    position:relative;
-    right:0;
-    float:right;
+    background-repeat: no-repeat;
+    background-position: top right;
+    position: relative;
+    right: 0;
+    float: right;
 }
 
 

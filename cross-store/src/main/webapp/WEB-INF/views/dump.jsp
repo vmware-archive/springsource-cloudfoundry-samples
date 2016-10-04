@@ -1,5 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -26,10 +26,12 @@
         <div id="content" class="no-side-nav">
             <h1>Database Info</h1>
             <h4>SQL: <c:out value="${sqlinfo}"/></h4>
+
             <p>
                 <c:out value="${sqldata}"/>
             </p>
             <h4>Mongo: <c:out value="${mongoinfo}"/></h4>
+
             <p>
                 <c:out value="${mongodata}"/>
             </p>
@@ -38,10 +40,9 @@
     </div>
 </div>
 
-<DIV class = "cloudEnvironment">
+<DIV class="cloudEnvironment">
     ${host}:${port}
 </DIV>
-
 
 
 </body>
